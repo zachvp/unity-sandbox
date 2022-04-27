@@ -133,7 +133,6 @@ GameObject:
   m_Component:
   - component: {fileID: 23948220}
   - component: {fileID: 23948222}
-  - component: {fileID: 23948223}
   m_Layer: 0
   m_Name: Emitter
   m_TagString: Untagged
@@ -202,33 +201,6 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &23948223
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 23948219}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a3fed172ee574f49a2c38aa2530e0b8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  testEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 905632238}
-        m_TargetAssemblyTypeName: EventHandler, Assembly-CSharp
-        m_MethodName: Trigger
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!1 &181391974
 GameObject:
   m_ObjectHideFlags: 0
