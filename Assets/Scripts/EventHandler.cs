@@ -1,10 +1,13 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Events;
 
 public class EventHandler : MonoBehaviour
 {
     public string debugText;
     public InputActionPhase phase;
+    public UnityEvent filteredEvent;
+
 
     public void Trigger(InputAction.CallbackContext context)
     {
@@ -16,6 +19,8 @@ public class EventHandler : MonoBehaviour
             //    .Start();
 
             Debug.Log(debugText);
+
+            filteredEvent.Invoke();
         }
     }
 }
