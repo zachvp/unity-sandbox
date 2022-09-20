@@ -18,8 +18,6 @@ public class EventHandler : MonoBehaviour
             //    .OnMatchWaitForAnother(0.1f)
             //    .Start();
 
-            Debug.Log(debugText);
-
             filteredEvent.Invoke();
         }
     }
