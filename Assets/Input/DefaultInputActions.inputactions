@@ -18,7 +18,7 @@
                     "name": "Move",
                     "type": "Value",
                     "id": "bf146e7d-6034-442b-8cb6-539a1f908811",
-                    "expectedControlType": "Vector2",
+                    "expectedControlType": "Stick",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -48,30 +48,8 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "up",
-                    "id": "756f0e13-1b94-47bc-88c1-612db2d669f9",
-                    "path": "<Keyboard>/w",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Move",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "down",
-                    "id": "2f23934f-d409-4aab-bb48-f0f8352de0ad",
-                    "path": "<Keyboard>/s",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Move",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "left",
-                    "id": "106ebf50-4900-43d0-a1ce-1851dd6e578d",
+                    "name": "Left",
+                    "id": "ed4dc331-1b90-4022-9e1f-398a79d17eb5",
                     "path": "<Keyboard>/a",
                     "interactions": "",
                     "processors": "",
@@ -81,8 +59,8 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "right",
-                    "id": "f9f975eb-77e9-4a81-a8ff-b3e1c8f10389",
+                    "name": "Right",
+                    "id": "bd5781b8-a24b-4cfe-afb7-846ee19e00be",
                     "path": "<Keyboard>/d",
                     "interactions": "",
                     "processors": "",

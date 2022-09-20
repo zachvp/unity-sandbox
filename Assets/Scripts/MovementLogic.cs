@@ -5,14 +5,20 @@ public class MovementLogic : MonoBehaviour
 {
     public DataVector2 input;
     public DataVector2 output;
-    public float speed;
+    public int speed;
+    public int jump;
     public UnityEvent movementEvent;
-
 
     public void Trigger()
     {
-        output.data = input.data * speed;
+        //if (input.data.sqrMagnitude > 0)
+        {
+            var outputData = input.data * speed;
+            outputData.y = Mathf.Max(0, jump * input.data.y);
 
-        movementEvent.Invoke();
+            output.data = outputData;
+            movementEvent.Invoke();
+            //Debug.LogFormat("zvp: moved {0}", output.data);
+        }
     }
 }

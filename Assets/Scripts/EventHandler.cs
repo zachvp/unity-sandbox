@@ -1,18 +1,21 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Events;
+using System.Collections;
 
 public class EventHandler : MonoBehaviour
 {
-    public string debugText;
-    public InputActionPhase phase;
+    public InputActionPhase initialPhase;
+    public InputActionPhase endPhase;
     public UnityEvent filteredEvent;
     public DataVector2 digitalAxis0;
+
+    private InputActionPhase currentPhase;
 
 
     public void Trigger(InputAction.CallbackContext context)
     {
-        if (context.phase == phase)
+        if (context.phase == initialPhase)
         {
             //context.action.PerformInteractiveRebinding()
             //    .WithControlsExcluding("Mouse")
@@ -25,10 +28,24 @@ public class EventHandler : MonoBehaviour
 
     public void ApplyVector2(InputAction.CallbackContext context)
     {
-        //Debug.LogFormat("zvp: apply vector2: {0}", context.ReadValue<Vector2>());
+        Debug.LogFormat("zvp: context: {0}", context.phase);
 
-        this.digitalAxis0.data = context.ReadValue<Vector2>();
+        currentPhase = context.phase;
 
-        filteredEvent.Invoke();
+        if (context.phase == initialPhase)
+        {
+            digitalAxis0.data = context.ReadValue<Vector2>();
+
+            StartCoroutine(CoroutineDigitalAxis0());
+        }
+    }
+
+    public IEnumerator CoroutineDigitalAxis0()
+    {
+        while (currentPhase != endPhase)
+        {
+            filteredEvent.Invoke();
+            yield return null;
+        }
     }
 }
