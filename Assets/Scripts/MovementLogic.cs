@@ -11,7 +11,7 @@ public class MovementLogic : MonoBehaviour
 
     public void Trigger()
     {
-        this.output.data = this.input.data * speed;
+        output.data = input.data * speed;
 
         movementEvent.Invoke();
     }

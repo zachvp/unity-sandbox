@@ -691,6 +691,7 @@ GameObject:
   - component: {fileID: 2025389674}
   - component: {fileID: 2025389673}
   - component: {fileID: 2025389677}
+  - component: {fileID: 2025389678}
   m_Layer: 0
   m_Name: Circle
   m_TagString: Untagged
@@ -708,7 +709,7 @@ SpringJoint2D:
   m_Enabled: 1
   serializedVersion: 4
   m_EnableCollision: 0
-  m_ConnectedRigidBody: {fileID: 1024393159}
+  m_ConnectedRigidBody: {fileID: 0}
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 0
@@ -738,7 +739,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 5
+  m_Constraints: 4
 --- !u!212 &2025389675
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -798,7 +799,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2025389672}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 16, y: 16, z: 1}
   m_ConstrainProportionsScale: 0
@@ -822,6 +823,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   value: {fileID: 2092758540}
   body: {fileID: 2025389674}
+--- !u!114 &2025389678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2025389672}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc3024eff02344febae620fb33013394, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  joint: {fileID: 2025389673}
+  anchor: {fileID: 1024393158}
 --- !u!1 &2092758538
 GameObject:
   m_ObjectHideFlags: 0
