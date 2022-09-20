@@ -1,17 +1,21 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.Events;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class ModifyVelocity : MonoBehaviour
 {
-    public Vector2 value;
+    public ScriptableObjectVector2 value;
     public Rigidbody2D body;
+
+    public void Awake()
+    {
+        Debug.LogFormat("zvp: awake: value: {0}", value.data);
+    }
 
     public void Trigger()
     {
-        body.velocity = value;
+        value.data = Vector2.zero;
+        Debug.LogFormat("zvp: SO vec2 value after change: {0}", value.data);
+
+        body.velocity = value.data;
     }
 }
