@@ -1,19 +1,21 @@
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 public class EventHandler : MonoBehaviour
 {
-    private void Awake()
-    {
-        //testEvent.AddListener(Trigger);
-    }
+    public string debugText;
+    public InputActionPhase phase;
 
     public void Trigger(InputAction.CallbackContext context)
     {
-        if (context.started)
+        if (context.phase == phase)
         {
-            Debug.Log("triggered");
+            //context.action.PerformInteractiveRebinding()
+            //    .WithControlsExcluding("Mouse")
+            //    .OnMatchWaitForAnother(0.1f)
+            //    .Start();
+
+            Debug.Log(debugText);
         }
     }
 }
