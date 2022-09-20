@@ -7,6 +7,7 @@ public class EventHandler : MonoBehaviour
     public string debugText;
     public InputActionPhase phase;
     public UnityEvent filteredEvent;
+    public DataVector2 digitalAxis0;
 
 
     public void Trigger(InputAction.CallbackContext context)
@@ -20,5 +21,14 @@ public class EventHandler : MonoBehaviour
 
             filteredEvent.Invoke();
         }
+    }
+
+    public void ApplyVector2(InputAction.CallbackContext context)
+    {
+        //Debug.LogFormat("zvp: apply vector2: {0}", context.ReadValue<Vector2>());
+
+        this.digitalAxis0.data = context.ReadValue<Vector2>();
+
+        filteredEvent.Invoke();
     }
 }
