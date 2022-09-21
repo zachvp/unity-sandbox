@@ -1453,6 +1453,7 @@ GameObject:
   - component: {fileID: 1195974544}
   - component: {fileID: 1195974545}
   - component: {fileID: 1195974546}
+  - component: {fileID: 1195974547}
   m_Layer: 0
   m_Name: Movement
   m_TagString: Untagged
@@ -1504,13 +1505,42 @@ MonoBehaviour:
   input: {fileID: 1648719322}
   output: {fileID: 513726285}
   speed: 80
-  jump: 200
   movementEvent:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1195974545}
         m_TargetAssemblyTypeName: ModifyVelocity, Assembly-CSharp
         m_MethodName: Trigger
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1195974547
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1195974543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fba765d2baab4300b9306db262afb58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  jump: 200
+  input: {fileID: 1648719323}
+  output: {fileID: 513726285}
+  movementEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1195974545}
+        m_TargetAssemblyTypeName: ModifyVelocity, Assembly-CSharp
+        m_MethodName: TriggerY
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1530,7 +1560,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1273539368}
   - component: {fileID: 1273539369}
-  - component: {fileID: 1273539367}
   m_Layer: 0
   m_Name: Input
   m_TagString: Untagged
@@ -1538,36 +1567,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1273539367
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1273539366}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 92e886ab2a8a4495fac92d7368532e2c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialPhase: 0
-  endPhase: 0
-  filteredEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2025389677}
-        m_TargetAssemblyTypeName: ModifyVelocity, Assembly-CSharp
-        m_MethodName: Trigger
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  digitalAxis0: {fileID: 0}
 --- !u!4 &1273539368
 Transform:
   m_ObjectHideFlags: 0
@@ -1609,25 +1608,17 @@ MonoBehaviour:
       m_Calls: []
   m_ActionEvents:
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1273539367}
-        m_TargetAssemblyTypeName: EventHandler, Assembly-CSharp
-        m_MethodName: Trigger
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_ActionId: 9c74540a-a46b-41c5-880b-607c28c6b98b
     m_ActionName: Player/Start[/Keyboard/enter]
   - m_PersistentCalls:
       m_Calls: []
     m_ActionId: bf146e7d-6034-442b-8cb6-539a1f908811
     m_ActionName: Player/Move[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: bf1036d6-5ef6-4dad-9af0-79b0f2f1bf52
+    m_ActionName: Player/Jump[/Keyboard/w]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -2177,6 +2168,8 @@ GameObject:
   - component: {fileID: 1648719320}
   - component: {fileID: 1648719321}
   - component: {fileID: 1648719322}
+  - component: {fileID: 1648719324}
+  - component: {fileID: 1648719323}
   m_Layer: 0
   m_Name: Input
   m_TagString: Untagged
@@ -2231,8 +2224,8 @@ MonoBehaviour:
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1648719321}
-        m_TargetAssemblyTypeName: EventHandler, Assembly-CSharp
-        m_MethodName: ApplyVector2
+        m_TargetAssemblyTypeName: EventHandlerHeldAxis, Assembly-CSharp
+        m_MethodName: Trigger
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2246,8 +2239,8 @@ MonoBehaviour:
     m_ActionName: Player/Move[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1648719321}
-        m_TargetAssemblyTypeName: EventHandler, Assembly-CSharp
+      - m_Target: {fileID: 1648719324}
+        m_TargetAssemblyTypeName: EventHandlerButton, Assembly-CSharp
         m_MethodName: Trigger
         m_Mode: 0
         m_Arguments:
@@ -2274,7 +2267,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1648719318}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 92e886ab2a8a4495fac92d7368532e2c, type: 3}
+  m_Script: {fileID: 11500000, guid: 04ac6880728164dc4aad998c6405247c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   initialPhase: 3
@@ -2294,7 +2287,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  digitalAxis0: {fileID: 1648719322}
+  axis: {fileID: 1648719322}
 --- !u!114 &1648719322
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2308,6 +2301,49 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data: {x: 0, y: 0}
+--- !u!114 &1648719323
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1648719318}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 443eb01113e7445d29cdf1b093478313, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data: 0
+--- !u!114 &1648719324
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1648719318}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53485a42687b442158c00e2ab10c3df9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  initialPhase: 3
+  endPhase: 4
+  filteredEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1195974547}
+        m_TargetAssemblyTypeName: MovementJump, Assembly-CSharp
+        m_MethodName: Trigger
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  data: {fileID: 1648719323}
 --- !u!1 &1776160064
 GameObject:
   m_ObjectHideFlags: 0
