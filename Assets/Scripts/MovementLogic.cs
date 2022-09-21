@@ -11,14 +11,17 @@ public class MovementLogic : MonoBehaviour
 
     public void Trigger()
     {
-        //if (input.data.sqrMagnitude > 0)
-        {
-            var outputData = input.data * speed;
-            outputData.y = Mathf.Max(0, jump * input.data.y);
+        output.data = input.data * speed;
+        movementEvent.Invoke();
+    }
 
-            output.data = outputData;
-            movementEvent.Invoke();
-            //Debug.LogFormat("zvp: moved {0}", output.data);
-        }
+    public void TriggerJump()
+    {
+        Debug.LogFormat("zvp: trigger jump");
+
+        var outputData = output.data;
+        outputData.y = jump;
+
+        movementEvent.Invoke();
     }
 }

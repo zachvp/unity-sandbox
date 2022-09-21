@@ -28,8 +28,6 @@ public class EventHandler : MonoBehaviour
 
     public void ApplyVector2(InputAction.CallbackContext context)
     {
-        Debug.LogFormat("zvp: context: {0}", context.phase);
-
         currentPhase = context.phase;
 
         if (context.phase == initialPhase)
