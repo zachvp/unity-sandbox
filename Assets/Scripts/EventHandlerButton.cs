@@ -10,15 +10,13 @@ public class EventHandlerButton : MonoBehaviour
 
     public void Trigger(InputAction.CallbackContext context)
     {
-        if (context.phase == initialPhase)
+        if (context.phase == initialPhase || context.phase == endPhase)
         {
-            Debug.LogFormat("zvp: button phase: {0}", context.phase);
-
             //context.action.PerformInteractiveRebinding()
             //    .WithControlsExcluding("Mouse")
             //    .OnMatchWaitForAnother(0.1f)
             //    .Start();
-            filteredEvent.Invoke(true);
+            filteredEvent.Invoke(context.phase == initialPhase);
         }
     }
 }

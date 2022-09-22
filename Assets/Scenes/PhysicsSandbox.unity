@@ -1484,7 +1484,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jump: 200
-  intEvent:
+  movementEvent:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1195974545}
@@ -1494,7 +1494,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 200
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -2254,7 +2254,7 @@ MonoBehaviour:
       - m_Target: {fileID: 1195974547}
         m_TargetAssemblyTypeName: MovementJump, Assembly-CSharp
         m_MethodName: Trigger
-        m_Mode: 6
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
