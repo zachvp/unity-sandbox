@@ -7,10 +7,10 @@ public class EventHandlerHeldAxis : MonoBehaviour
 {
     public InputActionPhase initialPhase = InputActionPhase.Performed;
     public InputActionPhase endPhase = InputActionPhase.Canceled;
-    public UnityEvent<Vector2> filteredEvent;
+    public UnityEvent<float> filteredEvent;
 
     private InputActionPhase currentPhase;
-    private Vector2 value;
+    private float value;
 
     public void Trigger(InputAction.CallbackContext context)
     {
@@ -18,13 +18,15 @@ public class EventHandlerHeldAxis : MonoBehaviour
 
         if (context.phase == initialPhase)
         {
-            value = context.ReadValue<Vector2>();
+            value = context.ReadValue<float>();
+
+            Debug.LogFormat("zvp: value: {0}", value);
 
             StartCoroutine(CoroutineHold());
         }
         else if (context.phase == endPhase)
         {
-            value = context.ReadValue<Vector2>();
+            value = context.ReadValue<float>();
 
             filteredEvent.Invoke(value);
         }

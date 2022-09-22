@@ -16,9 +16,9 @@
                 },
                 {
                     "name": "Move",
-                    "type": "Value",
+                    "type": "Button",
                     "id": "bf146e7d-6034-442b-8cb6-539a1f908811",
-                    "expectedControlType": "Stick",
+                    "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -46,9 +46,9 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "2D Vector",
+                    "name": "1D Axis",
                     "id": "6fb4770a-5900-4a49-bbf8-4412422ce853",
-                    "path": "2DVector",
+                    "path": "1DAxis",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -57,7 +57,7 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "Left",
+                    "name": "Negative",
                     "id": "ed4dc331-1b90-4022-9e1f-398a79d17eb5",
                     "path": "<Keyboard>/a",
                     "interactions": "",
@@ -68,7 +68,7 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "Right",
+                    "name": "Positive",
                     "id": "bd5781b8-a24b-4cfe-afb7-846ee19e00be",
                     "path": "<Keyboard>/d",
                     "interactions": "",

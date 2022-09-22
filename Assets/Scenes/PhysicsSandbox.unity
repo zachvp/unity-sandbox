@@ -1452,7 +1452,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1195974543}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 37067a6d43a77480fb430023bc4984d5, type: 3}
+  m_Script: {fileID: 11500000, guid: 904ec869feeb14ba9a7b1cc8bdcd6874, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 80
@@ -2223,7 +2223,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1195974546}
-        m_TargetAssemblyTypeName: MovementLogic, Assembly-CSharp
+        m_TargetAssemblyTypeName: MovementHorizontal, Assembly-CSharp
         m_MethodName: Trigger
         m_Mode: 0
         m_Arguments:
