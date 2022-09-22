@@ -4,8 +4,10 @@ public class ModifyVelocity : MonoBehaviour
 {
     public Rigidbody2D body;
 
-    // todo: set X & Y velocity independently
-    public void Trigger(int value)
+    private float velocityX;
+    private float velocityY;
+
+    public void TriggerX(short value)
     {
         var result = body.velocity;
         result.x = value;
@@ -14,12 +16,11 @@ public class ModifyVelocity : MonoBehaviour
         body.velocity = result;
     }
 
-    public void TriggerY(int value)
+    public void TriggerY(short value)
     {
         var result = body.velocity;
         result.y = value;
 
         body.velocity = result;
-        Debug.LogFormat("zvp: trigger y; value: {0}", value);
     }
 }

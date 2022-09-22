@@ -20,8 +20,6 @@ public class EventHandlerHeldAxis : MonoBehaviour
         {
             value = context.ReadValue<float>();
 
-            Debug.LogFormat("zvp: value: {0}", value);
-
             StartCoroutine(CoroutineHold());
         }
         else if (context.phase == endPhase)

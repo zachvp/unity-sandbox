@@ -4,13 +4,11 @@ using System;
 
 public class MovementJump : MonoBehaviour
 {
-    public int jump;
-    public UnityEvent<int> movementEvent;
+    public short jump;
+    public UnityEvent<short> movementEvent;
 
     public void Trigger(bool isActive)
     {
-        Debug.LogFormat("zvp: trigger jump; active: {0}", isActive);
-
         if (isActive)
         {
             movementEvent.Invoke(jump);
