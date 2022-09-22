@@ -1416,6 +1416,7 @@ GameObject:
   - component: {fileID: 756236436}
   - component: {fileID: 756236437}
   - component: {fileID: 756236438}
+  - component: {fileID: 756236439}
   m_Layer: 6
   m_Name: DetectionTrigger
   m_TagString: Untagged
@@ -1445,7 +1446,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 756236434}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -1518,11 +1519,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4130e05c4c9a0416d90823f6f44813c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isActive: 0
+  isActive: {fileID: 756236439}
   mask:
     serializedVersion: 2
     m_Bits: 1
   collider: {fileID: 756236437}
+--- !u!114 &756236439
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 756236434}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 443eb01113e7445d29cdf1b093478313, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  value: 0
 --- !u!1 &923668337
 GameObject:
   m_ObjectHideFlags: 0
@@ -1885,6 +1899,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  isAwake: {fileID: 756236439}
 --- !u!1 &1285272873
 GameObject:
   m_ObjectHideFlags: 0

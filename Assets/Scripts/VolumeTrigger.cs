@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public class VolumeTrigger : MonoBehaviour
 {
-    public bool isActive;
+    public DataBool isActive;
     public LayerMask mask;
     new public Collider2D collider;
 
@@ -27,6 +27,6 @@ public class VolumeTrigger : MonoBehaviour
 
         var result = collider.OverlapCollider(filter, colliders);
 
-        isActive = result > 0;
+        isActive.value = result > 0;
     }
 }
