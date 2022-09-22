@@ -305,7 +305,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 54928596}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: f2167badff59d456b9a461cee65bf11f, type: 2}
+  m_Material: {fileID: 6200000, guid: f794a5bc4e5cd429b92cb4b20a329bd3, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -571,7 +571,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 80821275}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: f2167badff59d456b9a461cee65bf11f, type: 2}
+  m_Material: {fileID: 6200000, guid: f794a5bc4e5cd429b92cb4b20a329bd3, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -837,7 +837,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 456194590}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: f2167badff59d456b9a461cee65bf11f, type: 2}
+  m_Material: {fileID: 6200000, guid: f794a5bc4e5cd429b92cb4b20a329bd3, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -921,51 +921,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &513726283
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 513726284}
-  - component: {fileID: 513726285}
-  m_Layer: 0
-  m_Name: Data
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &513726284
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 513726283}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1024393158}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &513726285
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 513726283}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eac0deb41df7340b4b27d757050c8c12, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  data: {x: 0, y: 0}
 --- !u!1 &532340023
 GameObject:
   m_ObjectHideFlags: 0
@@ -1015,7 +970,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 532340023}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: f2167badff59d456b9a461cee65bf11f, type: 2}
+  m_Material: {fileID: 6200000, guid: f794a5bc4e5cd429b92cb4b20a329bd3, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -1400,7 +1355,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1648719319}
-  - {fileID: 513726284}
   - {fileID: 1195974544}
   m_Father: {fileID: 0}
   m_RootOrder: 2
@@ -1474,7 +1428,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1024393158}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1195974545
 MonoBehaviour:
@@ -1488,7 +1442,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2ab775cac0214ffba36c2aabee7dc9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  value: {fileID: 513726285}
   body: {fileID: 1024393159}
 --- !u!114 &1195974546
 MonoBehaviour:
@@ -1502,8 +1455,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37067a6d43a77480fb430023bc4984d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  input: {fileID: 1648719322}
-  output: {fileID: 513726285}
   speed: 80
   movementEvent:
     m_PersistentCalls:
@@ -1511,7 +1462,7 @@ MonoBehaviour:
       - m_Target: {fileID: 1195974545}
         m_TargetAssemblyTypeName: ModifyVelocity, Assembly-CSharp
         m_MethodName: Trigger
-        m_Mode: 1
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1533,15 +1484,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jump: 200
-  input: {fileID: 1648719323}
-  output: {fileID: 513726285}
-  movementEvent:
+  intEvent:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1195974545}
         m_TargetAssemblyTypeName: ModifyVelocity, Assembly-CSharp
         m_MethodName: TriggerY
-        m_Mode: 1
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -2072,7 +2021,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 1441174516}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: f2167badff59d456b9a461cee65bf11f, type: 2}
+  m_Material: {fileID: 6200000, guid: f794a5bc4e5cd429b92cb4b20a329bd3, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -2167,9 +2116,7 @@ GameObject:
   - component: {fileID: 1648719319}
   - component: {fileID: 1648719320}
   - component: {fileID: 1648719321}
-  - component: {fileID: 1648719322}
   - component: {fileID: 1648719324}
-  - component: {fileID: 1648719323}
   m_Layer: 0
   m_Name: Input
   m_TagString: Untagged
@@ -2278,7 +2225,7 @@ MonoBehaviour:
       - m_Target: {fileID: 1195974546}
         m_TargetAssemblyTypeName: MovementLogic, Assembly-CSharp
         m_MethodName: Trigger
-        m_Mode: 1
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -2287,33 +2234,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  axis: {fileID: 1648719322}
---- !u!114 &1648719322
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1648719318}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eac0deb41df7340b4b27d757050c8c12, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  data: {x: 0, y: 0}
---- !u!114 &1648719323
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1648719318}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 443eb01113e7445d29cdf1b093478313, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  data: 0
 --- !u!114 &1648719324
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2334,7 +2254,7 @@ MonoBehaviour:
       - m_Target: {fileID: 1195974547}
         m_TargetAssemblyTypeName: MovementJump, Assembly-CSharp
         m_MethodName: Trigger
-        m_Mode: 1
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -2343,7 +2263,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  data: {fileID: 1648719323}
 --- !u!1 &1776160064
 GameObject:
   m_ObjectHideFlags: 0
@@ -2526,7 +2445,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 1931367352}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: f2167badff59d456b9a461cee65bf11f, type: 2}
+  m_Material: {fileID: 6200000, guid: f794a5bc4e5cd429b92cb4b20a329bd3, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -2659,7 +2578,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 1948490940}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: f2167badff59d456b9a461cee65bf11f, type: 2}
+  m_Material: {fileID: 6200000, guid: f794a5bc4e5cd429b92cb4b20a329bd3, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -2886,7 +2805,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2ab775cac0214ffba36c2aabee7dc9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  value: {fileID: 2092758540}
   body: {fileID: 2025389674}
 --- !u!114 &2025389678
 MonoBehaviour:
@@ -3129,7 +3047,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 2124580900}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: f2167badff59d456b9a461cee65bf11f, type: 2}
+  m_Material: {fileID: 6200000, guid: f794a5bc4e5cd429b92cb4b20a329bd3, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0

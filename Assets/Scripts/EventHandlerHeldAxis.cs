@@ -7,10 +7,10 @@ public class EventHandlerHeldAxis : MonoBehaviour
 {
     public InputActionPhase initialPhase = InputActionPhase.Performed;
     public InputActionPhase endPhase = InputActionPhase.Canceled;
-    public UnityEvent filteredEvent;
-    public DataVector2 axis;
+    public UnityEvent<Vector2> filteredEvent;
 
     private InputActionPhase currentPhase;
+    private Vector2 value;
 
     public void Trigger(InputAction.CallbackContext context)
     {
@@ -18,15 +18,15 @@ public class EventHandlerHeldAxis : MonoBehaviour
 
         if (context.phase == initialPhase)
         {
-            axis.data = context.ReadValue<Vector2>();
+            value = context.ReadValue<Vector2>();
 
             StartCoroutine(CoroutineHold());
         }
         else if (context.phase == endPhase)
         {
-            axis.data = context.ReadValue<Vector2>();
+            value = context.ReadValue<Vector2>();
 
-            filteredEvent.Invoke();
+            filteredEvent.Invoke(value);
         }
     }
 
@@ -34,7 +34,7 @@ public class EventHandlerHeldAxis : MonoBehaviour
     {
         while (currentPhase != endPhase)
         {
-            filteredEvent.Invoke();
+            filteredEvent.Invoke(value);
             yield return null;
         }
     }

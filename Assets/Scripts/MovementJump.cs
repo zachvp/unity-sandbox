@@ -1,29 +1,21 @@
 using UnityEngine;
 using UnityEngine.Events;
+using System;
 
 public class MovementJump : MonoBehaviour
 {
     public int jump;
-    public DataBool input;
-    public DataVector2 output;
-    public UnityEvent movementEvent;
+    public UnityEventInt intEvent;
 
-    private bool didJump;
-
-    public void Trigger()
+    public void Trigger(bool isActive)
     {
-        Debug.LogFormat("zvp: trigger jump");
+        Debug.LogFormat("zvp: trigger jump; active: {0}", isActive);
 
-        if (input.data)
+        intEvent.Invoke(200);
+
+        if (isActive)
         {
-            output.data.y = jump;
-            didJump = true;
-            movementEvent.Invoke();
-        }
-        else if (didJump)
-        {
-            didJump = false;
-            output.data.y = 0;
+            //movementEvent.Invoke(jump);
         }
     }
 }
