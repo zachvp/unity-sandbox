@@ -11,6 +11,7 @@ public class Emitter : MonoBehaviour
         if (Keyboard.current.enterKey.wasPressedThisFrame)
         {
             testEvent.Invoke();
+            
         }
     }
 }

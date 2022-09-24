@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 using System.Collections.Generic;
 
 public class VolumeTrigger : MonoBehaviour
@@ -6,6 +7,7 @@ public class VolumeTrigger : MonoBehaviour
     public DataBool isActive;
     public LayerMask mask;
     new public Collider2D collider;
+    public UnityEvent<bool> onUpdate;
 
     public void OnTriggerEnter2D(Collider2D other)
     {
@@ -28,5 +30,6 @@ public class VolumeTrigger : MonoBehaviour
         var result = collider.OverlapCollider(filter, colliders);
 
         isActive.value = result > 0;
+        onUpdate.Invoke(isActive.value);
     }
 }

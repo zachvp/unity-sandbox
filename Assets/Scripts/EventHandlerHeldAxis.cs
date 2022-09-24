@@ -3,14 +3,16 @@ using UnityEngine.InputSystem;
 using UnityEngine.Events;
 using System.Collections;
 
+// todo: rename to InputHandlerHeldAxis
 public class EventHandlerHeldAxis : MonoBehaviour
 {
     public InputActionPhase initialPhase = InputActionPhase.Performed;
     public InputActionPhase endPhase = InputActionPhase.Canceled;
+    // todo: refactor to short
     public UnityEvent<float> filteredEvent;
 
     private InputActionPhase currentPhase;
-    private float value;
+    private float axis;
 
     public void Trigger(InputAction.CallbackContext context)
     {
@@ -18,15 +20,15 @@ public class EventHandlerHeldAxis : MonoBehaviour
 
         if (context.phase == initialPhase)
         {
-            value = context.ReadValue<float>();
+            axis = context.ReadValue<float>();
 
             StartCoroutine(CoroutineHold());
         }
         else if (context.phase == endPhase)
         {
-            value = context.ReadValue<float>();
+            axis = context.ReadValue<float>();
 
-            filteredEvent.Invoke(value);
+            filteredEvent.Invoke(axis);
         }
     }
 
@@ -34,7 +36,7 @@ public class EventHandlerHeldAxis : MonoBehaviour
     {
         while (currentPhase != endPhase)
         {
-            filteredEvent.Invoke(value);
+            filteredEvent.Invoke(axis);
             yield return null;
         }
     }
