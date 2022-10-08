@@ -1,13 +1,14 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class MovementHorizontal : MonoBehaviour
 {
     public short speed;
-    public UnityEvent<short> movementEvent;
+    public GameObject targetOfEvent;
 
-    public void Trigger(float input)
+    public void Trigger(short input)
     {
-        movementEvent.Invoke((short)(input * speed));
+        EventBus.Trigger(MoveEventUnit.EventHook, targetOfEvent, (short)(input * speed));
     }
 }

@@ -79,3 +79,53 @@ public sealed class JumpEventUnit : GameObjectEventUnit<short>
 
     public override Type MessageListenerType { get; }
 }
+
+[UnitCategory("Events/Core")]
+[UnitTitle(nameof(MoveInputEventUnit))]
+public sealed class MoveInputEventUnit : GameObjectEventUnit<short>
+{
+    public static string EventHook = nameof(MoveInputEventUnit);
+
+    protected override string hookName => EventHook;
+
+    [DoNotSerialize]
+    public ValueOutput value { get; private set; }
+
+    protected override void Definition()
+    {
+        base.Definition();
+        value = ValueOutput<short>(nameof(value));
+    }
+
+    protected override void AssignArguments(Flow flow, short args)
+    {
+        flow.SetValue(value, args);
+    }
+
+    public override Type MessageListenerType { get; }
+}
+
+[UnitCategory("Events/Core")]
+[UnitTitle(nameof(MoveEventUnit))]
+public sealed class MoveEventUnit : GameObjectEventUnit<short>
+{
+    public static string EventHook = nameof(MoveEventUnit);
+
+    protected override string hookName => EventHook;
+
+    [DoNotSerialize]
+    public ValueOutput value { get; private set; }
+
+    protected override void Definition()
+    {
+        base.Definition();
+        value = ValueOutput<short>(nameof(value));
+    }
+
+    protected override void AssignArguments(Flow flow, short args)
+    {
+        flow.SetValue(value, args);
+    }
+
+    public override Type MessageListenerType { get; }
+}

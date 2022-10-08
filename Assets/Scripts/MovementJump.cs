@@ -14,7 +14,6 @@ public class MovementJump : MonoBehaviour
         if (isActive && isGrounded)
         {
             EventBus.Trigger(JumpEventUnit.EventHook, targetOfEvent, jump);
-            Debug.LogFormat("zvp: emit jump event unit");
         }
     }
 }

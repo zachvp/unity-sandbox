@@ -2,17 +2,18 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Events;
 using System.Collections;
+using Unity.VisualScripting;
 
 // todo: rename to InputHandlerHeldAxis
 public class EventHandlerHeldAxis : MonoBehaviour
 {
     public InputActionPhase initialPhase = InputActionPhase.Performed;
     public InputActionPhase endPhase = InputActionPhase.Canceled;
-    // todo: refactor to short
-    public UnityEvent<float> filteredEvent;
+    public GameObject targetOfEvent;
 
     private InputActionPhase currentPhase;
-    private float axis;
+    private short axis;
+
 
     public void Trigger(InputAction.CallbackContext context)
     {
@@ -20,15 +21,15 @@ public class EventHandlerHeldAxis : MonoBehaviour
 
         if (context.phase == initialPhase)
         {
-            axis = context.ReadValue<float>();
+            axis = (short) context.ReadValue<float>();
 
             StartCoroutine(CoroutineHold());
         }
         else if (context.phase == endPhase)
         {
-            axis = context.ReadValue<float>();
+            axis = (short) context.ReadValue<float>();
 
-            filteredEvent.Invoke(axis);
+            EventBus.Trigger(MoveInputEventUnit.EventHook, targetOfEvent, axis);
         }
     }
 
@@ -36,7 +37,8 @@ public class EventHandlerHeldAxis : MonoBehaviour
     {
         while (currentPhase != endPhase)
         {
-            filteredEvent.Invoke(axis);
+            EventBus.Trigger(MoveInputEventUnit.EventHook, targetOfEvent, axis);
+
             yield return null;
         }
     }

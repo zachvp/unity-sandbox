@@ -4,7 +4,6 @@ using System.Collections.Generic;
 
 public class VolumeTrigger : MonoBehaviour
 {
-    //public DataBool isActive;
     public bool isActive;
     public LayerMask mask;
     new public Collider2D collider;
