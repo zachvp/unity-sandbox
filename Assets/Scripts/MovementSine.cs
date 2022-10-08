@@ -18,4 +18,10 @@ public class MovementSine : MonoBehaviour
         // Update current.
         current += increment % (2*Mathf.PI);
     }
+
+    public void Reset()
+    {
+        current = 0;
+        transform.position = origin.position;
+    }
 }
