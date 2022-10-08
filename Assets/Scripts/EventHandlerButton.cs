@@ -1,12 +1,13 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Events;
+using Unity.VisualScripting;
 
 public class EventHandlerButton : MonoBehaviour
 {
     public InputActionPhase initialPhase = InputActionPhase.Performed;
     public InputActionPhase endPhase = InputActionPhase.Canceled;
-    public UnityEvent<bool> filteredEvent;
+    public GameObject targetOfEvent;
 
     public void Trigger(InputAction.CallbackContext context)
     {
@@ -16,7 +17,8 @@ public class EventHandlerButton : MonoBehaviour
             //    .WithControlsExcluding("Mouse")
             //    .OnMatchWaitForAnother(0.1f)
             //    .Start();
-            filteredEvent.Invoke(context.phase == initialPhase);
+            
+            EventBus.Trigger(JumpInputEventUnit.EventHook, targetOfEvent, context.phase == initialPhase);
         }
     }
 }

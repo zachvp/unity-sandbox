@@ -29,6 +29,6 @@ public class Signal : MonoBehaviour
 
         previousFired = value;
 
-        Debug.LogFormat("zvp: update signal: {0}", value);
+        //Debug.LogFormat("zvp: update signal: {0}", value);
     }
 }

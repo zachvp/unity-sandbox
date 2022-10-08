@@ -4,7 +4,8 @@ using System.Collections.Generic;
 
 public class VolumeTrigger : MonoBehaviour
 {
-    public DataBool isActive;
+    //public DataBool isActive;
+    public bool isActive;
     public LayerMask mask;
     new public Collider2D collider;
     public UnityEvent<bool> onUpdate;
@@ -29,7 +30,7 @@ public class VolumeTrigger : MonoBehaviour
 
         var result = collider.OverlapCollider(filter, colliders);
 
-        isActive.value = result > 0;
-        onUpdate.Invoke(isActive.value);
+        isActive = result > 0;
+        onUpdate.Invoke(isActive);
     }
 }

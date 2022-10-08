@@ -1,18 +1,20 @@
 using UnityEngine;
 using UnityEngine.Events;
 using System;
+using Unity.VisualScripting;
+using Unity.VisualScripting.FullSerializer;
 
 public class MovementJump : MonoBehaviour
 {
     public short jump;
-    public UnityEvent<short> movementEvent;
-    public DataBool isAwake;
+    public GameObject targetOfEvent;
 
-    public void Trigger(bool isActive)
+    public void Trigger(bool isActive, bool isGrounded)
     {
-        if (isActive && isAwake.value)
+        if (isActive && isGrounded)
         {
-            movementEvent.Invoke(jump);
+            EventBus.Trigger(JumpEventUnit.EventHook, targetOfEvent, jump);
+            Debug.LogFormat("zvp: emit jump event unit");
         }
     }
 }

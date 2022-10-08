@@ -15,6 +15,6 @@ public class SignalLogicalAND : Signal
         fired.value = value;
         UpdateValue(value);
 
-        Debug.LogFormat("zvp: update AND: {0}", value);
+        //Debug.LogFormat("zvp: update AND: {0}", value);
     }
 }
