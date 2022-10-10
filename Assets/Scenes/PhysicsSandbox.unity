@@ -1340,7 +1340,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 756236435}
-  - component: {fileID: 756236436}
   - component: {fileID: 756236437}
   - component: {fileID: 756236438}
   - component: {fileID: 756236440}
@@ -1369,58 +1368,6 @@ Transform:
   m_Father: {fileID: 1024393158}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &756236436
-SpriteRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 756236434}
-  m_Enabled: 0
-  m_CastShadows: 0
-  m_ReceiveShadows: 0
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 0
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: db42ecbe00b51466c94d6b42558fd156, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 0
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
-  m_FlipY: 0
-  m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
-  m_AdaptiveModeThreshold: 0.5
-  m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
 --- !u!58 &756236437
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -1686,7 +1633,9 @@ MonoBehaviour:
       Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"},{"name":"moveLogic","value":{"$content":4,"$type":"UnityEngine.Object"},"typeHandle":{"Identification":"MovementHorizontal,
       Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"},{"name":"blockTriggerLHS","value":{"$content":5,"$type":"UnityEngine.Object"},"typeHandle":{"Identification":"VolumeTrigger,
       Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"},{"name":"blockTriggerRHS","value":{"$content":6,"$type":"UnityEngine.Object"},"typeHandle":{"Identification":"VolumeTrigger,
-      Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"}],"$version":"A"},"$version":"A"}}'
+      Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"},{"name":"inputObject","value":{"$content":7,"$type":"UnityEngine.Object"},"typeHandle":{"Identification":"UnityEngine.GameObject,
+      UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"},{"name":"moveObject","value":{"$content":8,"$type":"UnityEngine.Object"},"typeHandle":{"Identification":"UnityEngine.GameObject,
+      UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"}],"$version":"A"},"$version":"A"}}'
     _objectReferences:
     - {fileID: 1024393156}
     - {fileID: 1195974545}
@@ -1695,6 +1644,8 @@ MonoBehaviour:
     - {fileID: 1195974546}
     - {fileID: 756236441}
     - {fileID: 756236439}
+    - {fileID: 1648719318}
+    - {fileID: 1195974543}
 --- !u!1 &1195974543
 GameObject:
   m_ObjectHideFlags: 0
@@ -1771,7 +1722,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jump: 200
-  targetOfEvent: {fileID: 1024393156}
 --- !u!1 &1237819480
 GameObject:
   m_ObjectHideFlags: 0
@@ -2528,7 +2478,6 @@ GameObject:
   - component: {fileID: 1582256155}
   - component: {fileID: 1582256158}
   - component: {fileID: 1582256157}
-  - component: {fileID: 1582256159}
   m_Layer: 7
   m_Name: JointFoot
   m_TagString: Untagged
@@ -2606,29 +2555,6 @@ MonoBehaviour:
     - {fileID: 756236438}
     - {fileID: 1024393159}
     - {fileID: 1195974543}
---- !u!114 &1582256159
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1582256153}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c80285c4002cb403089802fb0ba80835, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  value: 0
-  startingVector: {x: 0, y: 0}
-  previousVector: {x: 0, y: 0}
-  type: 0
-  samples:
-  - {x: 0, y: 0}
-  - {x: 0, y: 0}
-  - {x: 0, y: 0}
-  - {x: 0, y: 0}
-  index: 0
-  dbgDistance: 0
 --- !u!1 &1601530414
 GameObject:
   m_ObjectHideFlags: 0
@@ -2900,7 +2826,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   initialPhase: 3
   endPhase: 4
-  targetOfEvent: {fileID: 1024393156}
 --- !u!1 &1776160064
 GameObject:
   m_ObjectHideFlags: 0

@@ -7,7 +7,6 @@ public class EventHandlerButton : MonoBehaviour
 {
     public InputActionPhase initialPhase = InputActionPhase.Performed;
     public InputActionPhase endPhase = InputActionPhase.Canceled;
-    public GameObject targetOfEvent;
 
     public void Trigger(InputAction.CallbackContext context)
     {
@@ -18,7 +17,7 @@ public class EventHandlerButton : MonoBehaviour
             //    .OnMatchWaitForAnother(0.1f)
             //    .Start();
             
-            EventBus.Trigger(JumpInputEventUnit.EventHook, targetOfEvent, context.phase == initialPhase);
+            EventBus.Trigger(JumpInputEventUnit.EventHook, gameObject, context.phase == initialPhase);
         }
     }
 }

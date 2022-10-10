@@ -2,11 +2,11 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using System;
+using static UnityEngine.GraphicsBuffer;
 
 public class MovementHorizontal : MonoBehaviour
 {
     public short speed;
-    public GameObject[] targetsOfEvent;
 
     public bool Trigger(short input, bool leftBlocked, bool rightBlocked)
     {
@@ -15,11 +15,7 @@ public class MovementHorizontal : MonoBehaviour
 
         if (triggered)
         {
-            foreach (var target in targetsOfEvent)
-            {
-                EventBus.Trigger(MoveEventUnit.EventHook, target, (short)(input * speed));
-                //Debug.LogFormat("zvp: trigger move event on target: {0}", target);
-            }
+            EventBus.Trigger(MoveEventUnit.EventHook, gameObject, (short)(input * speed));
         }
 
         return triggered;

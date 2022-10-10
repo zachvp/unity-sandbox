@@ -7,13 +7,12 @@ using Unity.VisualScripting.FullSerializer;
 public class MovementJump : MonoBehaviour
 {
     public short jump;
-    public GameObject targetOfEvent;
 
     public void Trigger(bool isActive, bool isGrounded)
     {
         if (isActive && isGrounded)
         {
-            EventBus.Trigger(JumpEventUnit.EventHook, targetOfEvent, jump);
+            EventBus.Trigger(JumpEventUnit.EventHook, gameObject, jump);
         }
     }
 }
