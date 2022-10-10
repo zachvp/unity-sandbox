@@ -8,6 +8,7 @@ public class VolumeTrigger : MonoBehaviour
     public bool isActive;
     public LayerMask mask;
     new public Collider2D collider;
+    public short triggerEntryCount;
 
     public void OnTriggerEnter2D(Collider2D other)
     {
@@ -19,7 +20,6 @@ public class VolumeTrigger : MonoBehaviour
         UpdateState();
     }
 
-    // todo: refactor to simply increment/decrement counter in response to exit/enter
     private void UpdateState()
     {
         var filter = new ContactFilter2D();
@@ -28,8 +28,6 @@ public class VolumeTrigger : MonoBehaviour
         filter.useLayerMask = true;
         filter.layerMask = mask;
 
-        var result = collider.OverlapCollider(filter, colliders);
-
-        isActive = result > 0;
+        isActive = collider.OverlapCollider(filter, colliders) > 0;
     }
 }

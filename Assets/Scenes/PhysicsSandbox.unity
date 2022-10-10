@@ -1401,6 +1401,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   collider: {fileID: 756236437}
+  triggerEntryCount: 0
 --- !u!114 &756236439
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1418,6 +1419,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   collider: {fileID: 756236440}
+  triggerEntryCount: 0
 --- !u!70 &756236440
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -1451,6 +1453,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   collider: {fileID: 756236442}
+  triggerEntryCount: 0
 --- !u!70 &756236442
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -1626,18 +1629,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _data:
-    _json: '{"declarations":{"collection":{"$content":[{"name":"root","value":{"$content":0,"$type":"UnityEngine.Object"},"typeHandle":{"Identification":"UnityEngine.GameObject,
-      UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"},{"name":"modVelocity","value":{"$content":1,"$type":"UnityEngine.Object"},"typeHandle":{"Identification":"ModifyVelocity,
-      Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"},{"name":"jumpLogic","value":{"$content":2,"$type":"UnityEngine.Object"},"typeHandle":{"Identification":"MovementJump,
-      Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"},{"name":"groundTrigger","value":{"$content":3,"$type":"UnityEngine.Object"},"typeHandle":{"Identification":"VolumeTrigger,
-      Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"},{"name":"moveLogic","value":{"$content":4,"$type":"UnityEngine.Object"},"typeHandle":{"Identification":"MovementHorizontal,
-      Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"},{"name":"blockTriggerLHS","value":{"$content":5,"$type":"UnityEngine.Object"},"typeHandle":{"Identification":"VolumeTrigger,
-      Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"},{"name":"blockTriggerRHS","value":{"$content":6,"$type":"UnityEngine.Object"},"typeHandle":{"Identification":"VolumeTrigger,
-      Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"},{"name":"inputObject","value":{"$content":7,"$type":"UnityEngine.Object"},"typeHandle":{"Identification":"UnityEngine.GameObject,
-      UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"},{"name":"moveObject","value":{"$content":8,"$type":"UnityEngine.Object"},"typeHandle":{"Identification":"UnityEngine.GameObject,
+    _json: '{"declarations":{"collection":{"$content":[{"name":"modVelocity","value":{"$content":0,"$type":"UnityEngine.Object"},"typeHandle":{"Identification":"ModifyVelocity,
+      Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"},{"name":"jumpLogic","value":{"$content":1,"$type":"UnityEngine.Object"},"typeHandle":{"Identification":"MovementJump,
+      Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"},{"name":"groundTrigger","value":{"$content":2,"$type":"UnityEngine.Object"},"typeHandle":{"Identification":"VolumeTrigger,
+      Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"},{"name":"moveLogic","value":{"$content":3,"$type":"UnityEngine.Object"},"typeHandle":{"Identification":"MovementHorizontal,
+      Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"},{"name":"blockTriggerLHS","value":{"$content":4,"$type":"UnityEngine.Object"},"typeHandle":{"Identification":"VolumeTrigger,
+      Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"},{"name":"blockTriggerRHS","value":{"$content":5,"$type":"UnityEngine.Object"},"typeHandle":{"Identification":"VolumeTrigger,
+      Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"},{"name":"inputObject","value":{"$content":6,"$type":"UnityEngine.Object"},"typeHandle":{"Identification":"UnityEngine.GameObject,
+      UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"},{"name":"moveObject","value":{"$content":7,"$type":"UnityEngine.Object"},"typeHandle":{"Identification":"UnityEngine.GameObject,
       UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"}],"$version":"A"},"$version":"A"}}'
     _objectReferences:
-    - {fileID: 1024393156}
     - {fileID: 1195974545}
     - {fileID: 1195974547}
     - {fileID: 756236438}
@@ -1706,9 +1707,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 80
-  targetsOfEvent:
-  - {fileID: 1024393156}
-  - {fileID: 1582256153}
 --- !u!114 &1195974547
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2811,7 +2809,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   initialPhase: 3
   endPhase: 4
-  targetOfEvent: {fileID: 1024393156}
+  currentPhase: 0
+  axis: 0
 --- !u!114 &1648719324
 MonoBehaviour:
   m_ObjectHideFlags: 0
