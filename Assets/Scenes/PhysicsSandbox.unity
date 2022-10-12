@@ -1484,6 +1484,7 @@ GameObject:
   - component: {fileID: 1024393160}
   - component: {fileID: 1024393162}
   - component: {fileID: 1024393161}
+  - component: {fileID: 1024393163}
   m_Layer: 7
   m_Name: Capsule
   m_TagString: Untagged
@@ -1629,24 +1630,42 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _data:
-    _json: '{"declarations":{"collection":{"$content":[{"name":"modVelocity","value":{"$content":0,"$type":"UnityEngine.Object"},"typeHandle":{"Identification":"ModifyVelocity,
-      Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"},{"name":"jumpLogic","value":{"$content":1,"$type":"UnityEngine.Object"},"typeHandle":{"Identification":"MovementJump,
-      Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"},{"name":"groundTrigger","value":{"$content":2,"$type":"UnityEngine.Object"},"typeHandle":{"Identification":"VolumeTrigger,
-      Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"},{"name":"moveLogic","value":{"$content":3,"$type":"UnityEngine.Object"},"typeHandle":{"Identification":"MovementHorizontal,
-      Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"},{"name":"blockTriggerLHS","value":{"$content":4,"$type":"UnityEngine.Object"},"typeHandle":{"Identification":"VolumeTrigger,
-      Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"},{"name":"blockTriggerRHS","value":{"$content":5,"$type":"UnityEngine.Object"},"typeHandle":{"Identification":"VolumeTrigger,
-      Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"},{"name":"inputObject","value":{"$content":6,"$type":"UnityEngine.Object"},"typeHandle":{"Identification":"UnityEngine.GameObject,
-      UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"},{"name":"moveObject","value":{"$content":7,"$type":"UnityEngine.Object"},"typeHandle":{"Identification":"UnityEngine.GameObject,
-      UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"}],"$version":"A"},"$version":"A"}}'
+    _json: '{"declarations":{"collection":{"$content":[{"name":"triggerLHS","value":{"$content":0,"$type":"UnityEngine.Object"},"typeHandle":{"Identification":"VolumeTrigger,
+      Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"},{"name":"triggerRHS","value":{"$content":1,"$type":"UnityEngine.Object"},"typeHandle":{"Identification":"VolumeTrigger,
+      Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"},{"name":"inputObject","value":{"$content":2,"$type":"UnityEngine.Object"},"typeHandle":{"Identification":"UnityEngine.GameObject,
+      UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"},{"name":"movementWallCling","value":{"$content":3,"$type":"UnityEngine.Object"},"typeHandle":{"Identification":"MovementWallCling,
+      Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"},{"name":"groundTrigger","value":{"$content":4,"$type":"UnityEngine.Object"},"typeHandle":{"Identification":"VolumeTrigger,
+      Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"},{"name":"moveObject","value":{"$content":5,"$type":"UnityEngine.Object"},"typeHandle":{"Identification":"UnityEngine.GameObject,
+      UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"},{"name":"jumpLogic","value":{"$content":6,"$type":"UnityEngine.Object"},"typeHandle":{"Identification":"MovementJump,
+      Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"},{"name":"modVelocity","value":{"$content":7,"$type":"UnityEngine.Object"},"typeHandle":{"Identification":"ModifyVelocity,
+      Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"},{"name":"moveLogic","value":{"$content":8,"$type":"UnityEngine.Object"},"typeHandle":{"Identification":"MovementHorizontal,
+      Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"}],"$version":"A"},"$version":"A"}}'
     _objectReferences:
-    - {fileID: 1195974545}
-    - {fileID: 1195974547}
-    - {fileID: 756236438}
-    - {fileID: 1195974546}
     - {fileID: 756236441}
     - {fileID: 756236439}
     - {fileID: 1648719318}
+    - {fileID: 1195974548}
+    - {fileID: 756236438}
     - {fileID: 1195974543}
+    - {fileID: 1195974547}
+    - {fileID: 1195974545}
+    - {fileID: 1195974546}
+--- !u!114 &1024393163
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1024393156}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2fe5546f775c47d2820aa5e8a715f53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _data:
+    _json: '{"nest":{"source":"Macro","macro":0,"embed":null}}'
+    _objectReferences:
+    - {fileID: 11400000, guid: 842ae302e1e2f48e3870de141d3a053e, type: 2}
 --- !u!1 &1195974543
 GameObject:
   m_ObjectHideFlags: 0
@@ -1659,6 +1678,7 @@ GameObject:
   - component: {fileID: 1195974545}
   - component: {fileID: 1195974546}
   - component: {fileID: 1195974547}
+  - component: {fileID: 1195974548}
   m_Layer: 7
   m_Name: Movement
   m_TagString: Untagged
@@ -1720,6 +1740,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jump: 200
+--- !u!114 &1195974548
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1195974543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e64a8462683c546a1adc49a7036cab9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1237819480
 GameObject:
   m_ObjectHideFlags: 0
@@ -1851,9 +1883,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _data:
-    _json: '{"nest":{"source":"Macro","macro":0,"embed":null}}'
-    _objectReferences:
-    - {fileID: 11400000, guid: b6a0e830d8c9c4b1e9db40c1ed5c0996, type: 2}
+    _json: '{"nest":{"source":"Macro","macro":null,"embed":null}}'
+    _objectReferences: []
 --- !u!114 &1284023718
 MonoBehaviour:
   m_ObjectHideFlags: 0
