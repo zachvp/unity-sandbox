@@ -1486,6 +1486,7 @@ GameObject:
   - component: {fileID: 1024393161}
   - component: {fileID: 1024393163}
   - component: {fileID: 1024393164}
+  - component: {fileID: 1024393165}
   m_Layer: 7
   m_Name: Capsule
   m_TagString: Untagged
@@ -1641,7 +1642,8 @@ MonoBehaviour:
       Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"},{"name":"modVelocity","value":{"$content":7,"$type":"UnityEngine.Object"},"typeHandle":{"Identification":"ModifyVelocity,
       Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"},{"name":"moveLogic","value":{"$content":8,"$type":"UnityEngine.Object"},"typeHandle":{"Identification":"MovementHorizontal,
       Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"},{"name":"rigidBody","value":{"$content":9,"$type":"UnityEngine.Object"},"typeHandle":{"Identification":"UnityEngine.Rigidbody2D,
-      UnityEngine.Physics2DModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"}],"$version":"A"},"$version":"A"}}'
+      UnityEngine.Physics2DModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"},{"name":"moveWallJump","value":{"$content":10,"$type":"UnityEngine.Object"},"typeHandle":{"Identification":"MovementWallJump,
+      Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"}],"$version":"A"},"$version":"A"}}'
     _objectReferences:
     - {fileID: 756236441}
     - {fileID: 756236439}
@@ -1653,6 +1655,7 @@ MonoBehaviour:
     - {fileID: 1195974545}
     - {fileID: 1195974546}
     - {fileID: 1024393159}
+    - {fileID: 1195974549}
 --- !u!114 &1024393163
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1685,6 +1688,19 @@ MonoBehaviour:
     _json: '{"nest":{"source":"Macro","macro":0,"embed":null}}'
     _objectReferences:
     - {fileID: 11400000, guid: a16198bb04f07470994e2719059a6c01, type: 2}
+--- !u!114 &1024393165
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1024393156}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95be07ccfe5554bdaae24c257069d034, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  state: 0
 --- !u!1 &1195974543
 GameObject:
   m_ObjectHideFlags: 0
@@ -1698,6 +1714,7 @@ GameObject:
   - component: {fileID: 1195974546}
   - component: {fileID: 1195974547}
   - component: {fileID: 1195974548}
+  - component: {fileID: 1195974549}
   m_Layer: 7
   m_Name: Movement
   m_TagString: Untagged
@@ -1772,7 +1789,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e64a8462683c546a1adc49a7036cab9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lhsTrigger: {fileID: 756236441}
+--- !u!114 &1195974549
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1195974543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 275eb1d990a854962af0aa44c8606a24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1237819480
 GameObject:
   m_ObjectHideFlags: 0
