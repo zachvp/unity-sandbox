@@ -4,8 +4,6 @@ using Unity.VisualScripting;
 
 public class MovementWallCling : MonoBehaviour
 {
-    public ModifyVelocity modVelocity;
-
     public bool Trigger(bool lhsBlocked, bool rhsBlocked, bool grounded, short inputAxis, Rigidbody2D rigidbody)
     {
         var rightCondition = inputAxis > 0 && rhsBlocked;
@@ -14,21 +12,8 @@ public class MovementWallCling : MonoBehaviour
 
         result &= leftCondition || rightCondition;
 
-        if (result)
-        {
-            EventBus.Trigger<Null>(WallClingEventUnit.EventHook, gameObject, null);
-        }
+        EventBus.Trigger<bool>(WallClingEventUnit.EventHook, gameObject, result);
 
         return result;
-    }
-
-    public void Cling(Rigidbody2D rigidbody)
-    {
-        modVelocity.StopVertical();
-    }
-
-    public void Reset(Rigidbody2D rigidbody, float originalScale)
-    {
-        modVelocity.Reset();
     }
 }

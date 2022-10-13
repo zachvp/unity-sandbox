@@ -107,7 +107,7 @@ public sealed class MoveEventUnit : GameObjectEventUnit<short>
 
 [UnitCategory("Events/Core")]
 [UnitTitle(nameof(WallClingEventUnit))]
-public sealed class WallClingEventUnit : GameObjectEventUnit<Null>
+public sealed class WallClingEventUnit : GameObjectEventUnit<bool>
 {
     public static string EventHook = nameof(WallClingEventUnit);
 
@@ -119,7 +119,12 @@ public sealed class WallClingEventUnit : GameObjectEventUnit<Null>
     protected override void Definition()
     {
         base.Definition();
-        value = ValueOutput<short>(nameof(value));
+        value = ValueOutput<bool>(nameof(value));
+    }
+
+    protected override void AssignArguments(Flow flow, bool args)
+    {
+        flow.SetValue(value, args);
     }
 
     public override Type MessageListenerType { get; }
