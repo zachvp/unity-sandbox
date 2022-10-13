@@ -1,40 +1,34 @@
 using UnityEngine;
 using System.Collections;
+using Unity.VisualScripting;
 
 public class MovementWallCling : MonoBehaviour
 {
-    public bool stateCling;
+    public ModifyVelocity modVelocity;
 
     public bool Trigger(bool lhsBlocked, bool rhsBlocked, bool grounded, short inputAxis, Rigidbody2D rigidbody)
     {
         var rightCondition = inputAxis > 0 && rhsBlocked;
         var leftCondition = inputAxis < 0 && lhsBlocked;
-        var result = Mathf.Abs(inputAxis) > 0 && !grounded;// && rigidbody.velocity.y < 0.1f;
+        var result = Mathf.Abs(inputAxis) > 0 && !grounded && rigidbody.velocity.y < 1;
 
-        //if (leftCondition)
-        //{
-        //    Debug.LogFormat("zvp: result: {0}", result);
-        //}
+        result &= leftCondition || rightCondition;
 
-        //Debug.LogFormat("zvp: left condition: {0}", leftCondition);
-        result &= leftCondition;// || rightCondition;
-
-        Debug.LogFormat("zvp: result: {0}", result);
+        if (result)
+        {
+            EventBus.Trigger<Null>(WallClingEventUnit.EventHook, gameObject, null);
+        }
 
         return result;
     }
 
     public void Cling(Rigidbody2D rigidbody)
     {
-        var newVelocity = rigidbody.velocity;
-
-        newVelocity.y = 0;
-
-        rigidbody.velocity = newVelocity;
+        modVelocity.StopVertical();
     }
 
-    public void Reset(Rigidbody2D rigidbody)
+    public void Reset(Rigidbody2D rigidbody, float originalScale)
     {
-        rigidbody.WakeUp();
+        modVelocity.Reset();
     }
 }

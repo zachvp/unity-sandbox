@@ -1733,6 +1733,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   body: {fileID: 1024393159}
+  gravityScaleOriginal: 0
 --- !u!114 &1195974546
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1771,6 +1772,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e64a8462683c546a1adc49a7036cab9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  modVelocity: {fileID: 1195974545}
 --- !u!1 &1237819480
 GameObject:
   m_ObjectHideFlags: 0

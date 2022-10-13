@@ -3,9 +3,12 @@ using UnityEngine;
 public class ModifyVelocity : MonoBehaviour
 {
     public Rigidbody2D body;
+    public float gravityScaleOriginal;
 
-    private float velocityX;
-    private float velocityY;
+    public void Awake()
+    {
+        gravityScaleOriginal = body.gravityScale;
+    }
 
     public void TriggerX(short value)
     {
@@ -22,5 +25,20 @@ public class ModifyVelocity : MonoBehaviour
         result.y = value;
 
         body.velocity = result;
+    }
+
+    public void StopVertical()
+    {
+        var newVelocity = body.velocity;
+
+        newVelocity.y = 0;
+        body.gravityScale = 0;
+
+        body.velocity = newVelocity;
+    }
+
+    public void Reset()
+    {
+        body.gravityScale = gravityScaleOriginal;
     }
 }

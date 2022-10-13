@@ -5,31 +5,6 @@ using System;
 // This file declare custom events for the game. When you write your own event, don't forget to Regenerate Units through
 // the "Regenerate Unit" button in the Visual Script section of the Project Settings
 
-[UnitCategory("Events/Test")]
-[UnitTitle("Test_0")]
-public sealed class Test_0 : GameObjectEventUnit<short>
-{
-    public static string EventHook = nameof(Test_0);
-
-    protected override string hookName => EventHook;
-
-    [DoNotSerialize]
-    public ValueOutput value { get; private set; }
-
-    protected override void Definition()
-    {
-        base.Definition();
-        value = ValueOutput<short>(nameof(value));
-    }
-
-    protected override void AssignArguments(Flow flow, short args)
-    {
-        flow.SetValue(value, args);
-    }
-
-    public override Type MessageListenerType { get; }
-}
-
 [UnitCategory("Events/Core")]
 [UnitTitle(nameof(JumpInputEventUnit))]
 public sealed class JumpInputEventUnit : GameObjectEventUnit<bool>
@@ -125,6 +100,26 @@ public sealed class MoveEventUnit : GameObjectEventUnit<short>
     protected override void AssignArguments(Flow flow, short args)
     {
         flow.SetValue(value, args);
+    }
+
+    public override Type MessageListenerType { get; }
+}
+
+[UnitCategory("Events/Core")]
+[UnitTitle(nameof(WallClingEventUnit))]
+public sealed class WallClingEventUnit : GameObjectEventUnit<Null>
+{
+    public static string EventHook = nameof(WallClingEventUnit);
+
+    protected override string hookName => EventHook;
+
+    [DoNotSerialize]
+    public ValueOutput value { get; private set; }
+
+    protected override void Definition()
+    {
+        base.Definition();
+        value = ValueOutput<short>(nameof(value));
     }
 
     public override Type MessageListenerType { get; }

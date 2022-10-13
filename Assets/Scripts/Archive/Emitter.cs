@@ -12,9 +12,6 @@ public class Emitter : MonoBehaviour
         if (Keyboard.current.enterKey.wasPressedThisFrame)
         {
             testEvent.Invoke();
-
-            Debug.LogFormat("zvp: trigger test 0");
-            EventBus.Trigger(Test_0.EventHook, gameObject, (short) 3);
         }
     }
 }
