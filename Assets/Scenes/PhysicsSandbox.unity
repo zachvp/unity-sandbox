@@ -1772,7 +1772,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e64a8462683c546a1adc49a7036cab9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  modVelocity: {fileID: 1195974545}
+  lhsTrigger: {fileID: 756236441}
 --- !u!1 &1237819480
 GameObject:
   m_ObjectHideFlags: 0
