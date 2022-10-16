@@ -1,11 +1,5 @@
 using UnityEngine;
 
-/*
-    onJumpInput
-        if movementwallcling.trigger()
-            modVelocity.TriggerY(wallJumpValue)
-*/
-
 public class MovementWallJump : MonoBehaviour
 {
     public bool Trigger(bool grounded, bool lhsBlocked)
