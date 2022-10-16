@@ -1346,6 +1346,9 @@ GameObject:
   - component: {fileID: 756236439}
   - component: {fileID: 756236442}
   - component: {fileID: 756236441}
+  - component: {fileID: 756236443}
+  - component: {fileID: 756236445}
+  - component: {fileID: 756236444}
   m_Layer: 6
   m_Name: Trigger
   m_TagString: Untagged
@@ -1470,6 +1473,59 @@ CapsuleCollider2D:
   m_Offset: {x: -0.01, y: 0.5}
   m_Size: {x: 1, y: 1.85}
   m_Direction: 0
+--- !u!114 &756236443
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 756236434}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95be07ccfe5554bdaae24c257069d034, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bufferSize: 30
+  states: 
+--- !u!114 &756236444
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 756236434}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2fe5546f775c47d2820aa5e8a715f53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _data:
+    _json: '{"nest":{"source":"Macro","macro":0,"embed":null}}'
+    _objectReferences:
+    - {fileID: 11400000, guid: 5e777fe02ea0348efb09ab6933a072e4, type: 2}
+--- !u!114 &756236445
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 756236434}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e741851cba3ad425c91ecf922cc6b379, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _data:
+    _json: '{"declarations":{"collection":{"$content":[{"name":"stateStore","value":{"$content":0,"$type":"UnityEngine.Object"},"typeHandle":{"Identification":"PlayerCharacterState,
+      Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"},{"name":"lhsTrigger","value":{"$content":1,"$type":"UnityEngine.Object"},"typeHandle":{"Identification":"VolumeTrigger,
+      Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"},{"name":"rhsTrigger","value":{"$content":2,"$type":"UnityEngine.Object"},"typeHandle":{"Identification":"VolumeTrigger,
+      Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"},{"name":"grounded","value":{"$content":3,"$type":"UnityEngine.Object"},"typeHandle":{"Identification":"VolumeTrigger,
+      Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"}],"$version":"A"},"$version":"A"}}'
+    _objectReferences:
+    - {fileID: 756236443}
+    - {fileID: 756236441}
+    - {fileID: 756236439}
+    - {fileID: 756236438}
 --- !u!1 &1024393156
 GameObject:
   m_ObjectHideFlags: 0
@@ -1642,6 +1698,8 @@ MonoBehaviour:
       Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"},{"name":"moveLogic","value":{"$content":8,"$type":"UnityEngine.Object"},"typeHandle":{"Identification":"MovementHorizontal,
       Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"},{"name":"rigidBody","value":{"$content":9,"$type":"UnityEngine.Object"},"typeHandle":{"Identification":"UnityEngine.Rigidbody2D,
       UnityEngine.Physics2DModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"},{"name":"moveWallJump","value":{"$content":10,"$type":"UnityEngine.Object"},"typeHandle":{"Identification":"MovementWallJump,
+      Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"},{"name":"inputMovement","value":{"$content":11,"$type":"UnityEngine.Object"},"typeHandle":{"Identification":"EventHandlerHeldAxis,
+      Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"},{"name":"playerState","value":{"$content":12,"$type":"UnityEngine.Object"},"typeHandle":{"Identification":"PlayerCharacterState,
       Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"}],"$version":"A"},"$version":"A"}}'
     _objectReferences:
     - {fileID: 756236441}
@@ -1655,6 +1713,8 @@ MonoBehaviour:
     - {fileID: 1195974546}
     - {fileID: 1024393159}
     - {fileID: 1195974549}
+    - {fileID: 1648719321}
+    - {fileID: 756236443}
 --- !u!114 &1024393163
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1787,6 +1847,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 275eb1d990a854962af0aa44c8606a24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  jumpVelocity: {x: 100, y: 160}
 --- !u!1 &1237819480
 GameObject:
   m_ObjectHideFlags: 0

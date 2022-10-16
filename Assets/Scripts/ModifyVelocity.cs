@@ -10,6 +10,11 @@ public class ModifyVelocity : MonoBehaviour
         gravityScaleOriginal = body.gravityScale;
     }
 
+    public void Trigger(Vector2 value)
+    {
+        body.velocity = value;
+    }
+
     public void TriggerX(short value)
     {
         var result = body.velocity;
