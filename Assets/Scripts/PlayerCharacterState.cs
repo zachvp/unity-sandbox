@@ -1,6 +1,8 @@
 using UnityEngine;
 using System;
 
+
+// todo: rename to platform actor state
 public class PlayerCharacterState : MonoBehaviour
 {
     [Flags]
