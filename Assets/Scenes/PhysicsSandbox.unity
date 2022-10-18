@@ -2824,6 +2824,90 @@ MonoBehaviour:
     - {fileID: 756236438}
     - {fileID: 1024393159}
     - {fileID: 1195974543}
+--- !u!1 &1586981412
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1586981414}
+  - component: {fileID: 1586981413}
+  m_Layer: 0
+  m_Name: Ball
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!212 &1586981413
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1586981412}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 4
+  m_Sprite: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
+  m_Color: {r: 0.29411766, g: 1, b: 0.69803923, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1, y: 1}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
+--- !u!4 &1586981414
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1586981412}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 41.4, y: 47.9, z: 0}
+  m_LocalScale: {x: 24, y: 24, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1601530414
 GameObject:
   m_ObjectHideFlags: 0
@@ -2978,6 +3062,7 @@ GameObject:
   - component: {fileID: 1648719320}
   - component: {fileID: 1648719321}
   - component: {fileID: 1648719324}
+  - component: {fileID: 1648719325}
   m_Layer: 7
   m_Name: Input
   m_TagString: Untagged
@@ -3061,6 +3146,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: bf1036d6-5ef6-4dad-9af0-79b0f2f1bf52
     m_ActionName: Player/Jump[/Keyboard/w]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1648719325}
+        m_TargetAssemblyTypeName: InputHandlerAnalogStick, Assembly-CSharp
+        m_MethodName: Trigger
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 29513934-1d0c-4a70-8702-c06113eb0dac
+    m_ActionName: Player/Move Hand
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -3078,8 +3179,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04ac6880728164dc4aad998c6405247c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialPhase: 3
-  endPhase: 4
   currentPhase: 0
   axis: 0
 --- !u!114 &1648719324
@@ -3094,8 +3193,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53485a42687b442158c00e2ab10c3df9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialPhase: 3
+  initialPhase: 2
   endPhase: 4
+--- !u!114 &1648719325
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1648719318}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25be65e124d5e46909fabd06fc929bba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentPhase: 0
+  axis: {x: 0, y: 0}
 --- !u!1 &1776160064
 GameObject:
   m_ObjectHideFlags: 0
@@ -3508,6 +3621,7 @@ GameObject:
   - component: {fileID: 2025389674}
   - component: {fileID: 2025389673}
   - component: {fileID: 2025389678}
+  - component: {fileID: 2025389679}
   m_Layer: 0
   m_Name: Hand
   m_TagString: Untagged
@@ -3637,6 +3751,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   joint: {fileID: 2025389673}
   anchor: {fileID: 1024393158}
+--- !u!114 &2025389679
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2025389672}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f096f97a957f47ad8b6d92c4e978e46, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  root: {fileID: 1024393158}
+  range: 16
 --- !u!1 &2048775863
 GameObject:
   m_ObjectHideFlags: 0

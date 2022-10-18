@@ -7,8 +7,6 @@ using Unity.VisualScripting;
 // todo: rename to InputHandlerHeldAxis
 public class EventHandlerHeldAxis : MonoBehaviour
 {
-    public InputActionPhase initialPhase = InputActionPhase.Performed;
-    public InputActionPhase endPhase = InputActionPhase.Canceled;
     public InputActionPhase currentPhase;
     public short axis;
 
@@ -16,16 +14,17 @@ public class EventHandlerHeldAxis : MonoBehaviour
     public void Trigger(InputAction.CallbackContext context)
     {
         currentPhase = context.phase;
+        axis = (short)context.ReadValue<float>();
 
-        if (context.phase == initialPhase)
+        if (context.phase == InputActionPhase.Started)
         {
-            axis = (short) context.ReadValue<float>();
+            axis = (short)context.ReadValue<float>();
 
             StartCoroutine(CoroutineHold());
         }
-        else if (context.phase == endPhase)
+        else if (context.phase == InputActionPhase.Canceled)
         {
-            axis = (short) context.ReadValue<float>();
+            axis = (short)context.ReadValue<float>();
 
             EventBus.Trigger(MoveInputEventUnit.EventHook, gameObject, axis);
         }
@@ -33,7 +32,7 @@ public class EventHandlerHeldAxis : MonoBehaviour
 
     public IEnumerator CoroutineHold()
     {
-        while (currentPhase != endPhase)
+        while (currentPhase != InputActionPhase.Canceled)
         {
             EventBus.Trigger(MoveInputEventUnit.EventHook, gameObject, axis);
 
