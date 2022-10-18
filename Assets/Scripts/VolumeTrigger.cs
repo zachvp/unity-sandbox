@@ -3,6 +3,7 @@ using UnityEngine.Events;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 
+// todo: rename to trigger volume
 public class VolumeTrigger : MonoBehaviour
 {
     public bool isActive;

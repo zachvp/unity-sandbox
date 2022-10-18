@@ -5,6 +5,8 @@ using System;
 // This file declare custom events for the game. When you write your own event, don't forget to Regenerate Units through
 // the "Regenerate Unit" button in the Visual Script section of the Project Settings
 
+// todo: refactor event hook names to use short enum string defs
+
 [UnitCategory("Events/Core")]
 [UnitTitle(nameof(JumpInputEventUnit))]
 public sealed class JumpInputEventUnit : GameObjectEventUnit<bool>
@@ -148,6 +150,31 @@ public sealed class WallClingEventUnit : GameObjectEventUnit<bool>
     }
 
     protected override void AssignArguments(Flow flow, bool args)
+    {
+        flow.SetValue(value, args);
+    }
+
+    public override Type MessageListenerType { get; }
+}
+
+[UnitCategory("Events/Core")]
+[UnitTitle(nameof(PickupEventUnit))]
+public sealed class PickupEventUnit : GameObjectEventUnit<GameObject>
+{
+    public static string EventHook = nameof(PickupEventUnit);
+
+    protected override string hookName => EventHook;
+
+    [DoNotSerialize]
+    public ValueOutput value { get; private set; }
+
+    protected override void Definition()
+    {
+        base.Definition();
+        value = ValueOutput<GameObject>(nameof(value));
+    }
+
+    protected override void AssignArguments(Flow flow, GameObject args)
     {
         flow.SetValue(value, args);
     }
