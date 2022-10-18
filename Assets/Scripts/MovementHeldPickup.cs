@@ -1,15 +1,11 @@
 using UnityEngine;
 using Unity.VisualScripting;
 
+// todo: rename to movement radial
 public class MovementHeldPickup : MonoBehaviour
 {
     public Transform root;
     public float range;
-
-    public void Awake()
-    {
-        EventBus.Register<Vector2>(GestureInputEventUnit.EventHook, Trigger);
-    }
 
     public void Trigger(Vector2 input)
     {

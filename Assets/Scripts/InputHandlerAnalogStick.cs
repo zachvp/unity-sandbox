@@ -13,6 +13,7 @@ public class InputHandlerAnalogStick : MonoBehaviour
         currentPhase = context.phase;
 
         axis = context.ReadValue<Vector2>();
-        EventBus.Trigger(GestureInputEventUnit.EventHook, axis);
+        
+        EventBus.Trigger(GestureInputEventUnit.EventHook, gameObject, axis);
     }
 }
