@@ -11,7 +11,7 @@ using System;
 [UnitTitle(nameof(JumpInputEventUnit))]
 public sealed class JumpInputEventUnit : GameObjectEventUnit<bool>
 {
-    public static string EventHook = nameof(JumpInputEventUnit);
+    public static string EventHook = EnumHelper.GetStringID(CustomHook.JumpInput);
 
     protected override string hookName => EventHook;
 
@@ -36,7 +36,7 @@ public sealed class JumpInputEventUnit : GameObjectEventUnit<bool>
 [UnitTitle(nameof(MoveInputEventUnit))]
 public sealed class MoveInputEventUnit : GameObjectEventUnit<short>
 {
-    public static string EventHook = nameof(MoveInputEventUnit);
+    public static string EventHook = EnumHelper.GetStringID(CustomHook.MoveInput);
 
     protected override string hookName => EventHook;
 
@@ -61,7 +61,7 @@ public sealed class MoveInputEventUnit : GameObjectEventUnit<short>
 [UnitTitle(nameof(GestureInputEventUnit))]
 public sealed class GestureInputEventUnit : GameObjectEventUnit<Vector2>
 {
-    public static string EventHook = nameof(GestureInputEventUnit);
+    public static string EventHook = EnumHelper.GetStringID(CustomHook.GestureInput);
 
     protected override string hookName => EventHook;
 
@@ -75,6 +75,31 @@ public sealed class GestureInputEventUnit : GameObjectEventUnit<Vector2>
     }
 
     protected override void AssignArguments(Flow flow, Vector2 args)
+    {
+        flow.SetValue(value, args);
+    }
+
+    public override Type MessageListenerType { get; }
+}
+
+[UnitCategory("Events/Core")]
+[UnitTitle(nameof(GripInputEventUnit))]
+public sealed class GripInputEventUnit : GameObjectEventUnit<bool>
+{
+    public static string EventHook = EnumHelper.GetStringID(CustomHook.GripInput);
+
+    protected override string hookName => EventHook;
+
+    [DoNotSerialize]
+    public ValueOutput value { get; private set; }
+
+    protected override void Definition()
+    {
+        base.Definition();
+        value = ValueOutput<bool>(nameof(value));
+    }
+
+    protected override void AssignArguments(Flow flow, bool args)
     {
         flow.SetValue(value, args);
     }

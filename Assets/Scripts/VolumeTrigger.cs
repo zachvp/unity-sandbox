@@ -9,7 +9,12 @@ public class VolumeTrigger : MonoBehaviour
     public bool isActive;
     public LayerMask mask;
     new public Collider2D collider;
-    public short triggerEntryCount;
+    public Collider2D[] overlappingObjects;
+
+    public void Awake()
+    {
+        overlappingObjects = new Collider2D[4];
+    }
 
     public void OnTriggerEnter2D(Collider2D other)
     {
@@ -24,11 +29,30 @@ public class VolumeTrigger : MonoBehaviour
     private void UpdateState()
     {
         var filter = new ContactFilter2D();
-        var colliders = new Collider2D[1];
 
         filter.useLayerMask = true;
         filter.layerMask = mask;
 
-        isActive = collider.OverlapCollider(filter, colliders) > 0;
+        isActive = collider.OverlapCollider(filter, overlappingObjects) > 0;
+    }
+
+    public bool ObjectsContainTraits(ConfigTraits.Traits traits)
+    {
+        foreach(Collider2D c in overlappingObjects)
+        {
+            if (null == c)
+            {
+                continue;
+            }
+
+            var otherTraits = c.GetComponent<ConfigTraits>();
+
+            if (null != otherTraits && otherTraits.traits == traits)
+            {
+                return true; 
+            }
+        }
+
+        return false;
     }
 }

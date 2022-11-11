@@ -7,17 +7,14 @@ public class EventHandlerButton : MonoBehaviour
 {
     public InputActionPhase initialPhase = InputActionPhase.Performed;
     public InputActionPhase endPhase = InputActionPhase.Canceled;
+    public CustomHook hook;
 
     public void Trigger(InputAction.CallbackContext context)
     {
         if (context.phase == initialPhase || context.phase == endPhase)
         {
-            //context.action.PerformInteractiveRebinding()
-            //    .WithControlsExcluding("Mouse")
-            //    .OnMatchWaitForAnother(0.1f)
-            //    .Start();
-            
-            EventBus.Trigger(JumpInputEventUnit.EventHook, gameObject, context.phase == initialPhase);
+            // todo: inject event hook
+            EventBus.Trigger(EnumHelper.GetStringID(hook), gameObject, context.phase == initialPhase);
         }
     }
 }
