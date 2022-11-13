@@ -18,11 +18,13 @@ public class VolumeTrigger : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D other)
     {
+        ClearState();
         UpdateState();
     }
 
     public void OnTriggerExit2D(Collider2D other)
     {
+        ClearState();
         UpdateState();
     }
 
@@ -36,6 +38,15 @@ public class VolumeTrigger : MonoBehaviour
         isActive = collider.OverlapCollider(filter, overlappingObjects) > 0;
     }
 
+    private void ClearState()
+    {
+        for (var i = 0; i < overlappingObjects.Length; i++)
+        {
+            overlappingObjects[i] = null;
+        }
+    }
+
+    // todo: remove, use layer instead
     public bool ObjectsContainTraits(ConfigTraits.Traits traits)
     {
         foreach(Collider2D c in overlappingObjects)
