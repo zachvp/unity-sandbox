@@ -1625,7 +1625,7 @@ MonoBehaviour:
   isActive: 0
   mask:
     serializedVersion: 2
-    m_Bits: 384
+    m_Bits: 2432
   collider: {fileID: 756236437}
   overlappingObjects:
   - {fileID: 0}

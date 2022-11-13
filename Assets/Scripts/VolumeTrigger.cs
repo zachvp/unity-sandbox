@@ -45,25 +45,4 @@ public class VolumeTrigger : MonoBehaviour
             overlappingObjects[i] = null;
         }
     }
-
-    // todo: remove, use layer instead
-    public bool ObjectsContainTraits(ConfigTraits.Traits traits)
-    {
-        foreach(Collider2D c in overlappingObjects)
-        {
-            if (null == c)
-            {
-                continue;
-            }
-
-            var otherTraits = c.GetComponent<ConfigTraits>();
-
-            if (null != otherTraits && otherTraits.traits == traits)
-            {
-                return true; 
-            }
-        }
-
-        return false;
-    }
 }
