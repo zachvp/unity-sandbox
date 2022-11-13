@@ -6,7 +6,8 @@ public enum CustomHook
     JumpInput,
     MoveInput,
     GestureInput,
-    GripInput
+    GripInput,
+    ThrowInput
 }
 
 public static class EnumHelper

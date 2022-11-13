@@ -108,6 +108,31 @@ public sealed class GripInputEventUnit : GameObjectEventUnit<bool>
 }
 
 [UnitCategory("Events/Core")]
+[UnitTitle(nameof(ThrowInputEventUnit))]
+public sealed class ThrowInputEventUnit : GameObjectEventUnit<bool>
+{
+    public static string EventHook = EnumHelper.GetStringID(CustomHook.ThrowInput);
+
+    protected override string hookName => EventHook;
+
+    [DoNotSerialize]
+    public ValueOutput value { get; private set; }
+
+    protected override void Definition()
+    {
+        base.Definition();
+        value = ValueOutput<bool>(nameof(value));
+    }
+
+    protected override void AssignArguments(Flow flow, bool args)
+    {
+        flow.SetValue(value, args);
+    }
+
+    public override Type MessageListenerType { get; }
+}
+
+[UnitCategory("Events/Core")]
 [UnitTitle(nameof(JumpEventUnit))]
 public sealed class JumpEventUnit : GameObjectEventUnit<short>
 {
