@@ -181,28 +181,3 @@ public sealed class WallClingEventUnit : GameObjectEventUnit<bool>
 
     public override Type MessageListenerType { get; }
 }
-
-[UnitCategory("Events/Core")]
-[UnitTitle(nameof(PickupEventUnit))]
-public sealed class PickupEventUnit : GameObjectEventUnit<GameObject>
-{
-    public static string EventHook = nameof(PickupEventUnit);
-
-    protected override string hookName => EventHook;
-
-    [DoNotSerialize]
-    public ValueOutput value { get; private set; }
-
-    protected override void Definition()
-    {
-        base.Definition();
-        value = ValueOutput<GameObject>(nameof(value));
-    }
-
-    protected override void AssignArguments(Flow flow, GameObject args)
-    {
-        flow.SetValue(value, args);
-    }
-
-    public override Type MessageListenerType { get; }
-}
