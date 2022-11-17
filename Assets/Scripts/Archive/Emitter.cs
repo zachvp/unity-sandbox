@@ -11,13 +11,19 @@ using Unity.VisualScripting;
 
 public class Emitter : MonoBehaviour
 {
-    public UnityEvent testEvent;
+
+    public void Awake()
+    {
+        
+    }
 
     public void Update()
     {
+        //input0.
+
         if (Keyboard.current.enterKey.wasPressedThisFrame)
         {
-            testEvent.Invoke();
+            
         }
     }
 }

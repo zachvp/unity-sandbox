@@ -13,7 +13,6 @@ public class EventHandlerButton : MonoBehaviour
     {
         if (context.phase == initialPhase || context.phase == endPhase)
         {
-            // todo: inject event hook
             EventBus.Trigger(EnumHelper.GetStringID(hook), gameObject, context.phase == initialPhase);
         }
     }
