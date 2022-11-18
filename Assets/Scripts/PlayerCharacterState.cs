@@ -5,6 +5,7 @@ using System;
 // todo: rename to platform actor state
 public class PlayerCharacterState : MonoBehaviour
 {
+    // todo: separate into separate generic buffer class
     [Flags]
     public enum State
     {
@@ -14,11 +15,13 @@ public class PlayerCharacterState : MonoBehaviour
         GROUNDED = 1 << 2
     }
 
-
     public short bufferSize;
     public State[] states;
 
     private short index;
+    // end todo
+
+    public Direction2D directionFace;
 
 
     public void Awake()
