@@ -1876,8 +1876,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95be07ccfe5554bdaae24c257069d034, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  right: {fileID: 756236439}
+  left: {fileID: 756236441}
+  down: {fileID: 756236438}
   bufferSize: 30
   states: 
+  stateBuffered: 0
+  directionFace: 0
 --- !u!114 &756236444
 MonoBehaviour:
   m_ObjectHideFlags: 0

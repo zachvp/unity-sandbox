@@ -1,11 +1,15 @@
 using UnityEngine;
 using System;
+using System.Collections;
 
 
 // todo: rename to platform actor state
 public class PlayerCharacterState : MonoBehaviour
 {
-    // todo: separate into separate generic buffer class
+    public VolumeTrigger right;
+    public VolumeTrigger left;
+    public VolumeTrigger down;
+
     [Flags]
     public enum State
     {
@@ -15,37 +19,30 @@ public class PlayerCharacterState : MonoBehaviour
         GROUNDED = 1 << 2
     }
 
-    public short bufferSize;
-    public State[] states;
-
-    private short index;
-    // end todo
+    public State stateCurrent;
+    public Buffer<State> stateBuffer;
 
     public Direction2D directionFace;
 
-
-    public void Awake()
+    public void Update()
     {
-        states = new State[bufferSize];
+        stateCurrent = ComputeState(left.isActive, right.isActive, down.isActive);
+
+        // todo: should be frame independent? e.g. does this window depend on FPS?
+        stateBuffer.Store(stateCurrent);
     }
 
     public bool BufferContainsState(State includeState, State excludeState)
     {
-        foreach (var s in states)
+        for (var i = 0; i < stateBuffer.values.Length; i++)
         {
-            if ((s & includeState) > 0 && (s & excludeState) == 0)
+            if ((stateBuffer.values[i] & includeState) > 0 && (stateBuffer.values[i] & excludeState) == 0)
             {
                 return true;
             }
         }
 
         return false;
-    }
-
-    public void Store(State s)
-    {
-        states[index] = s;
-        index = (short) (((short) (index + 1)) % bufferSize);
     }
 
     public State ComputeState(bool lhsBlocked, bool rhsBlocked, bool grounded)
