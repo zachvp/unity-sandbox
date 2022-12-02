@@ -10,24 +10,24 @@ public class PlayerCharacterState : MonoBehaviour
     public VolumeTrigger left;
     public VolumeTrigger down;
 
-    public Direction2D stateTrigger;
-    public Buffer<Direction2D> stateBuffer;
+    public Direction2D triggerState;
+    public Buffer<Direction2D> triggerStateBuffer;
 
     public Direction2D directionFace;
 
     public void Update()
     {
-        stateTrigger = EnumHelper.FromBool(left.isActive, right.isActive, down.isActive, false);
+        triggerState = EnumHelper.FromBool(left.isActive, right.isActive, down.isActive, false);
 
         // todo: should be frame independent? e.g. does this window depend on FPS?
-        stateBuffer.Store(stateTrigger);
+        triggerStateBuffer.Store(triggerState);
     }
 
     public bool BufferContainsState(Direction2D included, Direction2D excluded)
     {
-        for (var i = 0; i < stateBuffer.values.Length; i++)
+        for (var i = 0; i < triggerStateBuffer.values.Length; i++)
         {
-            if ((stateBuffer.values[i] & included) > 0 && (stateBuffer.values[i] & excluded) == 0)
+            if ((triggerStateBuffer.values[i] & included) > 0 && (triggerStateBuffer.values[i] & excluded) == 0)
             {
                 return true;
             }
