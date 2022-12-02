@@ -1723,7 +1723,6 @@ GameObject:
   m_Component:
   - component: {fileID: 756236435}
   - component: {fileID: 756236445}
-  - component: {fileID: 756236444}
   - component: {fileID: 756236437}
   - component: {fileID: 756236438}
   - component: {fileID: 756236440}
@@ -1879,26 +1878,11 @@ MonoBehaviour:
   right: {fileID: 756236439}
   left: {fileID: 756236441}
   down: {fileID: 756236438}
-  bufferSize: 30
-  states: 
-  stateBuffered: 0
+  stateTrigger: 0
+  stateBuffer:
+    values: 000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+    index: 0
   directionFace: 0
---- !u!114 &756236444
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 756236434}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d2fe5546f775c47d2820aa5e8a715f53, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _data:
-    _json: '{"nest":{"source":"Macro","macro":0,"embed":null}}'
-    _objectReferences:
-    - {fileID: 11400000, guid: 5e777fe02ea0348efb09ab6933a072e4, type: 2}
 --- !u!114 &756236445
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2836,7 +2820,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1284023713
 Transform:
   m_ObjectHideFlags: 0

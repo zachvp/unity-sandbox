@@ -10,49 +10,29 @@ public class PlayerCharacterState : MonoBehaviour
     public VolumeTrigger left;
     public VolumeTrigger down;
 
-    [Flags]
-    public enum State
-    {
-        NONE = 0,
-        LHS_BLOCKED = 1,
-        RHS_BLOCKED = 1 << 1,
-        GROUNDED = 1 << 2
-    }
-
-    public State stateCurrent;
-    public Buffer<State> stateBuffer;
+    public Direction2D stateTrigger;
+    public Buffer<Direction2D> stateBuffer;
 
     public Direction2D directionFace;
 
     public void Update()
     {
-        stateCurrent = ComputeState(left.isActive, right.isActive, down.isActive);
+        stateTrigger = EnumHelper.FromBool(left.isActive, right.isActive, down.isActive, false);
 
         // todo: should be frame independent? e.g. does this window depend on FPS?
-        stateBuffer.Store(stateCurrent);
+        stateBuffer.Store(stateTrigger);
     }
 
-    public bool BufferContainsState(State includeState, State excludeState)
+    public bool BufferContainsState(Direction2D included, Direction2D excluded)
     {
         for (var i = 0; i < stateBuffer.values.Length; i++)
         {
-            if ((stateBuffer.values[i] & includeState) > 0 && (stateBuffer.values[i] & excludeState) == 0)
+            if ((stateBuffer.values[i] & included) > 0 && (stateBuffer.values[i] & excluded) == 0)
             {
                 return true;
             }
         }
 
         return false;
-    }
-
-    public State ComputeState(bool lhsBlocked, bool rhsBlocked, bool grounded)
-    {
-        var result = State.NONE;
-
-        result |= lhsBlocked ? State.LHS_BLOCKED : State.NONE;
-        result |= rhsBlocked ? State.RHS_BLOCKED : State.NONE;
-        result |= grounded ? State.GROUNDED : State.NONE;
-
-        return result;
     }
 }

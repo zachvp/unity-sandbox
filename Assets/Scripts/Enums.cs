@@ -44,4 +44,16 @@ public static class EnumHelper
 
         return (maskCast | flagsCast) == maskCast;
     }
+
+    public static Direction2D FromBool(bool left, bool right, bool down, bool up)
+    {
+        var result = Direction2D.NONE;
+
+        result |= left ? Direction2D.LEFT : Direction2D.NONE;
+        result |= right ? Direction2D.RIGHT : Direction2D.NONE;
+        result |= down ? Direction2D.DOWN : Direction2D.NONE;
+        result |= up ? Direction2D.UP : Direction2D.NONE;
+
+        return result;
+    }
 }
