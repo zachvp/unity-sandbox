@@ -2,15 +2,11 @@ using UnityEngine;
 using Unity.VisualScripting;
 using UnityEngine.UI;
 
-public class CoreUtilities : MonoBehaviour
+public class CoreBehaviorUtilities : MonoBehaviour
 {
     public static bool MultiAND(bool[] propositions)
     {
-        if (propositions.Length < 1)
-        {
-            Debug.LogWarning("propositions are empty, result is trivially false");
-            return false;
-        }
+        Debug.Assert(propositions.Length > 0, "propositions are empty, result is trivially false");
 
         var result = propositions[0];
 
