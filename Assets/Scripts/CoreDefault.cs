@@ -21,6 +21,7 @@ public class Buffer<T>
 {
     public T[] values;
     public short index;
+    public float interval; // in seconds
 
     public void Store(T s)
     {

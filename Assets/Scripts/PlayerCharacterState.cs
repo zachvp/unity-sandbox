@@ -15,12 +15,25 @@ public class PlayerCharacterState : MonoBehaviour
 
     public Direction2D directionFace;
 
-    public void Update()
+    public void Start()
     {
-        triggerState = EnumHelper.FromBool(left.isActive, right.isActive, down.isActive, false);
+        StartCoroutine(RepeatTask(triggerStateBuffer.interval,
+            () =>
+            {
+                triggerState = EnumHelper.FromBool(left.isActive, right.isActive, down.isActive, false);
+                triggerStateBuffer.Store(triggerState);
+            }
+        ));
+    }
 
-        // todo: should be frame independent? e.g. does this window depend on FPS?
-        triggerStateBuffer.Store(triggerState);
+    public IEnumerator RepeatTask(float interval, Action task)
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(interval);
+            task();
+            yield return null;
+        }
     }
 
     public bool BufferContainsState(Direction2D included, Direction2D excluded)
