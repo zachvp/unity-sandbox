@@ -37,14 +37,6 @@ public static class EnumHelper
         return hookCast.ToString();
     }
 
-    public static bool ContainsFlags(Enum mask, Enum flags)
-    {
-        var maskCast = Convert.ToInt32(mask);
-        var flagsCast = Convert.ToInt32(flags);
-
-        return (maskCast | flagsCast) == maskCast;
-    }
-
     public static Direction2D FromBool(bool left, bool right, bool down, bool up)
     {
         var result = Direction2D.NONE;

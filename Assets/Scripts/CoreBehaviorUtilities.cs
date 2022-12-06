@@ -1,6 +1,7 @@
 using UnityEngine;
 using Unity.VisualScripting;
 using UnityEngine.UI;
+using System;
 
 public class CoreBehaviorUtilities : MonoBehaviour
 {
@@ -20,7 +21,7 @@ public class CoreBehaviorUtilities : MonoBehaviour
 
     public static void Swap(GameObject toActivate, GameObject toDeactivate, UnityProperties properties)
     {
-        if (EnumHelper.ContainsFlags(properties, UnityProperties.ACTIVATION))
+        if (properties.HasFlag(UnityProperties.ACTIVATION))
         {
             toActivate.SetActive(true);
         }
@@ -33,7 +34,7 @@ public class CoreBehaviorUtilities : MonoBehaviour
             toActivate.transform.position = toDeactivate.transform.position;
         }
 
-        if (EnumHelper.ContainsFlags(properties, UnityProperties.ACTIVATION))
+        if (properties.HasFlag(UnityProperties.ACTIVATION))
         {
             toDeactivate.SetActive(false);
         }
