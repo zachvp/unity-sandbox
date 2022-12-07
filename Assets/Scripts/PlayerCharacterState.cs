@@ -17,13 +17,11 @@ public class PlayerCharacterState : MonoBehaviour
 
     public void Start()
     {
-        StartCoroutine(CoreUtilities.RepeatTask(triggerStateBuffer.interval,
-            () =>
-            {
+        StartCoroutine(CoreUtilities.RepeatTask(triggerStateBuffer.interval, () =>
+        {
                 triggerState = EnumHelper.FromBool(left.isActive, right.isActive, down.isActive, false);
                 triggerStateBuffer.Store(triggerState);
-            }
-        ));
+        }));
     }
 
     public bool BufferContainsState(Direction2D included, Direction2D excluded)

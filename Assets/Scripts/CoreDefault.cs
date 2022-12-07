@@ -27,4 +27,11 @@ public static class CoreUtilities
             yield return null;
         }
     }
+
+    public static IEnumerator PostFixedUpdateTask(Action task)
+    {
+        yield return new WaitForFixedUpdate();
+        task();
+        yield return null;
+    }
 }
