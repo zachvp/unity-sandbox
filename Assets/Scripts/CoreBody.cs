@@ -1,6 +1,7 @@
 using UnityEngine;
 
-public class ModifyVelocity : MonoBehaviour
+// todo: rename to CoreBody
+public class CoreBody : MonoBehaviour
 {
     public Rigidbody2D body;
     public float gravityScaleOriginal;
@@ -45,5 +46,10 @@ public class ModifyVelocity : MonoBehaviour
     public void Reset()
     {
         body.gravityScale = gravityScaleOriginal;
+    }
+
+    public Vector2 GetVelocity()
+    {
+        return body.velocity;
     }
 }
