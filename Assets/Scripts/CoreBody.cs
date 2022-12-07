@@ -1,6 +1,5 @@
 using UnityEngine;
 
-// todo: rename to CoreBody
 public class CoreBody : MonoBehaviour
 {
     public Rigidbody2D body;
