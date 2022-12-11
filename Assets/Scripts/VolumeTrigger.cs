@@ -11,10 +11,12 @@ public class VolumeTrigger : MonoBehaviour
     new public Collider2D collider;
     public Collider2D[] overlappingObjects;
 
+#if DEBUG
     public void Awake()
     {
         Debug.AssertFormat(overlappingObjects.Length > 0, "non-zero length required for trigger");
     }
+#endif
 
     public void OnTriggerEnter2D(Collider2D other)
     {
