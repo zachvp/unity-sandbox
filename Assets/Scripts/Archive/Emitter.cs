@@ -19,7 +19,8 @@ public class Emitter : MonoBehaviour
 
     public void Update()
     {
-        //input0.
+        // todo: look into this function
+        //Mathf.SmoothDamp()
 
         if (Keyboard.current.enterKey.wasPressedThisFrame)
         {

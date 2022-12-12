@@ -1,67 +1,100 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
+using System.Collections.Generic;
+using System;
 
 public class TestKinematicBody : MonoBehaviour
 {
+    [Flags]
+    public enum Command
+    {
+        NONE = 0,
+        JUMP = 1 << 0,
+        MOVE_LEFT = 1 << 1,
+        MOVE_RIGHT = 1 << 2,
+        MOVE_NONE = 1 << 3
+    }
+
     public Rigidbody2D body;
     public Collider2D attachedCollider;
-    public bool isCollided;
-    public Vector2 velocity;
+    public VolumeTrigger triggerDown;
+
+    public float speed = 50;
+    public float jumpStrength = 50;
+    public float maxSpeed = 100;
     public float gravity = 100;
-    public short speed = 50;
-    public short maxSpeed = 100;
+    public Direction2D collisionDirection;
+    public Command command;
 
-    public void FixedUpdate()
+    public Vector2 velocity;
+
+    public float maxHeight;
+    
+
+    public void Update()
     {
-        if (!isCollided)
+        collisionDirection = EnumHelper.FromBool(false, false, triggerDown.isActive, false);
+
+        if (Keyboard.current.upArrowKey.wasPressedThisFrame && collisionDirection.HasFlag(Direction2D.DOWN))
         {
-            //velocity.x = speed;
-            //velocity.y = Mathf.Max(velocity.y - gravity, velocity.y - maxSpeed);
-            velocity.y -= gravity * Time.fixedDeltaTime;
-
-            //Debug.Log($"velocity: {velocity}");
-
-            //body.transform.Translate(velocity * Time.deltaTime, Space.World);
-            body.MovePosition(body.transform.position + new Vector3(velocity.x, velocity.y) * Time.fixedDeltaTime);
-
-            var overlaps = new Collider2D[1];
-            var count = attachedCollider.OverlapCollider(new ContactFilter2D(), overlaps);
-            if (count > 0)
-            {
-                //body.transform.Translate(-velocity * Time.deltaTime, Space.World);
-                //Debug.Log("wind back body");
-            }
-            //body.transform.position += new Vector3(velocity.x, velocity.y);
+            command |= Command.JUMP;
+        }
+        
+        // horizontal
+        if (Keyboard.current.rightArrowKey.isPressed && !Keyboard.current.leftArrowKey.isPressed)
+        {
+            command |= Command.MOVE_RIGHT;
+        }
+        else if (Keyboard.current.leftArrowKey.isPressed && !Keyboard.current.rightArrowKey.isPressed)
+        {
+            command |= Command.MOVE_LEFT;
         }
         else
         {
-            velocity = Vector2.zero;
+            command |= Command.MOVE_NONE;
         }
+
+        maxHeight = Mathf.Max(maxHeight, transform.position.y);
     }
 
-    public void OnCollisionEnter2D(Collision2D collision)
+    public void FixedUpdate()
     {
-        var contacts = new ContactPoint2D[8];
-        collision.GetContacts(contacts);
-
-        foreach (var contact in contacts)
+        if (command.HasFlag(Command.JUMP))
         {
-            Debug.DrawLine(contact.point, contact.point + Vector2.up * 2, Color.red, float.PositiveInfinity, false);
-            //contact.no
+            velocity.y = jumpStrength;
+            command ^= Command.JUMP;
+        } else if (collisionDirection.HasFlag(Direction2D.DOWN))
+        {
+            velocity.y = 0;
         }
 
-        //if (!isCollided)
-        //{
-        //    var diff = collision.collider.bounds.max.y - collision.otherCollider.bounds.min.y;
-        //    body.transform.Translate(new Vector2(0, diff));
-        //}
+        if (command.HasFlag(Command.MOVE_RIGHT))
+        {
+            velocity.x = speed;
+            command ^= Command.MOVE_RIGHT;
+        }
+        if (command.HasFlag(Command.MOVE_LEFT))
+        {
+            velocity.x = -speed;
+            command ^= Command.MOVE_LEFT;
+        }
+        if (command.HasFlag(Command.MOVE_NONE))
+        {
+            velocity.x = 0;
+            command ^= Command.MOVE_NONE;
+        }
 
-        //Debug.Log($"zvp: enter kinematic collision with: {collision.collider.gameObject.name}; dist: {contact.separation}");
-        isCollided = true;
+        if (!collisionDirection.HasFlag(Direction2D.DOWN))
+        {
+            velocity.y -= gravity;
+        }
+
+        var newPos = body.position + velocity * Time.fixedDeltaTime;
+
+        //body.position = newPos;
+
+        body.MovePosition(newPos);
     }
 
-    public void OnCollisionExit2D(Collision2D collision)
-    {
-        //Debug.Log($"zvp: exit kinematic collision with: {collision.gameObject.name}");
-        isCollided = false;
-    }
+    //public void 
 }
