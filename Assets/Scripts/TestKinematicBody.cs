@@ -16,13 +16,12 @@ public class TestKinematicBody : MonoBehaviour
     }
 
     public Rigidbody2D body;
-    public Collider2D attachedCollider;
     public VolumeTrigger triggerDown;
 
-    public float speed = 50;
-    public float jumpStrength = 50;
-    public float maxSpeed = 100;
-    public float gravity = 100;
+    public short speed = 50;
+    public short jumpStrength = 200;
+    public short maxSpeed = 100;
+    public short gravity = 8;
     public Direction2D collisionDirection;
     public Command command;
 
@@ -95,6 +94,4 @@ public class TestKinematicBody : MonoBehaviour
 
         body.MovePosition(newPos);
     }
-
-    //public void 
 }
