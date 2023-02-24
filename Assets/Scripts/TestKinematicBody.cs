@@ -12,10 +12,13 @@ public class TestKinematicBody : MonoBehaviour
         JUMP = 1 << 0,
         MOVE_LEFT = 1 << 1,
         MOVE_RIGHT = 1 << 2,
-        MOVE_NONE = 1 << 3
+        MOVE_NONE = 1 << 3,
+        ADJUST = 1 << 4
     }
 
     public Rigidbody2D body;
+    public Collider2D attachedCollider;
+    public LayerMask mask;
     public VolumeTrigger triggerDown;
 
     public short speed = 50;
@@ -26,6 +29,7 @@ public class TestKinematicBody : MonoBehaviour
     public Command command;
 
     public Vector2 velocity;
+    public Vector2 adjustPosition;
 
     public float maxHeight;
     
@@ -88,9 +92,13 @@ public class TestKinematicBody : MonoBehaviour
             velocity.y -= gravity;
         }
 
-        var newPos = body.position + velocity * Time.fixedDeltaTime;
+        if (command.HasFlag(Command.ADJUST))
+        {
+            velocity += adjustPosition;
+            command ^= Command.ADJUST;
+        }
 
-        //body.position = newPos;
+        var newPos = body.position + velocity * Time.fixedDeltaTime;
 
         body.MovePosition(newPos);
     }
