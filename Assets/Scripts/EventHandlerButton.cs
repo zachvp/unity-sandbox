@@ -8,6 +8,13 @@ public class EventHandlerButton : MonoBehaviour
     public InputActionPhase initialPhase = InputActionPhase.Performed;
     public InputActionPhase endPhase = InputActionPhase.Canceled;
     public CustomHook hook;
+    public PlayerInput input;
+
+    public void Awake()
+    {
+        // todo: this is a temp fix for NREs; move to use only this or only member outlets
+        input = GetComponent<PlayerInput>();
+    }
 
     public void Trigger(InputAction.CallbackContext context)
     {
@@ -20,6 +27,7 @@ public class EventHandlerButton : MonoBehaviour
             {
                 EventBus.Trigger(OnCustomInputTrigger.Hook);
                 EventBus.Trigger(OnCustomInputTriggerArgs.Hook, true);
+                Debug.Log($"button handler input id: {input.playerIndex}");
             }
         }
     }
