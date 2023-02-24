@@ -136,7 +136,7 @@ public sealed class ThrowInputEventUnit : GameObjectEventUnit<bool>
 [UnitTitle(nameof(JumpEventUnit))]
 public sealed class JumpEventUnit : GameObjectEventUnit<short>
 {
-    public static string EventHook = nameof(JumpInputEventUnit);
+    public static string EventHook = EnumHelper.GetStringID(CustomHook.Jump);
 
     protected override string hookName => EventHook;
 
@@ -161,7 +161,7 @@ public sealed class JumpEventUnit : GameObjectEventUnit<short>
 [UnitTitle(nameof(MoveEventUnit))]
 public sealed class MoveEventUnit : GameObjectEventUnit<short>
 {
-    public static string EventHook = nameof(MoveEventUnit);
+    public static string EventHook = EnumHelper.GetStringID(CustomHook.Move);
 
     protected override string hookName => EventHook;
 
@@ -186,7 +186,7 @@ public sealed class MoveEventUnit : GameObjectEventUnit<short>
 [UnitTitle(nameof(WallClingEventUnit))]
 public sealed class WallClingEventUnit : GameObjectEventUnit<bool>
 {
-    public static string EventHook = nameof(WallClingEventUnit);
+    public static string EventHook = EnumHelper.GetStringID(CustomHook.WallCling);
 
     protected override string hookName => EventHook;
 
@@ -205,4 +205,14 @@ public sealed class WallClingEventUnit : GameObjectEventUnit<bool>
     }
 
     public override Type MessageListenerType { get; }
+}
+
+// Machine events, independent of gameobject
+[UnitCategory("Events/Core")]
+public sealed class OnCustomInputTrigger : EventUnit<EmptyEventArgs>
+{
+    public static string Hook = nameof(OnCustomInputTrigger);
+
+    protected override bool register => true;
+    public override EventHook GetHook(GraphReference r) => Hook;
 }

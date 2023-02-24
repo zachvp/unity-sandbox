@@ -14,6 +14,12 @@ public class EventHandlerButton : MonoBehaviour
         if (context.phase == initialPhase || context.phase == endPhase)
         {
             EventBus.Trigger(EnumHelper.GetStringID(hook), gameObject, context.phase == initialPhase);
+            EventBus.Trigger(EnumHelper.GetStringID(hook), context.phase == initialPhase);
+
+            if (context.phase == initialPhase)
+            {
+                EventBus.Trigger(OnCustomInputTrigger.Hook);
+            }
         }
     }
 }

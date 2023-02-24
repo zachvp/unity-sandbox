@@ -1,12 +1,16 @@
 using System;
 
-public enum CustomHook
+public enum CustomHook : Int32
 {
     JumpInput,
     MoveInput,
     GestureInput,
     GripInput,
-    ThrowInput
+    ThrowInput,
+
+    Jump,
+    Move,
+    WallCling
 }
 
 [Flags]

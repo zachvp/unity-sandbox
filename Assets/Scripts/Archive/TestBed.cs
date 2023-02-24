@@ -9,12 +9,21 @@ using Unity.VisualScripting;
 //    .OnMatchWaitForAnother(0.1f)
 //    .Start();
 
-public class Emitter : MonoBehaviour
+public class TestBed : MonoBehaviour
 {
 
     public void Awake()
     {
-        
+        Debug.LogFormat("TESTBED present in scene");
+        EventBus.Register<bool>(JumpInputEventUnit.EventHook, Trigger);
+
+        // EventBus.Trigger(EnumHelper.GetStringID(hook), context.phase == initialPhase);
+        Timer t;
+    }
+
+    public void Trigger(bool t)
+    {
+        Debug.Log($"jump triggered: {t}");
     }
 
     public void Update()
