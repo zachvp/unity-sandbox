@@ -16,9 +16,10 @@ public class TestBed : MonoBehaviour
     {
         Debug.LogFormat("TESTBED present in scene");
         EventBus.Register<bool>(JumpInputEventUnit.EventHook, Trigger);
+        EventBus.Register<EmptyEventArgs>(OnCustomInputTrigger.Hook, (EmptyEventArgs a) => { Debug.Log("handle global event in script"); });
 
         // EventBus.Trigger(EnumHelper.GetStringID(hook), context.phase == initialPhase);
-        Timer t;
+        //Timer t;
     }
 
     public void Trigger(bool t)
