@@ -11,12 +11,12 @@ using Unity.VisualScripting;
 
 public class TestBed : MonoBehaviour
 {
-
     public void Awake()
     {
         Debug.LogFormat("TESTBED present in scene");
         EventBus.Register<bool>(JumpInputEventUnit.EventHook, Trigger);
         EventBus.Register<EmptyEventArgs>(OnCustomInputTrigger.Hook, (EmptyEventArgs a) => { Debug.Log("handle global event in script"); });
+        EventBus.Register<bool>(OnCustomInputTriggerArgs.Hook, (bool b) => { Debug.Log($"handle global arg event in script: {b}"); });
 
         // EventBus.Trigger(EnumHelper.GetStringID(hook), context.phase == initialPhase);
         //Timer t;

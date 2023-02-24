@@ -19,6 +19,7 @@ public class EventHandlerButton : MonoBehaviour
             if (context.phase == initialPhase)
             {
                 EventBus.Trigger(OnCustomInputTrigger.Hook);
+                EventBus.Trigger(OnCustomInputTriggerArgs.Hook, true);
             }
         }
     }

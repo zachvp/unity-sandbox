@@ -216,3 +216,28 @@ public sealed class OnCustomInputTrigger : EventUnit<EmptyEventArgs>
     protected override bool register => true;
     public override EventHook GetHook(GraphReference r) => Hook;
 }
+
+[UnitCategory("Events/Core")]
+public sealed class OnCustomInputTriggerArgs : EventUnit<bool>
+{
+    public static string Hook = nameof(OnCustomInputTriggerArgs);
+
+    protected override bool register => true;
+    public override EventHook GetHook(GraphReference r) => Hook;
+
+    [DoNotSerialize]// No need to serialize ports.
+    public ValueOutput result { get; private set; }// The event output data to return when the event is triggered.
+
+    protected override void Definition()
+    {
+        base.Definition();
+        // Setting the value on our port.
+        result = ValueOutput<bool>(nameof(result));
+    }
+
+    // Setting the value on our port.
+    protected override void AssignArguments(Flow flow, bool data)
+    {
+        flow.SetValue(result, data);
+    }
+}
