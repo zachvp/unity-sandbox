@@ -4,6 +4,7 @@ public enum CustomHook : Int32
 {
     JumpInput,
     MoveInput,
+    // todo: rename to 2daxisinput
     GestureInput,
     GripInput,
     ThrowInput,

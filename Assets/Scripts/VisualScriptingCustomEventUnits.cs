@@ -85,11 +85,12 @@ public sealed class GestureInputEventUnit : EventUnit<Vector2>
 
 [UnitCategory("Events/Core")]
 [UnitTitle(nameof(GripInputEventUnit))]
-public sealed class GripInputEventUnit : GameObjectEventUnit<bool>
+public sealed class GripInputEventUnit : EventUnit<bool>
 {
-    public static string EventHook = EnumHelper.GetStringID(CustomHook.GripInput);
+    public static string Hook = EnumHelper.GetStringID(CustomHook.GripInput);
 
-    protected override string hookName => EventHook;
+    protected override bool register => true;
+    public override EventHook GetHook(GraphReference r) => Hook;
 
     [DoNotSerialize]
     public ValueOutput value { get; private set; }
@@ -104,17 +105,16 @@ public sealed class GripInputEventUnit : GameObjectEventUnit<bool>
     {
         flow.SetValue(value, args);
     }
-
-    public override Type MessageListenerType { get; }
 }
 
 [UnitCategory("Events/Core")]
 [UnitTitle(nameof(ThrowInputEventUnit))]
-public sealed class ThrowInputEventUnit : GameObjectEventUnit<bool>
+public sealed class ThrowInputEventUnit : EventUnit<bool>
 {
-    public static string EventHook = EnumHelper.GetStringID(CustomHook.ThrowInput);
+    public static string Hook = EnumHelper.GetStringID(CustomHook.ThrowInput);
 
-    protected override string hookName => EventHook;
+    protected override bool register => true;
+    public override EventHook GetHook(GraphReference r) => Hook;
 
     [DoNotSerialize]
     public ValueOutput value { get; private set; }
@@ -129,8 +129,6 @@ public sealed class ThrowInputEventUnit : GameObjectEventUnit<bool>
     {
         flow.SetValue(value, args);
     }
-
-    public override Type MessageListenerType { get; }
 }
 
 /* End input event units */
@@ -210,7 +208,7 @@ public sealed class WallClingEventUnit : GameObjectEventUnit<bool>
     public override Type MessageListenerType { get; }
 }
 
-// Machine events, independent of gameobject
+/**  REFERENCE: Machine events, independent of gameobject */
 [UnitCategory("Events/Core")]
 public sealed class OnCustomInputTrigger : EventUnit<EmptyEventArgs>
 {
