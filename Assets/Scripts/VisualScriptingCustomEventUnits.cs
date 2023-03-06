@@ -33,11 +33,12 @@ public sealed class JumpInputEventUnit : EventUnit<bool>
 
 [UnitCategory("Events/Core")]
 [UnitTitle(nameof(MoveInputEventUnit))]
-public sealed class MoveInputEventUnit : GameObjectEventUnit<short>
+public sealed class MoveInputEventUnit : EventUnit<short>
 {
-    public static string EventHook = EnumHelper.GetStringID(CustomHook.MoveInput);
+    public static string Hook = EnumHelper.GetStringID(CustomHook.MoveInput);
 
-    protected override string hookName => EventHook;
+    protected override bool register => true;
+    public override EventHook GetHook(GraphReference r) => Hook;
 
     [DoNotSerialize]
     public ValueOutput value { get; private set; }
@@ -52,8 +53,6 @@ public sealed class MoveInputEventUnit : GameObjectEventUnit<short>
     {
         flow.SetValue(value, args);
     }
-
-    public override Type MessageListenerType { get; }
 }
 
 [UnitCategory("Events/Core")]

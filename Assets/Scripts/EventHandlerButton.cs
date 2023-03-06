@@ -20,15 +20,16 @@ public class EventHandlerButton : MonoBehaviour
     {
         if (context.phase == initialPhase || context.phase == endPhase)
         {
+            // todo: remove game object call
             EventBus.Trigger(EnumHelper.GetStringID(hook), gameObject, context.phase == initialPhase);
             EventBus.Trigger(EnumHelper.GetStringID(hook), context.phase == initialPhase);
 
-            if (context.phase == initialPhase)
-            {
-                EventBus.Trigger(OnCustomInputTrigger.Hook);
-                EventBus.Trigger(OnCustomInputTriggerArgs.Hook, true);
-                Debug.Log($"button handler input id: {input.playerIndex}");
-            }
+            //if (context.phase == initialPhase)
+            //{
+            //    EventBus.Trigger(OnCustomInputTrigger.Hook);
+            //    EventBus.Trigger(OnCustomInputTriggerArgs.Hook, true);
+            //    Debug.Log($"button handler input id: {input.playerIndex}");
+            //}
         }
     }
 }

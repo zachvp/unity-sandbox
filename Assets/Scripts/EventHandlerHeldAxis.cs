@@ -10,7 +10,6 @@ public class EventHandlerHeldAxis : MonoBehaviour
     public InputActionPhase currentPhase;
     public short axis;
 
-
     public void Trigger(InputAction.CallbackContext context)
     {
         currentPhase = context.phase;
@@ -26,7 +25,9 @@ public class EventHandlerHeldAxis : MonoBehaviour
         {
             axis = (short)context.ReadValue<float>();
 
-            EventBus.Trigger(MoveInputEventUnit.EventHook, gameObject, axis);
+            // todo: remove game object call
+            EventBus.Trigger(MoveInputEventUnit.Hook, gameObject, axis);
+            EventBus.Trigger(MoveInputEventUnit.Hook, axis);
         }
     }
 
@@ -34,7 +35,9 @@ public class EventHandlerHeldAxis : MonoBehaviour
     {
         while (currentPhase != InputActionPhase.Canceled)
         {
-            EventBus.Trigger(MoveInputEventUnit.EventHook, gameObject, axis);
+            // todo: remove game object call
+            EventBus.Trigger(MoveInputEventUnit.Hook, gameObject, axis);
+            EventBus.Trigger(MoveInputEventUnit.Hook, axis);
 
             yield return null;
         }
