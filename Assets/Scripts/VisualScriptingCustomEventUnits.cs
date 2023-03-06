@@ -1,6 +1,7 @@
 using Unity.VisualScripting;
 using UnityEngine;
 using System;
+using UnityEngine.InputSystem;
 
 // This file declare custom events for the game. When you write your own event, don't forget to Regenerate Units through
 // the "Regenerate Unit" button in the Visual Script section of the Project Settings
@@ -13,6 +14,22 @@ public sealed class InputButtonEvent : EventUnit<InputButtonArgs>
 
     protected override bool register => true;
     public override EventHook GetHook(GraphReference r) => Hook;
+
+    public ValueOutput phase { get; private set; }
+    public ValueOutput action { get; private set; }
+
+    protected override void Definition()
+    {
+        base.Definition();
+        phase = ValueOutput<InputActionPhase>(nameof(phase));
+        action = ValueOutput<CustomInputAction>(nameof(action));
+    }
+
+    protected override void AssignArguments(Flow flow, InputButtonArgs args)
+    {
+        flow.SetValue(phase, args.phase);
+        flow.SetValue(action, args.action);
+    }
 }
 
 [UnitCategory("Events/Core")]

@@ -20,6 +20,14 @@ public class EventHandlerButton : MonoBehaviour
 
     public void Trigger(InputAction.CallbackContext context)
     {
+        var inputArgs = new InputButtonArgs();
+
+        inputArgs.action = action;
+        inputArgs.playerID = (short) input.playerIndex;
+        inputArgs.phase = context.phase;
+
+        EventBus.Trigger(EnumHelper.GetStringID(CustomHook.INPUT_BUTTON), inputArgs);
+
         if (context.phase == initialPhase || context.phase == endPhase)
         {
             EventBus.Trigger(EnumHelper.GetStringID(hook), context.phase == initialPhase);
