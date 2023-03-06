@@ -8,7 +8,8 @@ public class EventHandlerButton : MonoBehaviour
 {
     public InputActionPhase initialPhase = InputActionPhase.Performed;
     public InputActionPhase endPhase = InputActionPhase.Canceled;
-    public CustomHook hook;
+    public CustomHook hook = CustomHook.INPUT_BUTTON;
+    public CustomInputAction action;
     public PlayerInput input;
 
     public void Awake()
@@ -21,8 +22,6 @@ public class EventHandlerButton : MonoBehaviour
     {
         if (context.phase == initialPhase || context.phase == endPhase)
         {
-            // todo: remove game object call
-            EventBus.Trigger(EnumHelper.GetStringID(hook), gameObject, context.phase == initialPhase);
             EventBus.Trigger(EnumHelper.GetStringID(hook), context.phase == initialPhase);
 
             //if (context.phase == initialPhase)

@@ -2,6 +2,7 @@ using System;
 
 public enum CustomHook : Int32
 {
+    INPUT_BUTTON,
     JumpInput,
     MoveInput,
     // todo: rename to 2daxisinput
@@ -12,6 +13,15 @@ public enum CustomHook : Int32
     Jump,
     Move,
     WallCling
+}
+
+public enum CustomInputAction : Int32
+{
+    JUMP,
+    MOVE,
+    GESTURE,
+    GRIP,
+    THROW
 }
 
 [Flags]

@@ -18,15 +18,11 @@ public class EventHandlerHeldAxis : MonoBehaviour
         if (context.phase == InputActionPhase.Started)
         {
             axis = (short)context.ReadValue<float>();
-
             StartCoroutine(CoroutineHold());
         }
         else if (context.phase == InputActionPhase.Canceled)
         {
             axis = (short)context.ReadValue<float>();
-
-            // todo: remove game object call
-            EventBus.Trigger(MoveInputEventUnit.Hook, gameObject, axis);
             EventBus.Trigger(MoveInputEventUnit.Hook, axis);
         }
     }
@@ -35,8 +31,6 @@ public class EventHandlerHeldAxis : MonoBehaviour
     {
         while (currentPhase != InputActionPhase.Canceled)
         {
-            // todo: remove game object call
-            EventBus.Trigger(MoveInputEventUnit.Hook, gameObject, axis);
             EventBus.Trigger(MoveInputEventUnit.Hook, axis);
 
             yield return null;

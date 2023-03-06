@@ -14,8 +14,6 @@ public class InputHandlerAnalogStick : MonoBehaviour
 
         axis = context.ReadValue<Vector2>();
         
-        // todo: remove gameobject event call
-        EventBus.Trigger(GestureInputEventUnit.Hook, gameObject, axis);
         EventBus.Trigger(GestureInputEventUnit.Hook, axis);
     }
 }
