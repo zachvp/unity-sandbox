@@ -9,11 +9,12 @@ using System;
 
 [UnitCategory("Events/Core")]
 [UnitTitle(nameof(JumpInputEventUnit))]
-public sealed class JumpInputEventUnit : GameObjectEventUnit<bool>
+public sealed class JumpInputEventUnit : EventUnit<bool>
 {
-    public static string EventHook = EnumHelper.GetStringID(CustomHook.JumpInput);
+    public static string Hook = EnumHelper.GetStringID(CustomHook.JumpInput);
 
-    protected override string hookName => EventHook;
+    protected override bool register => true;
+    public override EventHook GetHook(GraphReference r) => Hook;
 
     [DoNotSerialize]
     public ValueOutput value { get; private set; }
@@ -28,8 +29,6 @@ public sealed class JumpInputEventUnit : GameObjectEventUnit<bool>
     {
         flow.SetValue(value, args);
     }
-
-    public override Type MessageListenerType { get; }
 }
 
 [UnitCategory("Events/Core")]
