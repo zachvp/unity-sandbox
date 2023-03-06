@@ -3,6 +3,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.Events;
 using Unity.VisualScripting;
 
+// todo: rename to inputhandler button
 public class EventHandlerButton : MonoBehaviour
 {
     public InputActionPhase initialPhase = InputActionPhase.Performed;

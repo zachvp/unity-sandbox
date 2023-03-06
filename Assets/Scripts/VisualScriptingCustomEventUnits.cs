@@ -9,6 +9,8 @@ using System;
 
 [UnitCategory("Events/Core")]
 [UnitTitle(nameof(JumpInputEventUnit))]
+// todo: convert to generic 'inputbuttonevent' with input event args
+// todo: remove other button type units
 public sealed class JumpInputEventUnit : EventUnit<bool>
 {
     public static string Hook = EnumHelper.GetStringID(CustomHook.JumpInput);
@@ -33,6 +35,7 @@ public sealed class JumpInputEventUnit : EventUnit<bool>
 
 [UnitCategory("Events/Core")]
 [UnitTitle(nameof(MoveInputEventUnit))]
+// todo: rename to 'inputAxis1DEvent'
 public sealed class MoveInputEventUnit : EventUnit<short>
 {
     public static string Hook = EnumHelper.GetStringID(CustomHook.MoveInput);
@@ -57,11 +60,13 @@ public sealed class MoveInputEventUnit : EventUnit<short>
 
 [UnitCategory("Events/Core")]
 [UnitTitle(nameof(GestureInputEventUnit))]
-public sealed class GestureInputEventUnit : GameObjectEventUnit<Vector2>
+// todo: rename to 'inputAxis2DEvent'
+public sealed class GestureInputEventUnit : EventUnit<Vector2>
 {
-    public static string EventHook = EnumHelper.GetStringID(CustomHook.GestureInput);
+    public static string Hook = EnumHelper.GetStringID(CustomHook.GestureInput);
 
-    protected override string hookName => EventHook;
+    protected override bool register => true;
+    public override EventHook GetHook(GraphReference r) => Hook;
 
     [DoNotSerialize]
     public ValueOutput value { get; private set; }
@@ -76,8 +81,6 @@ public sealed class GestureInputEventUnit : GameObjectEventUnit<Vector2>
     {
         flow.SetValue(value, args);
     }
-
-    public override Type MessageListenerType { get; }
 }
 
 [UnitCategory("Events/Core")]
@@ -129,6 +132,8 @@ public sealed class ThrowInputEventUnit : GameObjectEventUnit<bool>
 
     public override Type MessageListenerType { get; }
 }
+
+/* End input event units */
 
 [UnitCategory("Events/Core")]
 [UnitTitle(nameof(JumpEventUnit))]
