@@ -57,6 +57,14 @@ public enum PlatformState
     DISABLE_MOVE = 1 << 6
 }
 
+[Flags]
+public enum HandState
+{
+    NONE = 0,
+    GRIP = 1 << 0,
+    BLOCKED = 1 << 1
+}
+
 public static class EnumHelper
 {
     public static string GetStringID(Enum hook)

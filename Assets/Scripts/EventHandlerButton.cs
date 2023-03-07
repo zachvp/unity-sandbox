@@ -15,6 +15,7 @@ public class EventHandlerButton : MonoBehaviour
     public CustomInputAction action;
     public PlayerInput input;
     public InputButtonArgs args;
+    public UnityAction<InputButtonArgs> actionDelegate;
 
     public void Awake()
     {
@@ -29,11 +30,19 @@ public class EventHandlerButton : MonoBehaviour
         args.phase = context.phase;
 
         EventBus.Trigger(InputButtonEvent.Hook, args);
+        if (actionDelegate != null)
+        {
+            actionDelegate(args);
+        }
 
         // todo: remove after refactoring hand
         if (context.phase == initialPhase || context.phase == endPhase)
         {
             EventBus.Trigger(EnumHelper.GetStringID(hook), context.phase == initialPhase);
+            if (actionDelegate != null)
+            {
+                actionDelegate(args);
+            }
 
             //if (context.phase == initialPhase)
             //{

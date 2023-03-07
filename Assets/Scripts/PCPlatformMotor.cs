@@ -17,7 +17,7 @@ public class PCPlatformMotor : MonoBehaviour
 
     public void Awake()
     {
-        EventBus.Register<InputButtonArgs>(InputButtonEvent.Hook, OnInputButton);    
+        inputJump.actionDelegate += OnInputJump;
     }
 
     public void Update()
@@ -101,33 +101,28 @@ public class PCPlatformMotor : MonoBehaviour
         }
     }
 
-    public void OnInputButton(InputButtonArgs args)
+    public void OnInputJump(InputButtonArgs args)
     {
-        switch(args.action)
+        switch (args.phase)
         {
-            case CustomInputAction.JUMP:
-                switch(args.phase)
+            case InputActionPhase.Started:
+                // ground jump
+                if (state.down.isActive)
                 {
-                    case InputActionPhase.Started:
-                        // ground jump
-                        if (state.down.isActive)
-                        {
-                            state.platformState |= PlatformState.JUMP;
-                        }
+                    state.platformState |= PlatformState.JUMP;
+                }
 
-                        // wall jump
-                        else if (state.BufferContainsState(Direction2D.RIGHT | Direction2D.LEFT))
-                        {
-                            state.platformState |= PlatformState.WALL_JUMP;
-                            state.platformState |= PlatformState.DISABLE_MOVE;
-                            state.platformState &= ~PlatformState.MOVE;
+                // wall jump
+                else if (state.BufferContainsState(Direction2D.RIGHT | Direction2D.LEFT))
+                {
+                    state.platformState |= PlatformState.WALL_JUMP;
+                    state.platformState |= PlatformState.DISABLE_MOVE;
+                    state.platformState &= ~PlatformState.MOVE;
 
-                            StartCoroutine(CoreUtilities.DelayedTask(wallJumpDelay, () =>
-                            {
-                                state.platformState &= ~PlatformState.DISABLE_MOVE;
-                            }));
-                        }
-                        break;
+                    StartCoroutine(CoreUtilities.DelayedTask(wallJumpDelay, () =>
+                    {
+                        state.platformState &= ~PlatformState.DISABLE_MOVE;
+                    }));
                 }
                 break;
         }

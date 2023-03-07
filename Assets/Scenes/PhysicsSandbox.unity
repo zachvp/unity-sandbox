@@ -2628,10 +2628,10 @@ MonoBehaviour:
   inputMove: {fileID: 1648719321}
   inputJump: {fileID: 1648719324}
   jumpStrength: 250
-  wallJumpSpeed: {x: 100, y: 180}
   groundMoveSpeed: 100
   airMoveSpeed: 60
   wallJumpDelay: 0.5
+  wallJumpSpeed: {x: 100, y: 180}
 --- !u!1 &1060976994
 GameObject:
   m_ObjectHideFlags: 1
@@ -5468,6 +5468,7 @@ GameObject:
   - component: {fileID: 2025389676}
   - component: {fileID: 2025389682}
   - component: {fileID: 2025389675}
+  - component: {fileID: 2025389686}
   - component: {fileID: 2025389674}
   - component: {fileID: 2025389680}
   - component: {fileID: 2025389673}
@@ -5632,7 +5633,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2025389672}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d2fe5546f775c47d2820aa5e8a715f53, type: 3}
   m_Name: 
@@ -5717,6 +5718,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   body: {fileID: 2025389674}
   gravityScaleOriginal: 0
+--- !u!114 &2025389686
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2025389672}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6471060ef1988c64f8dbf02ee489156a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inputGrip: {fileID: 1648719326}
+  grabTrigger: {fileID: 2025389683}
+  pickupObject: {fileID: 1586981412}
+  heldObject: {fileID: 1273588013}
+  releasedObject: {fileID: 685569010}
+  interactionBlockDelay: 0.2
+  state: 0
 --- !u!1 &2048775863
 GameObject:
   m_ObjectHideFlags: 0
