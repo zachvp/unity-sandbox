@@ -19,7 +19,7 @@ public class TestKinematicBody : MonoBehaviour
     public Rigidbody2D body;
     public Collider2D attachedCollider;
     public LayerMask mask;
-    public VolumeTrigger triggerDown;
+    public TriggerVolume triggerDown;
 
     public short speed = 50;
     public short jumpStrength = 200;
@@ -36,7 +36,7 @@ public class TestKinematicBody : MonoBehaviour
 
     public void Update()
     {
-        collisionDirection = EnumHelper.FromBool(false, false, triggerDown.isActive, false);
+        collisionDirection = EnumHelper.FromBool(false, false, triggerDown.isTriggered, false);
 
         if (Keyboard.current.upArrowKey.wasPressedThisFrame && collisionDirection.HasFlag(Direction2D.DOWN))
         {

@@ -9,7 +9,7 @@ public class PCHandMotor : MonoBehaviour
     public InputHandlerButton inputGrip;
     public InputHandlerButton inputThrow;
     public InputHandlerAnalogStick inputGesture;
-    public VolumeTrigger grabTrigger;
+    public TriggerVolume grabTrigger;
     public GameObject pickupObject;
     public GameObject heldObject;
     public GameObject releasedObject;
@@ -61,7 +61,7 @@ public class PCHandMotor : MonoBehaviour
     {
         if (args.phase == InputActionPhase.Started)
         {
-            if (grabTrigger.isActive)
+            if (grabTrigger.isTriggered)
             {
                 if (state == HandState.NONE)
                 {

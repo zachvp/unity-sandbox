@@ -40,7 +40,7 @@ public class PCPlatformMotor : MonoBehaviour
         }
 
         // wall cling
-        if (!state.down.isActive)
+        if (!state.down.isTriggered)
         {
             // wall cling & release
             if (TriggerWallCling(state.triggerState, inputMove.args.axis, body))
@@ -58,7 +58,7 @@ public class PCPlatformMotor : MonoBehaviour
         // todo: implement air movement
         if (state.platformState.HasFlag(PlatformState.MOVE))
         {
-            if (state.down.isActive)
+            if (state.down.isTriggered)
             {
                 body.TriggerX((short)(groundMoveSpeed * inputMove.args.axis));
             }
@@ -95,7 +95,7 @@ public class PCPlatformMotor : MonoBehaviour
             state.platformState &= ~PlatformState.WALL_CLING;
         }
 
-        if (state.down.isActive)
+        if (state.down.isTriggered)
         {
             state.lastGroundVelocity = body.velocity;
         }
@@ -107,7 +107,7 @@ public class PCPlatformMotor : MonoBehaviour
         {
             case InputActionPhase.Started:
                 // ground jump
-                if (state.down.isActive)
+                if (state.down.isTriggered)
                 {
                     state.platformState |= PlatformState.JUMP;
                 }

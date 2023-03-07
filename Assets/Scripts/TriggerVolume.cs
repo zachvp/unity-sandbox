@@ -1,12 +1,8 @@
 using UnityEngine;
-using UnityEngine.Events;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 
-// todo: rename to trigger volume
-public class VolumeTrigger : MonoBehaviour
+public class TriggerVolume : MonoBehaviour
 {
-    public bool isActive; // todo: rename to 'triggered'
+    public bool isTriggered;
     public LayerMask mask;
     new public Collider2D collider;
     public Collider2D[] overlappingObjects;
@@ -37,7 +33,7 @@ public class VolumeTrigger : MonoBehaviour
         filter.useLayerMask = true;
         filter.layerMask = mask;
 
-        isActive = collider.OverlapCollider(filter, overlappingObjects) > 0;
+        isTriggered = collider.OverlapCollider(filter, overlappingObjects) > 0;
     }
 
     private void ClearState()

@@ -6,8 +6,6 @@ using UnityEngine.InputSystem;
 // This file declare custom events for the game. When you write your own event, don't forget to Regenerate Units through
 // the "Regenerate Unit" button in the Visual Script section of the Project Settings
 
-// todo: refactor event hook names to use short enum string defs
-
 public sealed class InputButtonEvent : EventUnit<InputButtonArgs>
 {
     public static string Hook = EnumHelper.GetStringID(CustomHook.INPUT_BUTTON);

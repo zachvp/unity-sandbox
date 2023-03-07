@@ -6,9 +6,9 @@ using System.Collections;
 // todo: rename to platform actor state
 public class PlayerCharacterState : MonoBehaviour
 {
-    public VolumeTrigger right;
-    public VolumeTrigger left;
-    public VolumeTrigger down;
+    public TriggerVolume right;
+    public TriggerVolume left;
+    public TriggerVolume down;
 
     public Direction2D triggerState;
     public PlatformState platformState;
@@ -20,7 +20,7 @@ public class PlayerCharacterState : MonoBehaviour
     {
         StartCoroutine(CoreUtilities.RepeatTask(triggerStateBuffer.interval, () =>
         {
-            triggerState = EnumHelper.FromBool(left.isActive, right.isActive, down.isActive, false);
+            triggerState = EnumHelper.FromBool(left.isTriggered, right.isTriggered, down.isTriggered, false);
             triggerStateBuffer.Store(triggerState);
         }));
     }
