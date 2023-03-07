@@ -7,8 +7,8 @@ public class PCPlatformMotor : MonoBehaviour
 {
     public CoreBody body;
     public PlayerCharacterState state;
-    public EventHandlerHeldAxis inputMove;
-    public EventHandlerButton inputJump;
+    public InputHandlerDigitalAxis1D inputMove;
+    public InputHandlerButton inputJump;
     public short jumpStrength = 100;
     public short groundMoveSpeed = 100;
     public short airMoveSpeed = 70;

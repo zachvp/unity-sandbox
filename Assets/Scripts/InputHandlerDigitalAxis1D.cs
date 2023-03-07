@@ -3,8 +3,7 @@ using UnityEngine.InputSystem;
 using System.Collections;
 using Unity.VisualScripting;
 
-// todo: rename to InputHandlerHeldAxis
-public class EventHandlerHeldAxis : MonoBehaviour
+public class InputHandlerDigitalAxis1D : MonoBehaviour
 {
     public PlayerInput playerInput;
     public InputAxis1DArgs args;

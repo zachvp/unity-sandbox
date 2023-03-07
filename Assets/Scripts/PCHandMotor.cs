@@ -6,8 +6,8 @@ using UnityEngine.InputSystem;
 
 public class PCHandMotor : MonoBehaviour
 {
-    public EventHandlerButton inputGrip;
-    public EventHandlerButton inputThrow;
+    public InputHandlerButton inputGrip;
+    public InputHandlerButton inputThrow;
     public InputHandlerAnalogStick inputGesture;
     public VolumeTrigger grabTrigger;
     public GameObject pickupObject;
