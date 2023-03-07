@@ -4,17 +4,7 @@ public enum CustomHook : Int32
 {
     INPUT_BUTTON,
     INPUT_AXIS1D,
-    INPUT_AXIS2D,
-    JumpInput,
-    MoveInput,
-    // todo: rename to 2daxisinput
-    GestureInput,
-    GripInput,
-    ThrowInput,
-
-    Jump,
-    Move,
-    WallCling
+    INPUT_AXIS2D
 }
 
 public enum CustomInputAction : Int32
