@@ -20,8 +20,8 @@ public class PlayerCharacterState : MonoBehaviour
     {
         StartCoroutine(CoreUtilities.RepeatTask(triggerStateBuffer.interval, () =>
         {
-                triggerState = EnumHelper.FromBool(left.isActive, right.isActive, down.isActive, false);
-                triggerStateBuffer.Store(triggerState);
+            triggerState = EnumHelper.FromBool(left.isActive, right.isActive, down.isActive, false);
+            triggerStateBuffer.Store(triggerState);
         }));
     }
 
