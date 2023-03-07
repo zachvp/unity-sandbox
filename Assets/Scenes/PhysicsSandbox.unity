@@ -699,7 +699,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 190d9e9918d0aaf48a103a2bb6995059, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nameOverride: grab
+  nameOverride: grabTrigger
   tooltipOverride: 
   target: {fileID: 2025389683}
 --- !u!1 &355127372
@@ -5041,7 +5041,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameOverride: throw
   tooltipOverride: 
-  target: {fileID: 2025389684}
+  target: {fileID: 0}
 --- !u!1 &1850138072
 GameObject:
   m_ObjectHideFlags: 0
@@ -5474,8 +5474,6 @@ GameObject:
   - component: {fileID: 2025389673}
   - component: {fileID: 2025389678}
   - component: {fileID: 2025389683}
-  - component: {fileID: 2025389681}
-  - component: {fileID: 2025389684}
   - component: {fileID: 2025389685}
   m_Layer: 7
   m_Name: Hand
@@ -5626,22 +5624,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
---- !u!114 &2025389681
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2025389672}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d2fe5546f775c47d2820aa5e8a715f53, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _data:
-    _json: '{"nest":{"source":"Macro","macro":0,"embed":null}}'
-    _objectReferences:
-    - {fileID: 11400000, guid: d88e2332c33b041ae802090c0d9c021c, type: 2}
 --- !u!114 &2025389682
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5688,22 +5670,6 @@ MonoBehaviour:
   collider: {fileID: 2025389680}
   overlappingObjects:
   - {fileID: 0}
---- !u!114 &2025389684
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2025389672}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d2fe5546f775c47d2820aa5e8a715f53, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _data:
-    _json: '{"nest":{"source":"Macro","macro":0,"embed":null}}'
-    _objectReferences:
-    - {fileID: 11400000, guid: c8184a49cda9b4c5b9f04393e86c93f6, type: 2}
 --- !u!114 &2025389685
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5731,10 +5697,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inputGrip: {fileID: 1648719326}
+  inputThrow: {fileID: 1648719327}
   grabTrigger: {fileID: 2025389683}
   pickupObject: {fileID: 1586981412}
   heldObject: {fileID: 1273588013}
   releasedObject: {fileID: 685569010}
+  hand: {fileID: 2025389685}
   interactionBlockDelay: 0.2
   state: 0
 --- !u!1 &2048775863
@@ -6096,4 +6064,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameOverride: pickup
   tooltipOverride: 
-  target: {fileID: 2025389681}
+  target: {fileID: 0}
