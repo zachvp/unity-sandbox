@@ -1,8 +1,6 @@
 using UnityEngine;
-using Unity.VisualScripting;
 
-// todo: rename to movement radial
-public class MovementHeldPickup : MonoBehaviour
+public class MovementRadial : MonoBehaviour
 {
     public Transform root;
     public float range;

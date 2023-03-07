@@ -6,7 +6,7 @@ using System;
 public class PCPlatformMotor : MonoBehaviour
 {
     public CoreBody body;
-    public PlayerCharacterState state;
+    public ActorStatePlatform state;
     public InputHandlerDigitalAxis1D inputMove;
     public InputHandlerButton inputJump;
     public short jumpStrength = 100;

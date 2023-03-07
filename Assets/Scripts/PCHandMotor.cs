@@ -14,7 +14,7 @@ public class PCHandMotor : MonoBehaviour
     public GameObject heldObject;
     public GameObject releasedObject;
     public CoreBody hand;
-    public MovementHeldPickup movementHeldPickup;
+    public MovementRadial movementHeldPickup;
     public float interactionBlockDelay;
     public HandState state;
 

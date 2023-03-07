@@ -1,10 +1,6 @@
 using UnityEngine;
-using System;
-using System.Collections;
 
-
-// todo: rename to platform actor state
-public class PlayerCharacterState : MonoBehaviour
+public class ActorStatePlatform : MonoBehaviour
 {
     public TriggerVolume right;
     public TriggerVolume left;
