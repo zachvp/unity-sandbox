@@ -30,6 +30,7 @@ public class EventHandlerButton : MonoBehaviour
 
         EventBus.Trigger(InputButtonEvent.Hook, args);
 
+        // todo: remove after refactoring hand
         if (context.phase == initialPhase || context.phase == endPhase)
         {
             EventBus.Trigger(EnumHelper.GetStringID(hook), context.phase == initialPhase);

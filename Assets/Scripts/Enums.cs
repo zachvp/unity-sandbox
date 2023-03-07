@@ -49,8 +49,12 @@ public enum PlatformState
 {
     NONE = 0,
     JUMP = 1 << 0,
-    WALL_JUMP = 1 << 1,
-    WALL_CLING = 1 << 2
+    MOVE = 1 << 1,
+    MOVE_NEUTRAL = 1 << 2,
+    WALL_JUMP = 1 << 3,
+    WALL_CLING = 1 << 4,
+    WALL_RELEASE = 1 << 5,
+    DISABLE_MOVE = 1 << 6
 }
 
 public static class EnumHelper
@@ -73,4 +77,6 @@ public static class EnumHelper
 
         return result;
     }
+
+    //public static Unset()
 }

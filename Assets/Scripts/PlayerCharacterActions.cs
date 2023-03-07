@@ -10,20 +10,88 @@ public class PlayerCharacterActions : MonoBehaviour
     public EventHandlerHeldAxis inputMove;
     public EventHandlerButton inputJump;
     public short jumpStrength = 100;
-    public Vector2Int wallJumpSpeed = new Vector2Int(40, 80);
     public short groundMoveSpeed = 100;
     public short airMoveSpeed = 70;
     public float wallJumpDelay = 0.1f;
+    public Vector2Int wallJumpSpeed = new Vector2Int(40, 80);
 
     public void Awake()
     {
-        EventBus.Register<InputButtonArgs>(InputButtonEvent.Hook, OnInputButton);
-        EventBus.Register<InputAxis1DArgs>(InputAxis1DEvent.Hook, OnInputAxis1D);
+        EventBus.Register<InputButtonArgs>(InputButtonEvent.Hook, OnInputButton);    
     }
 
     public void Update()
     {
         // todo: check input data each frame rather than splitting into events.
+
+        // movement
+        if (!state.platformState.HasFlag(PlatformState.DISABLE_MOVE))
+        {
+            if (Mathf.Abs(inputMove.args.axis) > 0)
+            {
+                state.platformState |= PlatformState.MOVE;
+                state.platformState &= ~PlatformState.MOVE_NEUTRAL;
+            }
+            else
+            {
+                state.platformState |= PlatformState.MOVE_NEUTRAL;
+                state.platformState &= ~PlatformState.MOVE;
+            }
+        }
+
+        // wall cling
+        if (!state.down.isActive)
+        {
+            // wall cling & release
+            if (TriggerWallCling(state.triggerState, inputMove.args.axis, body))
+            {
+                state.platformState |= PlatformState.WALL_CLING;
+            }
+            else
+            {
+                state.platformState |= PlatformState.WALL_RELEASE;
+            }
+        }
+
+        // todo: implement air movement
+        if (state.platformState.HasFlag(PlatformState.MOVE))
+        {
+            if (state.down.isActive)
+            {
+                body.TriggerX((short)(groundMoveSpeed * inputMove.args.axis));
+            }
+            else
+            {
+                body.TriggerX((short)(airMoveSpeed * inputMove.args.axis));
+            }
+        }
+
+        if (state.platformState.HasFlag(PlatformState.JUMP))
+        {
+            body.TriggerY(jumpStrength);
+
+            state.platformState &= ~PlatformState.JUMP;
+        }
+        else if (state.platformState.HasFlag(PlatformState.WALL_JUMP))
+        {
+            var velocity = wallJumpSpeed;
+            velocity.x *= inputMove.args.axis;
+
+            body.Trigger(velocity);
+            state.platformState &= ~PlatformState.WALL_JUMP;
+        }
+
+        // wall cling/release
+        if (state.platformState.HasFlag(PlatformState.WALL_CLING))
+        {
+            body.StopVertical();
+        }
+        if (state.platformState.HasFlag(PlatformState.WALL_RELEASE))
+        {
+            body.Reset();
+            state.platformState &= ~PlatformState.WALL_RELEASE;
+            state.platformState &= ~PlatformState.WALL_CLING;
+        }
 
         if (state.down.isActive)
         {
@@ -42,58 +110,22 @@ public class PlayerCharacterActions : MonoBehaviour
                         // ground jump
                         if (state.down.isActive)
                         {
-                            body.TriggerY(jumpStrength);
+                            state.platformState |= PlatformState.JUMP;
                         }
+
                         // wall jump
                         else if (state.BufferContainsState(Direction2D.RIGHT | Direction2D.LEFT))
                         {
-                            var velocity = wallJumpSpeed;
-                            velocity.x *= inputMove.args.axis;
-
-                            body.Trigger(velocity);
-
                             state.platformState |= PlatformState.WALL_JUMP;
+                            state.platformState |= PlatformState.DISABLE_MOVE;
+                            state.platformState &= ~PlatformState.MOVE;
+
                             StartCoroutine(CoreUtilities.DelayedTask(wallJumpDelay, () =>
                             {
-                                if (state.platformState.HasFlag(PlatformState.WALL_JUMP))
-                                {
-                                    state.platformState ^= PlatformState.WALL_JUMP;
-                                }
+                                state.platformState &= ~PlatformState.DISABLE_MOVE;
                             }));
                         }
                         break;
-                }
-                break;
-        }
-    }
-
-    public void OnInputAxis1D(InputAxis1DArgs args)
-    {
-        switch (args.action)
-        {
-            case (CustomInputAction.MOVE):
-                if (state.down.isActive)
-                {
-                    // walk
-                    body.TriggerX((short)(groundMoveSpeed * args.axis));
-                }
-                else
-                {
-                    // wall cling & release
-                    if (TriggerWallCling(state.triggerState, args.axis, body))
-                    {
-                        body.StopVertical();
-                    }
-                    else
-                    {
-                        body.Reset();
-                    }
-
-                    // todo: implement air movement
-                    if (Mathf.Abs(args.axis) > 0 && !state.platformState.HasFlag(PlatformState.WALL_JUMP))
-                    {
-                        body.TriggerX((short)(airMoveSpeed * args.axis));
-                    }
                 }
                 break;
         }
