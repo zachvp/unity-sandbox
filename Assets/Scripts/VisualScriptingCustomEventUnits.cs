@@ -38,6 +38,18 @@ public sealed class InputAxis1DEvent : EventUnit<InputAxis1DArgs>
 
     protected override bool register => true;
     public override EventHook GetHook(GraphReference r) => Hook;
+
+    // todo: expose arg properties
+}
+
+public sealed class InputAxis2DEvent : EventUnit<InputAxis2DArgs>
+{
+    public static string Hook = EnumHelper.GetStringID(CustomHook.INPUT_AXIS2D);
+
+    protected override bool register => true;
+    public override EventHook GetHook(GraphReference r) => Hook;
+
+    // todo: expose arg properties
 }
 
 [UnitCategory("Events/Core")]

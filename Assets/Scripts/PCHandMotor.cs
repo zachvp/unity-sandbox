@@ -8,11 +8,13 @@ public class PCHandMotor : MonoBehaviour
 {
     public EventHandlerButton inputGrip;
     public EventHandlerButton inputThrow;
+    public InputHandlerAnalogStick inputGesture;
     public VolumeTrigger grabTrigger;
     public GameObject pickupObject;
     public GameObject heldObject;
     public GameObject releasedObject;
     public CoreBody hand;
+    public MovementHeldPickup movementHeldPickup;
     public float interactionBlockDelay;
     public HandState state;
 
@@ -20,6 +22,12 @@ public class PCHandMotor : MonoBehaviour
     {
         inputGrip.actionDelegate += OnInputGrip;
         inputThrow.actionDelegate += OnInputThrow;
+        inputGesture.actionDelegate += OnInputGesture;
+    }
+
+    public void OnInputGesture(InputAxis2DArgs args)
+    {
+        movementHeldPickup.Trigger(args.axis);
     }
 
     public void OnInputThrow(InputButtonArgs args)
