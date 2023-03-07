@@ -23,7 +23,7 @@ public class PlayerCharacterActions : MonoBehaviour
 
     public void Update()
     {
-
+        // todo: check input data each frame rather than splitting into events.
 
         if (state.down.isActive)
         {
@@ -90,7 +90,7 @@ public class PlayerCharacterActions : MonoBehaviour
                     }
 
                     // todo: implement air movement
-                    if (!state.platformState.HasFlag(PlatformState.WALL_JUMP))
+                    if (Mathf.Abs(args.axis) > 0 && !state.platformState.HasFlag(PlatformState.WALL_JUMP))
                     {
                         body.TriggerX((short)(airMoveSpeed * args.axis));
                     }
