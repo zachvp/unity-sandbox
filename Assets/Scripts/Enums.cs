@@ -44,6 +44,15 @@ public enum Direction2D
     RIGHT = 1 << 3
 }
 
+[Flags]
+public enum PlatformState
+{
+    NONE = 0,
+    JUMP = 1 << 0,
+    WALL_JUMP = 1 << 1,
+    WALL_CLING = 1 << 2
+}
+
 public static class EnumHelper
 {
     public static string GetStringID(Enum hook)

@@ -1543,7 +1543,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1024393158}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &609966612
 MonoBehaviour:
@@ -1925,13 +1925,13 @@ GameObject:
   m_Component:
   - component: {fileID: 756236435}
   - component: {fileID: 756236445}
+  - component: {fileID: 756236443}
   - component: {fileID: 756236437}
   - component: {fileID: 756236438}
   - component: {fileID: 756236440}
   - component: {fileID: 756236439}
   - component: {fileID: 756236442}
   - component: {fileID: 756236441}
-  - component: {fileID: 756236443}
   m_Layer: 10
   m_Name: Trigger
   m_TagString: Untagged
@@ -2081,11 +2081,12 @@ MonoBehaviour:
   left: {fileID: 756236441}
   down: {fileID: 756236438}
   triggerState: 0
+  platformState: 0
   triggerStateBuffer:
     values: 000000000000000000000000000000000000000000000000
     index: 0
     interval: 0.01
-  directionFace: 0
+  lastGroundVelocity: {x: 0, y: 0}
 --- !u!114 &756236445
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2500,12 +2501,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1024393158}
+  - component: {fileID: 1024393165}
   - component: {fileID: 1024393157}
   - component: {fileID: 1024393159}
   - component: {fileID: 1024393160}
   - component: {fileID: 1024393162}
   - component: {fileID: 1024393164}
-  - component: {fileID: 1024393165}
   m_Layer: 10
   m_Name: Character
   m_TagString: Untagged
@@ -2583,7 +2584,6 @@ Transform:
   - {fileID: 1850138073}
   - {fileID: 1582256154}
   - {fileID: 1237819481}
-  - {fileID: 1220372103}
   - {fileID: 609966611}
   m_Father: {fileID: 1994839681}
   m_RootOrder: 1
@@ -2671,7 +2671,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1024393156}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d2fe5546f775c47d2820aa5e8a715f53, type: 3}
   m_Name: 
@@ -2693,8 +2693,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   body: {fileID: 1195974545}
+  state: {fileID: 756236443}
+  inputMove: {fileID: 1648719321}
+  inputJump: {fileID: 0}
   jumpStrength: 250
+  wallJumpSpeed: {x: 100, y: 180}
   groundMoveSpeed: 100
+  airMoveSpeed: 60
+  wallJumpDelay: 0.5
 --- !u!1 &1060976994
 GameObject:
   m_ObjectHideFlags: 1
@@ -3015,53 +3021,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jumpVelocity: {x: 100, y: 160}
---- !u!1 &1220372102
-GameObject:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1220372103}
-  - component: {fileID: 1220372104}
-  m_Layer: 0
-  m_Name: NameContainer(EditorOnly)
-  m_TagString: EditorOnly
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1220372103
-Transform:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1220372102}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1024393158}
-  m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1220372104
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1220372102}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 190d9e9918d0aaf48a103a2bb6995059, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nameOverride: move
-  tooltipOverride: 
-  target: {fileID: 0}
 --- !u!1 &1222732603
 GameObject:
   m_ObjectHideFlags: 1
@@ -4697,6 +4656,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentPhase: 0
   axis: 0
+  playerInput: {fileID: 1648719320}
   action: 1
 --- !u!114 &1648719324
 MonoBehaviour:

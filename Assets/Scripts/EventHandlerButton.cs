@@ -14,6 +14,7 @@ public class EventHandlerButton : MonoBehaviour
 
     public CustomInputAction action;
     public PlayerInput input;
+    public InputButtonArgs args;
 
     public void Awake()
     {
@@ -23,13 +24,11 @@ public class EventHandlerButton : MonoBehaviour
 
     public void Trigger(InputAction.CallbackContext context)
     {
-        var inputArgs = new InputButtonArgs();
+        args.action = action;
+        args.playerID = (short) input.playerIndex;
+        args.phase = context.phase;
 
-        inputArgs.action = action;
-        inputArgs.playerID = (short) input.playerIndex;
-        inputArgs.phase = context.phase;
-
-        EventBus.Trigger(InputButtonEvent.Hook, inputArgs);
+        EventBus.Trigger(InputButtonEvent.Hook, args);
 
         if (context.phase == initialPhase || context.phase == endPhase)
         {

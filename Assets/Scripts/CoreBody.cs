@@ -4,6 +4,7 @@ public class CoreBody : MonoBehaviour
 {
     public Rigidbody2D body;
     public float gravityScaleOriginal;
+    public Vector2 velocity { get { return body.velocity; } private set { body.velocity = value; } }
 
     public void Awake()
     {

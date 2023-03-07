@@ -34,4 +34,11 @@ public static class CoreUtilities
         task();
         yield return null;
     }
+
+    public static IEnumerator DelayedTask(float delay, Action task)
+    {
+        yield return new WaitForSeconds(delay);
+        task();
+        yield return null;
+    }
 }

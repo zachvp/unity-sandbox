@@ -11,9 +11,10 @@ public class PlayerCharacterState : MonoBehaviour
     public VolumeTrigger down;
 
     public Direction2D triggerState;
+    public PlatformState platformState;
     public Buffer<Direction2D> triggerStateBuffer;
 
-    public Direction2D directionFace;
+    public Vector2 lastGroundVelocity;
 
     public void Start()
     {
@@ -22,6 +23,11 @@ public class PlayerCharacterState : MonoBehaviour
                 triggerState = EnumHelper.FromBool(left.isActive, right.isActive, down.isActive, false);
                 triggerStateBuffer.Store(triggerState);
         }));
+    }
+
+    public bool BufferContainsState(Direction2D included)
+    {
+        return BufferContainsState(included, Direction2D.NONE);
     }
 
     public bool BufferContainsState(Direction2D included, Direction2D excluded)

@@ -6,7 +6,7 @@ using Unity.VisualScripting;
 // todo: rename to trigger volume
 public class VolumeTrigger : MonoBehaviour
 {
-    public bool isActive;
+    public bool isActive; // todo: rename to 'triggered'
     public LayerMask mask;
     new public Collider2D collider;
     public Collider2D[] overlappingObjects;

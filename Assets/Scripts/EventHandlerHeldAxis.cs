@@ -10,6 +10,7 @@ public class EventHandlerHeldAxis : MonoBehaviour
     public InputActionPhase currentPhase;
     public short axis;
 
+    public PlayerInput playerInput;
     public InputAxis1DArgs args;
     public CustomInputAction action;
 
@@ -29,7 +30,8 @@ public class EventHandlerHeldAxis : MonoBehaviour
         }
         // end remove
 
-        args.axis = (short)context.ReadValue<float>();
+        args.playerID = (short) playerInput.playerIndex;
+        args.axis = (short) context.ReadValue<float>();
         args.phase = context.phase;
         args.action = action;
         EventBus.Trigger(InputAxis1DEvent.Hook, args);
