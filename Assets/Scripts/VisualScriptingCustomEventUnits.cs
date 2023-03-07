@@ -32,6 +32,14 @@ public sealed class InputButtonEvent : EventUnit<InputButtonArgs>
     }
 }
 
+public sealed class InputAxis1DEvent : EventUnit<InputAxis1DArgs>
+{
+    public static string Hook = EnumHelper.GetStringID(CustomHook.INPUT_BUTTON);
+
+    protected override bool register => true;
+    public override EventHook GetHook(GraphReference r) => Hook;
+}
+
 [UnitCategory("Events/Core")]
 [UnitTitle(nameof(JumpInputEventUnit))]
 // todo: convert to generic 'inputbuttonevent' with input event args

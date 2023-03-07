@@ -702,53 +702,6 @@ MonoBehaviour:
   nameOverride: grab
   tooltipOverride: 
   target: {fileID: 2025389683}
---- !u!1 &287965234
-GameObject:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 287965235}
-  - component: {fileID: 287965236}
-  m_Layer: 0
-  m_Name: NameContainer(EditorOnly)
-  m_TagString: EditorOnly
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &287965235
-Transform:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 287965234}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1024393158}
-  m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &287965236
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 287965234}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 190d9e9918d0aaf48a103a2bb6995059, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nameOverride: jump
-  tooltipOverride: 
-  target: {fileID: 1024393161}
 --- !u!1 &355127372
 GameObject:
   m_ObjectHideFlags: 0
@@ -1590,7 +1543,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1024393158}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &609966612
 MonoBehaviour:
@@ -2551,8 +2504,6 @@ GameObject:
   - component: {fileID: 1024393159}
   - component: {fileID: 1024393160}
   - component: {fileID: 1024393162}
-  - component: {fileID: 1024393161}
-  - component: {fileID: 1024393163}
   - component: {fileID: 1024393164}
   - component: {fileID: 1024393165}
   m_Layer: 10
@@ -2632,7 +2583,6 @@ Transform:
   - {fileID: 1850138073}
   - {fileID: 1582256154}
   - {fileID: 1237819481}
-  - {fileID: 287965235}
   - {fileID: 1220372103}
   - {fileID: 609966611}
   m_Father: {fileID: 1994839681}
@@ -2675,22 +2625,6 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 1, y: 2}
   m_Direction: 0
---- !u!114 &1024393161
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1024393156}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d2fe5546f775c47d2820aa5e8a715f53, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _data:
-    _json: '{"nest":{"source":"Macro","macro":0,"embed":null}}'
-    _objectReferences:
-    - {fileID: 11400000, guid: e49aac2c4c47a4918a04728ee4d285af, type: 2}
 --- !u!114 &1024393162
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2730,22 +2664,6 @@ MonoBehaviour:
     - {fileID: 1195974549}
     - {fileID: 1648719321}
     - {fileID: 756236443}
---- !u!114 &1024393163
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1024393156}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d2fe5546f775c47d2820aa5e8a715f53, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _data:
-    _json: '{"nest":{"source":"Macro","macro":0,"embed":null}}'
-    _objectReferences:
-    - {fileID: 11400000, guid: 842ae302e1e2f48e3870de141d3a053e, type: 2}
 --- !u!114 &1024393164
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2776,6 +2694,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   body: {fileID: 1195974545}
   jumpStrength: 250
+  groundMoveSpeed: 100
 --- !u!1 &1060976994
 GameObject:
   m_ObjectHideFlags: 1
@@ -3126,7 +3045,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1024393158}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1220372104
 MonoBehaviour:
@@ -3142,7 +3061,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameOverride: move
   tooltipOverride: 
-  target: {fileID: 1024393163}
+  target: {fileID: 0}
 --- !u!1 &1222732603
 GameObject:
   m_ObjectHideFlags: 1
@@ -4778,6 +4697,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentPhase: 0
   axis: 0
+  action: 1
 --- !u!114 &1648719324
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4792,7 +4712,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   initialPhase: 2
   endPhase: 4
-  hook: 1
+  hook: 0
   action: 0
   input: {fileID: 1648719320}
 --- !u!114 &1648719325
@@ -4823,8 +4743,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   initialPhase: 3
   endPhase: 4
-  hook: 4
-  action: 0
+  hook: 5
+  action: 3
   input: {fileID: 1648719320}
 --- !u!114 &1648719327
 MonoBehaviour:
@@ -4840,9 +4760,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   initialPhase: 3
   endPhase: 4
-  hook: 5
-  action: 0
-  input: {fileID: 0}
+  hook: 6
+  action: 4
+  input: {fileID: 1648719320}
 --- !u!1 &1653112934
 GameObject:
   m_ObjectHideFlags: 0

@@ -6,9 +6,12 @@ using Unity.VisualScripting;
 // todo: rename to inputhandler button
 public class EventHandlerButton : MonoBehaviour
 {
+    // todo: remove
     public InputActionPhase initialPhase = InputActionPhase.Performed;
     public InputActionPhase endPhase = InputActionPhase.Canceled;
     public CustomHook hook = CustomHook.INPUT_BUTTON;
+    // end remove
+
     public CustomInputAction action;
     public PlayerInput input;
 
@@ -26,7 +29,7 @@ public class EventHandlerButton : MonoBehaviour
         inputArgs.playerID = (short) input.playerIndex;
         inputArgs.phase = context.phase;
 
-        EventBus.Trigger(EnumHelper.GetStringID(CustomHook.INPUT_BUTTON), inputArgs);
+        EventBus.Trigger(InputButtonEvent.Hook, inputArgs);
 
         if (context.phase == initialPhase || context.phase == endPhase)
         {

@@ -3,6 +3,7 @@ using System;
 public enum CustomHook : Int32
 {
     INPUT_BUTTON,
+    INPUT_AXIS1D,
     JumpInput,
     MoveInput,
     // todo: rename to 2daxisinput
