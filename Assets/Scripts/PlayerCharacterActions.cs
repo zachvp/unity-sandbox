@@ -46,10 +46,12 @@ public class PlayerCharacterActions : MonoBehaviour
             if (TriggerWallCling(state.triggerState, inputMove.args.axis, body))
             {
                 state.platformState |= PlatformState.WALL_CLING;
+                state.platformState &= ~PlatformState.WALL_RELEASE;
             }
             else
             {
                 state.platformState |= PlatformState.WALL_RELEASE;
+                state.platformState &= ~PlatformState.WALL_CLING;
             }
         }
 
@@ -86,7 +88,7 @@ public class PlayerCharacterActions : MonoBehaviour
         {
             body.StopVertical();
         }
-        if (state.platformState.HasFlag(PlatformState.WALL_RELEASE))
+        else if (state.platformState.HasFlag(PlatformState.WALL_RELEASE))
         {
             body.Reset();
             state.platformState &= ~PlatformState.WALL_RELEASE;
