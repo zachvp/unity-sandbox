@@ -1,19 +1,24 @@
 using UnityEngine;
-using Unity.VisualScripting;
 using UnityEngine.InputSystem;
 using System;
 
+// TODO: SWITCH FROM SHORT TO INT -- =OOOO 
+
 public class PCPlatformMotor : MonoBehaviour
 {
+    // -- read vars
     public CoreBody body;
     public ActorStatePlatform state;
     public InputHandlerDigitalAxis1D inputMove;
     public InputHandlerButton inputJump;
-    public short jumpStrength = 100;
-    public short groundMoveSpeed = 100;
-    public short airMoveSpeed = 70;
+    public float jumpStrength = 100;
+    public float groundMoveSpeed = 100;
+    public float airMoveSpeed = 70;
     public float wallJumpDelay = 0.1f;
     public Vector2Int wallJumpSpeed = new Vector2Int(40, 80);
+
+    // -- write vars
+    public float adjustedVelocityX;
 
     public void Awake()
     {
@@ -39,8 +44,12 @@ public class PCPlatformMotor : MonoBehaviour
             }
         }
 
-        // wall cling
-        if (!state.down.isTriggered)
+        // grounded
+        if (state.down.isTriggered)
+        {
+            state.lastGroundVelocity = body.velocity;
+        }
+        else
         {
             // wall cling & release
             if (TriggerWallCling(state.triggerState, inputMove.args.axis, body))
@@ -60,16 +69,23 @@ public class PCPlatformMotor : MonoBehaviour
         {
             if (state.down.isTriggered)
             {
-                body.TriggerX((short)(groundMoveSpeed * inputMove.args.axis));
+                adjustedVelocityX = (groundMoveSpeed * inputMove.args.axis);
+                //body.TriggerX((short)(groundMoveSpeed * inputMove.args.axis));
             }
             else
             {
-                body.TriggerX((short)(airMoveSpeed * inputMove.args.axis));
+                adjustedVelocityX += airMoveSpeed * inputMove.args.axis;
+                //body.TriggerX((short)(airMoveSpeed * inputMove.args.axis));
             }
+        }
+        else if (state.platformState.HasFlag(PlatformState.MOVE_NEUTRAL))
+        {
+            adjustedVelocityX = 0;
         }
 
         if (state.platformState.HasFlag(PlatformState.JUMP))
         {
+            //Debug.Log($"set jump velocity: {velocity.y}");
             body.TriggerY(jumpStrength);
 
             state.platformState &= ~PlatformState.JUMP;
@@ -78,8 +94,9 @@ public class PCPlatformMotor : MonoBehaviour
         {
             var velocity = wallJumpSpeed;
             velocity.x *= inputMove.args.axis;
+            body.TriggerY(velocity.y);
+            adjustedVelocityX = velocity.x;
 
-            body.Trigger(velocity);
             state.platformState &= ~PlatformState.WALL_JUMP;
         }
 
@@ -95,43 +112,47 @@ public class PCPlatformMotor : MonoBehaviour
             state.platformState &= ~PlatformState.WALL_CLING;
         }
 
-        if (state.down.isTriggered)
+        adjustedVelocityX = Mathf.Clamp(adjustedVelocityX, -1.1f*groundMoveSpeed, 1.1f*groundMoveSpeed);
+
+        if (Math.Abs(adjustedVelocityX) > 0)
         {
-            state.lastGroundVelocity = body.velocity;
+            body.TriggerX(adjustedVelocityX);
         }
     }
 
     public void OnInputJump(InputButtonArgs args)
     {
-        switch (args.phase)
+        if (args.phase == InputActionPhase.Started)
         {
-            case InputActionPhase.Started:
-                // ground jump
-                if (state.down.isTriggered)
-                {
-                    state.platformState |= PlatformState.JUMP;
-                }
+            // ground jump
+            if (state.down.isTriggered)
+            {
+                state.platformState |= PlatformState.JUMP;
+                //Debug.Log($"enter jump state");
+            }
 
-                // wall jump
-                else if (state.BufferContainsState(Direction2D.RIGHT | Direction2D.LEFT))
-                {
-                    state.platformState |= PlatformState.WALL_JUMP;
-                    state.platformState |= PlatformState.DISABLE_MOVE;
-                    state.platformState &= ~PlatformState.MOVE;
+            // wall jump
+            else if (state.BufferContainsState(Direction2D.RIGHT | Direction2D.LEFT))
+            {
+                state.platformState |= PlatformState.WALL_JUMP;
+                state.platformState |= PlatformState.DISABLE_MOVE;
+                state.platformState &= ~PlatformState.MOVE;
 
-                    StartCoroutine(CoreUtilities.DelayedTask(wallJumpDelay, () =>
-                    {
-                        state.platformState &= ~PlatformState.DISABLE_MOVE;
-                    }));
-                }
-                break;
+                StartCoroutine(CoreUtilities.DelayedTask(wallJumpDelay, () =>
+                {
+                    state.platformState &= ~PlatformState.DISABLE_MOVE;
+                }));
+            }
         }
     }
 
     public bool TriggerWallCling(Direction2D triggerState, short inputAxis, CoreBody body)
     {
+        // check if next to a wall
         var rightCondition = inputAxis > 0 && triggerState.HasFlag(Direction2D.RIGHT);
         var leftCondition = inputAxis < 0 && triggerState.HasFlag(Direction2D.LEFT);
+
+        // check if input pushes off
         var result = Mathf.Abs(inputAxis) > 0 && !triggerState.HasFlag(Direction2D.DOWN) && body.velocity.y < 1;
 
         result &= leftCondition || rightCondition;

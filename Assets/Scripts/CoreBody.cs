@@ -19,7 +19,7 @@ public class CoreBody : MonoBehaviour
         }));
     }
 
-    public void TriggerX(short value)
+    public void TriggerX(float value)
     {
         StartCoroutine(CoreUtilities.PostFixedUpdateTask(() =>
         {
@@ -30,7 +30,7 @@ public class CoreBody : MonoBehaviour
         }));
     }
 
-    public void TriggerY(short value)
+    public void TriggerY(float value)
     {
         StartCoroutine(CoreUtilities.PostFixedUpdateTask(() =>
         {
@@ -60,10 +60,5 @@ public class CoreBody : MonoBehaviour
         {
             body.gravityScale = gravityScaleOriginal;
         }));
-    }
-
-    public Vector2 GetVelocity()
-    {
-        return body.velocity;
     }
 }

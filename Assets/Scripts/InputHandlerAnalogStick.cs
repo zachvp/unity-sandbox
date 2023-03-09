@@ -4,8 +4,8 @@ using UnityEngine.Events;
 
 public class InputHandlerAnalogStick : MonoBehaviour
 {
-    public CustomInputAction action;
     public PlayerInput input;
+    public CustomInputAction action;
     public InputAxis2DArgs args;
     public UnityAction<InputAxis2DArgs> actionDelegate;
 

@@ -5,8 +5,8 @@ using Unity.VisualScripting;
 
 public class InputHandlerButton : MonoBehaviour
 {
-    public CustomInputAction action;
     public PlayerInput input;
+    public CustomInputAction action;
     public InputButtonArgs args;
     public UnityAction<InputButtonArgs> actionDelegate;
 
