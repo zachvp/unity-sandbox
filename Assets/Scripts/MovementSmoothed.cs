@@ -3,11 +3,9 @@ using UnityEngine;
 public class MovementSmoothed : MonoBehaviour
 {
     public float distance = 32;
-    public float velocity = 1;
     public float currentTime;
     public float smoothTime = 0.5f;
     public Vector3 target;
-    public float step = 0.01f;
     public float rate;
 
     public void Awake()
@@ -23,19 +21,16 @@ public class MovementSmoothed : MonoBehaviour
         {
             var position = transform.position;
             var direction = Vector3.Normalize(target - transform.position);
-            //position.x = Mathf.SmoothDamp(position.x, target.x, ref velocity, smoothTime);
-            //position.x = Mathf.Lerp(position.x, target.x)
-            //position = Vector3.Lerp(position, target, (currentTime / smoothTime) * Time.deltaTime);
             position += direction * rate * Time.deltaTime;
 
             transform.position = position;
 
-            //currentTime += step;
-
-            //step += step % smoothTime;
+            currentTime += Time.deltaTime;
         }
         else
         {
+            Debug.Log($"travel time: {currentTime}");
+            transform.position = target;
             currentTime = 0;
         }
         
