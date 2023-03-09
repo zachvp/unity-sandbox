@@ -1,5 +1,6 @@
 using UnityEngine;
 
+// split into separate 'PlatformBody' class?
 public class CoreBody : MonoBehaviour
 {
     public Rigidbody2D body;

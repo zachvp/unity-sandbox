@@ -128,7 +128,7 @@ public class PCPlatformMotor : MonoBehaviour
                 //Debug.Log($"enter jump state");
             }
 
-            // wall jump
+            // wall jump 
             else if (state.BufferContainsState(Direction2D.RIGHT | Direction2D.LEFT))
             {
                 state.platformState |= PlatformState.WALL_JUMP;
