@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using System;
 
-// TODO: SWITCH FROM SHORT TO INT -- =OOOO 
+// TODO: SWITCH FROM SHORT TO INT/FLOAT -- =OOOO 
 
 public class PCPlatformMotor : MonoBehaviour
 {
@@ -70,12 +70,10 @@ public class PCPlatformMotor : MonoBehaviour
             if (state.down.isTriggered)
             {
                 adjustedVelocityX = (groundMoveSpeed * inputMove.args.axis);
-                //body.TriggerX((short)(groundMoveSpeed * inputMove.args.axis));
             }
             else
             {
                 adjustedVelocityX += airMoveSpeed * inputMove.args.axis;
-                //body.TriggerX((short)(airMoveSpeed * inputMove.args.axis));
             }
         }
         else if (state.platformState.HasFlag(PlatformState.MOVE_NEUTRAL))
@@ -85,7 +83,6 @@ public class PCPlatformMotor : MonoBehaviour
 
         if (state.platformState.HasFlag(PlatformState.JUMP))
         {
-            //Debug.Log($"set jump velocity: {velocity.y}");
             body.TriggerY(jumpStrength);
 
             state.platformState &= ~PlatformState.JUMP;
