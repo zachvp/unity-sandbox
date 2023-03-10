@@ -8,13 +8,14 @@ public class PCHandMotor : MonoBehaviour
     public InputHandlerButton inputThrow;
     public InputHandlerAnalogStick inputGesture;
     public TriggerVolume grabTrigger;
-    public Rigidbody2D pickupObject;
-    public Rigidbody2D heldObject;
-    public Rigidbody2D releasedObject;
     public CoreBody hand;
+    public Transform holdAnchor;
     public MovementRadial movementHeldPickup;
     public float interactionBlockDelay;
     public HandState state;
+    public Trait grabbables;
+
+    private Ball ball;
 
     public void Awake()
     {
@@ -34,23 +35,14 @@ public class PCHandMotor : MonoBehaviour
         {
             if (state == HandState.GRIP)
             {
-                var releasedBody = releasedObject.GetComponent<CoreBody>();
-
-                heldObject.gameObject.SetActive(false);
-                releasedObject.transform.position = heldObject.transform.position;
-                releasedObject.gameObject.SetActive(true);
-                releasedBody.Trigger(hand.velocity);
+                ball.Throw(hand.velocity);
 
                 state &= ~HandState.GRIP;
                 state |= HandState.BLOCKED;
 
                 StartCoroutine(CoreUtilities.DelayedTask(interactionBlockDelay, () =>
                 {
-                    pickupObject.transform.position = releasedObject.transform.position;
-                    pickupObject.gameObject.SetActive(true);
-                    pickupObject.GetComponent<CoreBody>().Trigger(releasedBody.velocity);
-                    releasedObject.gameObject.SetActive(false);
-
+                    ball.ThrowReset();
                     state &= ~HandState.BLOCKED;
                 }));
             }
@@ -63,12 +55,13 @@ public class PCHandMotor : MonoBehaviour
         {
             if (grabTrigger.isTriggered)
             {
-                if (state == HandState.NONE)
-                {
-                    heldObject.gameObject.SetActive(true);
-                    heldObject.rotation = pickupObject.rotation;
-                    pickupObject.gameObject.SetActive(false);
+                ball = grabTrigger.overlappingObjects[0].GetComponent<Ball>();
+                Debug.Log($"grab ball: {ball}");
 
+                if (ball != null && state == HandState.NONE)
+                {
+                    ball.Grab(holdAnchor);
+                    
                     state |= HandState.BLOCKED;
                     state |= HandState.GRIP;
 
@@ -79,23 +72,16 @@ public class PCHandMotor : MonoBehaviour
                 }
             }
 
-            if (state == HandState.GRIP)
+            if (ball && state == HandState.GRIP)
             {
-                releasedObject.gameObject.SetActive(true);
-                heldObject.gameObject.SetActive(false);
-                releasedObject.transform.position = heldObject.transform.position;
-                releasedObject.rotation = heldObject.rotation;
+                ball.Release();
 
                 state |= HandState.BLOCKED;
                 state &= ~HandState.GRIP;
 
                 StartCoroutine(CoreUtilities.DelayedTask(interactionBlockDelay, () =>
                 {
-                    releasedObject.gameObject.SetActive(false);
-                    pickupObject.gameObject.SetActive(true);
-                    pickupObject.transform.position = releasedObject.transform.position;
-                    pickupObject.rotation = releasedObject.rotation;
-
+                    ball.ReleaseReset();
                     state &= ~HandState.BLOCKED;
                 }));
             }

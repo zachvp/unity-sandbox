@@ -29,7 +29,6 @@ public class MovementSmoothed : MonoBehaviour
         }
         else
         {
-            Debug.Log($"travel time: {currentTime}");
             transform.position = target;
             currentTime = 0;
         }

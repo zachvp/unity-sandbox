@@ -17,15 +17,6 @@ public enum CustomInputAction : Int32
 }
 
 [Flags]
-public enum UnityProperties
-{
-    NONE = 0,
-    ACTIVATION = 1 << 0,
-    POSITION = 1 << 1,
-    VELOCITY = 1 << 2
-}
-
-[Flags]
 public enum Direction2D
 {
     NONE = 0,
@@ -54,6 +45,13 @@ public enum HandState
     NONE = 0,
     GRIP = 1 << 0,
     BLOCKED = 1 << 1
+}
+
+[Flags]
+public enum Trait
+{
+    NONE = 0,
+    PICKUP = 1 << 0
 }
 
 public static class EnumHelper
