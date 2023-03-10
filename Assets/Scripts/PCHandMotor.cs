@@ -39,11 +39,12 @@ public class PCHandMotor : MonoBehaviour
 
                 state &= ~HandState.GRIP;
                 state |= HandState.BLOCKED;
-
+                
                 StartCoroutine(CoreUtilities.DelayedTask(interactionBlockDelay, () =>
                 {
-                    ball.ThrowReset();
                     state &= ~HandState.BLOCKED;
+                    ball.ThrowReset();
+
                 }));
             }
         }
@@ -55,8 +56,8 @@ public class PCHandMotor : MonoBehaviour
         {
             if (grabTrigger.isTriggered)
             {
-                ball = grabTrigger.overlappingObjects[0].GetComponent<Ball>();
-                Debug.Log($"grab ball: {ball}");
+                //grabTrigger.overlappingObjects[0].GetComponent<Ball>();
+                ball = grabTrigger.overlappingObjects[0].GetComponentInParent<Ball>();
 
                 if (ball != null && state == HandState.NONE)
                 {
@@ -81,8 +82,9 @@ public class PCHandMotor : MonoBehaviour
 
                 StartCoroutine(CoreUtilities.DelayedTask(interactionBlockDelay, () =>
                 {
-                    ball.ReleaseReset();
                     state &= ~HandState.BLOCKED;
+                    ball.ReleaseReset();
+
                 }));
             }
         }

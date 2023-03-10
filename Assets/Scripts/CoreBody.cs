@@ -4,13 +4,15 @@ using UnityEngine;
 public class CoreBody : MonoBehaviour
 {
     public Rigidbody2D body;
-    public float gravityScaleOriginal;
+    public float originalGravity;
+    public RigidbodyType2D originalType;
+
     public Vector2 velocity { get { return body.velocity; } set { Trigger(value); } }
     public float rotation { get { return body.rotation; } set { body.rotation = value; } }
 
     public void Awake()
     {
-        gravityScaleOriginal = body.gravityScale;
+        originalGravity = body.gravityScale;
     }
 
     public void Trigger(Vector2 value)
@@ -60,7 +62,31 @@ public class CoreBody : MonoBehaviour
     {
         StartCoroutine(CoreUtilities.PostFixedUpdateTask(() =>
         {
-            body.gravityScale = gravityScaleOriginal;
+            body.gravityScale = originalGravity;
+        }));
+    }
+
+    public void SetRotation(float r)
+    {
+        StartCoroutine(CoreUtilities.PostFixedUpdateTask(() =>
+        {
+            rotation = r;
+        }));
+    }
+
+    public void StopPhysics()
+    {
+        StartCoroutine(CoreUtilities.PostFixedUpdateTask(() =>
+        {
+            body.bodyType = RigidbodyType2D.Static;
+        }));
+    }
+
+    public void ResetPhysics()
+    {
+        StartCoroutine(CoreUtilities.PostFixedUpdateTask(() =>
+        {
+            body.bodyType = originalType;
         }));
     }
 }

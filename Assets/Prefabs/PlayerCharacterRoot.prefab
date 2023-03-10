@@ -319,7 +319,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   body: {fileID: 5749309987876600305}
-  gravityScaleOriginal: 0
+  originalGravity: 0
+  originalType: 0
 --- !u!1 &5749309987960713805
 GameObject:
   m_ObjectHideFlags: 0
@@ -335,7 +336,7 @@ GameObject:
   - component: {fileID: 5749309987960713798}
   - component: {fileID: 5749309987960713797}
   - component: {fileID: 5749309987960713796}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Input
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1099,7 +1100,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   body: {fileID: 5749309989022562396}
-  gravityScaleOriginal: 0
+  originalGravity: 0
+  originalType: 0
 --- !u!1 &5749309988676103328
 GameObject:
   m_ObjectHideFlags: 1
