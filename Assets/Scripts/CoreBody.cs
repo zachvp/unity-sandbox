@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 // split into separate 'PlatformBody' class?
 public class CoreBody : MonoBehaviour
@@ -6,7 +7,8 @@ public class CoreBody : MonoBehaviour
     public Rigidbody2D body;
     public float originalGravity;
     public RigidbodyType2D originalType;
-
+    public UnityAction<Collider2D> OnAnyColliderEnter;
+    
     public Vector2 velocity { get { return body.velocity; } set { Trigger(value); } }
     public float rotation { get { return body.rotation; } set { body.rotation = value; } }
 
@@ -15,6 +17,7 @@ public class CoreBody : MonoBehaviour
         originalGravity = body.gravityScale;
     }
 
+    // -- MOVEMENT
     public void Trigger(Vector2 value)
     {
         StartCoroutine(CoreUtilities.PostFixedUpdateTask(() =>
@@ -88,5 +91,22 @@ public class CoreBody : MonoBehaviour
         {
             body.bodyType = originalType;
         }));
+    }
+
+    // -- COLLISIONS
+    public void OnCollisionEnter2D(Collision2D c)
+    {
+        if (OnAnyColliderEnter != null)
+        {
+            OnAnyColliderEnter(c.collider);
+        }
+    }
+
+    public void OnTriggerEnter2D(Collider2D c)
+    {
+        if (OnAnyColliderEnter != null)
+        {
+            OnAnyColliderEnter(c);
+        }
     }
 }

@@ -252,7 +252,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.6
+  m_Radius: 0.9
 --- !u!231 &5749309987876600306
 SpringJoint2D:
   m_ObjectHideFlags: 0
@@ -515,6 +515,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerInput: {fileID: 5749309987960713795}
   action: 1
+  args:
+    playerID: 0
+    action: 0
+    axis: 0
 --- !u!114 &5749309987960713799
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -543,6 +547,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   input: {fileID: 5749309987960713795}
   action: 2
+  args:
+    playerID: 0
+    action: 0
+    axis: {x: 0, y: 0}
 --- !u!114 &5749309987960713797
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1428,7 +1436,8 @@ MonoBehaviour:
   inputJump: {fileID: 5749309987960713799}
   jumpStrength: 250
   groundMoveSpeed: 100
-  airMoveSpeed: 60
+  airMoveSpeed: 50
+  maxSpeedX: 110
   wallJumpDelay: 0.5
   wallJumpSpeed: {x: 100, y: 180}
   adjustedVelocityX: 0

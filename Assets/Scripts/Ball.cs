@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Ball : MonoBehaviour
 {
@@ -7,9 +8,9 @@ public class Ball : MonoBehaviour
     public GameObject pickup;
     public GameObject held;
     public GameObject released;
-    public Collider2D coll;
-
     public MovementFollowTransform heldMovement;
+
+    public float assistUpward = 50;
 
     // Activate the held object, deactivate the pickup object.
     public void Grab(Transform holdAnchor)
@@ -19,7 +20,6 @@ public class Ball : MonoBehaviour
 
         held.SetActive(true);
         pickup.SetActive(false);
-        //coll.enabled = false;
     }
 
     // Activate the temp release object, deactivate the held object.
@@ -49,6 +49,8 @@ public class Ball : MonoBehaviour
         released.SetActive(true);
         //coll.enabled = true;
         body.ResetPhysics();
+
+        baseVelocity.y += assistUpward;
         body.Trigger(baseVelocity);
     }
 

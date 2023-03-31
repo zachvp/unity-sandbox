@@ -74,15 +74,7 @@ public class PCPlatformMotor : MonoBehaviour
             }
             else
             {
-                if (Math.Abs(adjustedVelocityX) < groundMoveSpeed)
-                {
-
-                    adjustedVelocityX = airMoveSpeed * inputMove.args.axis;
-                }
-                else
-                {
-                    adjustedVelocityX += airMoveSpeed * inputMove.args.axis * Time.deltaTime;
-                }
+                adjustedVelocityX = airMoveSpeed * inputMove.args.axis;
             }
         }
         else if (state.platformState.HasFlag(PlatformState.MOVE_NEUTRAL))
