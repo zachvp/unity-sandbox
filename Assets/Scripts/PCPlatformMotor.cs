@@ -13,7 +13,8 @@ public class PCPlatformMotor : MonoBehaviour
     public InputHandlerButton inputJump;
     public float jumpStrength = 100;
     public float groundMoveSpeed = 100;
-    public float airMoveSpeed = 70;
+    public float airMoveSpeed = 25;
+    public float maxSpeedX = 200;
     public float wallJumpDelay = 0.1f;
     public Vector2Int wallJumpSpeed = new Vector2Int(40, 80);
 
@@ -73,7 +74,15 @@ public class PCPlatformMotor : MonoBehaviour
             }
             else
             {
-                adjustedVelocityX += airMoveSpeed * inputMove.args.axis;
+                if (Math.Abs(adjustedVelocityX) < groundMoveSpeed)
+                {
+
+                    adjustedVelocityX = airMoveSpeed * inputMove.args.axis;
+                }
+                else
+                {
+                    adjustedVelocityX += airMoveSpeed * inputMove.args.axis * Time.deltaTime;
+                }
             }
         }
         else if (state.platformState.HasFlag(PlatformState.MOVE_NEUTRAL))
@@ -109,7 +118,7 @@ public class PCPlatformMotor : MonoBehaviour
             state.platformState &= ~PlatformState.WALL_CLING;
         }
 
-        adjustedVelocityX = Mathf.Clamp(adjustedVelocityX, -1.1f*groundMoveSpeed, 1.1f*groundMoveSpeed);
+        adjustedVelocityX = Mathf.Clamp(adjustedVelocityX, -maxSpeedX, maxSpeedX);
 
         if (Math.Abs(adjustedVelocityX) > 0)
         {
@@ -143,7 +152,7 @@ public class PCPlatformMotor : MonoBehaviour
         }
     }
 
-    public bool TriggerWallCling(Direction2D triggerState, short inputAxis, CoreBody body)
+    public bool TriggerWallCling(Direction2D triggerState, int inputAxis, CoreBody body)
     {
         // check if next to a wall
         var rightCondition = inputAxis > 0 && triggerState.HasFlag(Direction2D.RIGHT);

@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 
 public struct InputButtonArgs
 {
-    public short playerID;
+    public int playerID;
     public InputActionPhase phase;
     public CustomInputAction action;
 }
@@ -12,15 +12,15 @@ public struct InputButtonArgs
 [Serializable]
 public struct InputAxis1DArgs
 {
-    public short playerID;
+    public int playerID;
     public CustomInputAction action;
-    public short axis;
+    public int axis;
 }
 
 [Serializable]
 public struct InputAxis2DArgs
 {
-    public short playerID;
+    public int playerID;
     public CustomInputAction action;
     public Vector2 axis;
 }
