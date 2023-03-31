@@ -12,7 +12,6 @@ public class InputHandlerAnalogStick : MonoBehaviour
     public void Trigger(InputAction.CallbackContext context)
     {
         args.playerID = (short) input.playerIndex;
-        args.phase = context.phase;
         args.action = action;
         args.axis = context.ReadValue<Vector2>();
 

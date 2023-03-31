@@ -11,25 +11,10 @@ public class InputHandlerDigitalAxis1D : MonoBehaviour
 
     public void Trigger(InputAction.CallbackContext context)
     {
-        if (context.phase == InputActionPhase.Started)
-        {
-            StartCoroutine(CoroutineHold());
-        }
-
         args.playerID = (short) playerInput.playerIndex;
-        args.axis = (short) context.ReadValue<float>();
-        args.phase = context.phase;
+        args.axis = (short) Mathf.RoundToInt(context.ReadValue<float>());
+        
         args.action = action;
         EventBus.Trigger(InputAxis1DEvent.Hook, args);
-    }
-
-    public IEnumerator CoroutineHold()
-    {
-        while (args.phase != InputActionPhase.Canceled)
-        {
-            EventBus.Trigger(InputAxis1DEvent.Hook, args);
-
-            yield return null;
-        }
     }
 }
