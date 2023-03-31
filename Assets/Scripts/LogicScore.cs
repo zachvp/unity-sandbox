@@ -1,5 +1,6 @@
 using UnityEngine;
 using System;
+using TMPro;
 
 public class LogicScore : MonoBehaviour
 {
@@ -9,6 +10,8 @@ public class LogicScore : MonoBehaviour
     public GameObject rim;
     public CoreBody ballBody;
     public State state;
+    public TextMeshProUGUI scoreUI;
+    public int score;
 
     public void Awake()
     {
@@ -26,6 +29,8 @@ public class LogicScore : MonoBehaviour
             if (state.HasFlag(State.TOP))
             {
                 Debug.Log("SCORE!");
+                score++;
+                scoreUI.text = score.ToString();
             }
 
             state = State.NONE;
