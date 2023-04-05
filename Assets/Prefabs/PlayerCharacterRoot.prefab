@@ -1436,7 +1436,7 @@ MonoBehaviour:
   inputJump: {fileID: 5749309987960713799}
   jumpStrength: 250
   groundMoveSpeed: 100
-  airMoveSpeed: 50
+  airMoveSpeed: 100
   maxSpeedX: 110
   wallJumpDelay: 0.5
   wallJumpSpeed: {x: 100, y: 180}
