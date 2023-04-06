@@ -4,11 +4,11 @@ using TMPro;
 
 public class LogicScore : MonoBehaviour
 {
-    public BoxCollider2D top;
-    public BoxCollider2D bottom;
-    public BoxCollider2D backboard;
-    public GameObject rim;
+    public Collider2D top;
+    public Collider2D bottom;
+    public Collider2D scoreZone;
     public CoreBody ballBody;
+    public Collider2D ballCollider;
     public State state;
     public TextMeshProUGUI scoreUI;
     public int score;
@@ -31,14 +31,14 @@ public class LogicScore : MonoBehaviour
         {
             if (state.HasFlag(State.TOP))
             {
-                Debug.Log("SCORE!");
                 score++;
                 scoreUI.text = score.ToString();
             }
 
             state = State.NONE;
         }
-        else if (c != backboard && c.gameObject != rim)
+
+        if (!ballCollider.IsTouching(scoreZone))
         {
             state = State.NONE;
         }
