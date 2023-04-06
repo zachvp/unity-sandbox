@@ -25,7 +25,14 @@ public class LogicScore : MonoBehaviour
     {
         if (c == top)
         {
-            state |= State.TOP;
+            if (!state.HasFlag(State.BOTTOM))
+            {
+                state |= State.TOP;
+            }
+            else
+            {
+                Debug.Log("INVALID SHOT: score from under the basket");
+            }
         }
         else if (c == bottom)
         {
@@ -35,7 +42,7 @@ public class LogicScore : MonoBehaviour
                 scoreUI.text = score.ToString();
             }
 
-            state = State.NONE;
+            state = State.BOTTOM;
         }
 
         if (!ballCollider.IsTouching(scoreZone))
@@ -49,5 +56,6 @@ public class LogicScore : MonoBehaviour
     {
         NONE = 0,
         TOP = 1 << 0,
+        BOTTOM = 1 << 1
     }
 }
