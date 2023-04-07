@@ -10,7 +10,10 @@ public class Ball : MonoBehaviour
     public GameObject released;
     public MovementFollowTransform heldMovement;
 
-    public float assistUpward = 50;
+    public Vector2 assistThrow = new Vector2(1.1f, 1.1f);
+
+    // todo: consider gesture input direction in throw
+    // todo: possibly related to above: improve jump shot feasibility
 
     // Activate the held object, deactivate the pickup object.
     public void Grab(Transform holdAnchor)
@@ -50,8 +53,18 @@ public class Ball : MonoBehaviour
         //coll.enabled = true;
         body.ResetPhysics();
 
-        baseVelocity.y += assistUpward;
-        body.Trigger(baseVelocity);
+        var modVelocity = baseVelocity;
+
+        modVelocity += assistThrow;
+
+        if (baseVelocity.x < 0)
+        {
+            modVelocity.x = baseVelocity.x - assistThrow.x;
+        }
+
+        //modVelocity.Scale(assistThrow);
+
+        body.Trigger(modVelocity);
     }
 
     // Activate the pickup object, deactivate the temp released object.
