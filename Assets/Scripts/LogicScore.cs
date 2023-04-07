@@ -13,9 +13,6 @@ public class LogicScore : MonoBehaviour
     public TextMeshProUGUI scoreUI;
     public int score;
 
-    // todo: determine the player that scored
-    // todo: reset state when player has picked up ball rather than colliding with random things
-
     public void Awake()
     {
         ballBody.OnAnyColliderEnter += HandleBallColliderEntry;
