@@ -7,10 +7,17 @@ public class MovementFollowTransform : MonoBehaviour
     public bool usePhysics;
 
     [ConditionalField("usePhysics")]
-    public Rigidbody2D body;
+    public CoreBody body;
 
     public void Update()
     {
-        transform.position = root.position;
+        if (usePhysics)
+        {
+            body.position = root.position;
+        }
+        else
+        {
+            transform.position = root.position;
+        }
     }
 }

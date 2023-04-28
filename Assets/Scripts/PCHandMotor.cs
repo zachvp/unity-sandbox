@@ -32,7 +32,6 @@ public class PCHandMotor : MonoBehaviour
 
     public void OnInputThrow(InputButtonArgs args)
     {
-        heldTrigger.RefreshState();
         if (args.phase == InputActionPhase.Started)
         {
             if (state == HandState.GRIP && !heldTrigger.isTriggered)
@@ -75,7 +74,6 @@ public class PCHandMotor : MonoBehaviour
                 }
             }
 
-            heldTrigger.RefreshState();
             if (ball && state == HandState.GRIP && !heldTrigger.isTriggered)
             {
                 ball.Release();

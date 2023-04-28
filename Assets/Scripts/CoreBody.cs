@@ -11,6 +11,7 @@ public class CoreBody : MonoBehaviour
     
     public Vector2 velocity { get { return body.velocity; } set { Trigger(value); } }
     public float rotation { get { return body.rotation; } set { body.rotation = value; } }
+    public Vector2 position { get { return body.position; } set { body.position = value; } }
 
     public void Awake()
     {
@@ -61,19 +62,21 @@ public class CoreBody : MonoBehaviour
         }));
     }
 
-    public void Reset()
-    {
-        StartCoroutine(CoreUtilities.PostFixedUpdateTask(() =>
-        {
-            body.gravityScale = originalGravity;
-        }));
-    }
-
+    // -- TRANSFORM CONTROL
     public void SetRotation(float r)
     {
         StartCoroutine(CoreUtilities.PostFixedUpdateTask(() =>
         {
             rotation = r;
+        }));
+    }
+
+    // -- STATE CONTROL
+    public void Reset()
+    {
+        StartCoroutine(CoreUtilities.PostFixedUpdateTask(() =>
+        {
+            body.gravityScale = originalGravity;
         }));
     }
 
