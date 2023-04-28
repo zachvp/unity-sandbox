@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class Ball : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class Ball : MonoBehaviour
     public GameObject released;
     public MovementFollowTransform heldMovement;
     public GameObject target;
+    public GameObject measureFloorToTarget;
 
     public Vector2 assistThrow = new Vector2(50, 50);
 
@@ -76,20 +78,27 @@ public class Ball : MonoBehaviour
         {
             // todo: rather than static number, compute optimal velocity for score
             var toTarget = target.transform.position - released.transform.position;
-            var a = body.originalGravity * Physics2D.gravity.y;
+            var a = new Vector2(-body.body.drag, body.originalGravity * Physics2D.gravity.y - body.body.drag);
             //target.transform.position.
 
-            magicVel.x = 2 * (toTarget.x / 2.6f);
-            magicVel.y = Mathf.Sqrt(Mathf.Pow(baseVelocity.y, 2) - (2 * a * toTarget.y));
+            magicVel.x = 2 * (toTarget.x / 2.55f);
+            //magicVel.x = Mathf.Sqrt(Mathf.Pow(baseVelocity.x, 2) - (2 * a.x * toTarget.x));
+            magicVel.y = Mathf.Sqrt(Mathf.Pow(baseVelocity.y, 2) - (2 * a.y * toTarget.y));
 
             if (float.IsNaN(magicVel.y))
             {
                 magicVel.y = 0;
                 magicVel.x = toTarget.x;
+                Debug.LogWarning("magicVelocity.y is NaN");
             }
 
-            magicVel *= 1 + body.body.drag;
-            Debug.Log($"precise jump shot! | {magicVel}");
+            //var yFudge = 1 / (toTarget.y / target to floor dist) // todo: 
+            var baseFudge = 1 + body.body.drag;
+            var yFudge = 0.8f / (Mathf.Max(0.25f, toTarget.y / measureFloorToTarget.transform.localScale.y));
+
+            magicVel.x *= baseFudge;
+            magicVel.y *= Mathf.Max(baseFudge, yFudge);
+            Debug.Log($"precise jump shot! | {magicVel}; fudge denom: {toTarget.y / measureFloorToTarget.transform.localScale.y}");
         }
 
         var modVelocity = modDirection * baseVelocity.magnitude;
