@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.Events;
 
 public class Ball : MonoBehaviour
 {
@@ -20,7 +19,7 @@ public class Ball : MonoBehaviour
     {
         heldMovement.root = holdAnchor;
         body.StopPhysics();
-
+        
         held.SetActive(true);
         pickup.SetActive(false);
     }
@@ -45,7 +44,7 @@ public class Ball : MonoBehaviour
     }
 
     // Deactivate the held object, activate the temp released object.
-    public void Throw(Vector2 baseVelocity)
+    public void Throw(Vector2 baseVelocity, Vector2 inputDirection)
     {
         held.gameObject.SetActive(false);
         released.transform.position = held.transform.position;
@@ -53,7 +52,7 @@ public class Ball : MonoBehaviour
         //coll.enabled = true;
         body.ResetPhysics();
 
-        var modVelocity = baseVelocity;
+        var modVelocity = inputDirection * baseVelocity.magnitude;
 
         modVelocity += assistThrow;
 

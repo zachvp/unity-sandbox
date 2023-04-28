@@ -26,6 +26,12 @@ public class TriggerVolume : MonoBehaviour
         UpdateState();
     }
 
+    public void RefreshState()
+    {
+        ClearState();
+        UpdateState();
+    }
+
     private void UpdateState()
     {
         var filter = new ContactFilter2D();

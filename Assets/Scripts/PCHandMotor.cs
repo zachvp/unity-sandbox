@@ -8,6 +8,7 @@ public class PCHandMotor : MonoBehaviour
     public InputHandlerButton inputThrow;
     public InputHandlerAnalogStick inputGesture;
     public TriggerVolume grabTrigger;
+    public TriggerVolume heldTrigger;
     public CoreBody hand;
     public Transform holdAnchor;
     public MovementRadial movementHeldPickup;
@@ -31,11 +32,12 @@ public class PCHandMotor : MonoBehaviour
 
     public void OnInputThrow(InputButtonArgs args)
     {
+        heldTrigger.RefreshState();
         if (args.phase == InputActionPhase.Started)
         {
-            if (state == HandState.GRIP)
+            if (state == HandState.GRIP && !heldTrigger.isTriggered)
             {
-                ball.Throw(hand.velocity);
+                ball.Throw(hand.velocity, inputGesture.args.axis);
 
                 state &= ~HandState.GRIP;
                 state |= HandState.BLOCKED;
@@ -73,7 +75,8 @@ public class PCHandMotor : MonoBehaviour
                 }
             }
 
-            if (ball && state == HandState.GRIP)
+            heldTrigger.RefreshState();
+            if (ball && state == HandState.GRIP && !heldTrigger.isTriggered)
             {
                 ball.Release();
 
