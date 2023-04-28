@@ -8,6 +8,7 @@ public class Ball : MonoBehaviour
     public GameObject held;
     public GameObject released;
     public MovementFollowTransform heldMovement;
+    public GameObject target;
 
     public Vector2 assistThrow = new Vector2(50, 50);
 
@@ -70,11 +71,18 @@ public class Ball : MonoBehaviour
             modDirection = Vector2.right;
         }
 
-        if (Mathf.Abs(motor.body.velocity.y) < 60 && !motor.state.down.isTriggered)
+        var magicVel = Vector2.zero;
+        //if (Mathf.Abs(motor.body.velocity.y) < 100 && !motor.state.down.isTriggered)
         {
             // todo: rather than static number, compute optimal velocity for score
-            modAssistThrow.y += 80;
-            Debug.Log("precise jump shot!");
+            var toTarget = target.transform.position - released.transform.position;
+            var a = body.originalGravity * Physics2D.gravity.y;
+            //target.transform.position.
+
+            magicVel.x = 2 * (toTarget.x / 2.5f);
+            magicVel.y = Mathf.Sqrt(Mathf.Pow(baseVelocity.y, 2) - (2 * a * toTarget.y));
+            magicVel *= 1 + body.body.drag;
+            Debug.Log($"precise jump shot! | {magicVel}");
         }
 
         var modVelocity = modDirection * baseVelocity.magnitude;
@@ -88,7 +96,7 @@ public class Ball : MonoBehaviour
 
         Debug.DrawRay(released.transform.position, modDirection*32, Color.red, 12);
 
-        body.Trigger(modVelocity);
+        body.Trigger(magicVel);
     }
 
     // Activate the pickup object, deactivate the temp released object.

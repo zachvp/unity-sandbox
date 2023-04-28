@@ -2721,6 +2721,11 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1130020185 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1910979239976679603, guid: 036ca569b87ecad4188f52844ae16601, type: 3}
+  m_PrefabInstance: {fileID: 1126111750630201001}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1240669291
 GameObject:
   m_ObjectHideFlags: 0
@@ -5516,6 +5521,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BallRoot
       objectReference: {fileID: 0}
+    - target: {fileID: 1022144515006881038, guid: 5c2d9e042253566459b3c48c97bf94e1, type: 3}
+      propertyPath: target
+      value: 
+      objectReference: {fileID: 1130020185}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5587,6 +5596,34 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1126111751411655401, guid: 036ca569b87ecad4188f52844ae16601, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3953535316186021924, guid: 036ca569b87ecad4188f52844ae16601, type: 3}
+      propertyPath: m_Color.b
+      value: 0.056019947
+      objectReference: {fileID: 0}
+    - target: {fileID: 3953535316186021924, guid: 036ca569b87ecad4188f52844ae16601, type: 3}
+      propertyPath: m_Color.g
+      value: 0.735849
+      objectReference: {fileID: 0}
+    - target: {fileID: 3953535316186021924, guid: 036ca569b87ecad4188f52844ae16601, type: 3}
+      propertyPath: m_Color.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3953535316186021924, guid: 036ca569b87ecad4188f52844ae16601, type: 3}
+      propertyPath: m_SortingOrder
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6405455038543609967, guid: 036ca569b87ecad4188f52844ae16601, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.08
+      objectReference: {fileID: 0}
+    - target: {fileID: 6405455038543609967, guid: 036ca569b87ecad4188f52844ae16601, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6405455038543609967, guid: 036ca569b87ecad4188f52844ae16601, type: 3}
+      propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
