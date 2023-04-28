@@ -212,6 +212,7 @@ MonoBehaviour:
   grabTrigger: {fileID: 5749309987876600296}
   heldTrigger: {fileID: 0}
   hand: {fileID: 5749309987876600302}
+  motor: {fileID: 5637173112284442397}
   holdAnchor: {fileID: 5749309988552863997}
   movementHeldPickup: {fileID: 5749309987702789797}
   interactionBlockDelay: 0.2
@@ -1107,6 +1108,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5749309988582234123}
   - component: {fileID: 5749309988582234122}
+  - component: {fileID: 5637173112284442397}
   m_Layer: 10
   m_Name: Movement
   m_TagString: Untagged
@@ -1144,6 +1146,29 @@ MonoBehaviour:
   body: {fileID: 5749309989022562396}
   originalGravity: 0
   originalType: 0
+--- !u!114 &5637173112284442397
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5749309988582234132}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a3920715b7db6240baf6441e06974cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  body: {fileID: 5749309988582234122}
+  state: {fileID: 5749309989291738880}
+  inputMove: {fileID: 5749309987960713794}
+  inputJump: {fileID: 5749309987960713799}
+  jumpStrength: 200
+  groundMoveSpeed: 100
+  airMoveSpeed: 100
+  maxSpeedX: 110
+  wallJumpDelay: 0.5
+  wallJumpSpeed: {x: 100, y: 180}
+  adjustedVelocityX: 0
 --- !u!1 &5749309988676103328
 GameObject:
   m_ObjectHideFlags: 1
@@ -1419,7 +1444,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5749309989022562397}
-  - component: {fileID: 5749309989022562390}
   - component: {fileID: 5749309989022562398}
   - component: {fileID: 5749309989022562396}
   - component: {fileID: 5749309989022562387}
@@ -1452,29 +1476,6 @@ Transform:
   m_Father: {fileID: 5749309987770028314}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5749309989022562390
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5749309989022562399}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a3920715b7db6240baf6441e06974cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  body: {fileID: 5749309988582234122}
-  state: {fileID: 5749309989291738880}
-  inputMove: {fileID: 5749309987960713794}
-  inputJump: {fileID: 5749309987960713799}
-  jumpStrength: 200
-  groundMoveSpeed: 100
-  airMoveSpeed: 100
-  maxSpeedX: 110
-  wallJumpDelay: 0.5
-  wallJumpSpeed: {x: 100, y: 180}
-  adjustedVelocityX: 0
 --- !u!212 &5749309989022562398
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1602,28 +1603,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _data:
-    _json: '{"declarations":{"Kind":"Object","collection":{"$content":[{"name":"triggerLHS","value":{"$content":0,"$type":"UnityEngine.Object"},"typeHandle":{"Identification":"VolumeTrigger,
-      Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"},{"name":"triggerRHS","value":{"$content":1,"$type":"UnityEngine.Object"},"typeHandle":{"Identification":"VolumeTrigger,
+    _json: '{"declarations":{"Kind":"Object","collection":{"$content":[{"name":"triggerLHS","value":{"$type":"Unity.VisualScripting.Unknown"},"typeHandle":{"Identification":"VolumeTrigger,
+      Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"},{"name":"triggerRHS","value":{"$type":"Unity.VisualScripting.Unknown"},"typeHandle":{"Identification":"VolumeTrigger,
       Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"},{"name":"movementWallCling","value":{"$type":"Unity.VisualScripting.Unknown"},"typeHandle":{"Identification":"MovementWallCling,
-      Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"},{"name":"groundTrigger","value":{"$content":2,"$type":"UnityEngine.Object"},"typeHandle":{"Identification":"VolumeTrigger,
-      Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"},{"name":"moveObject","value":{"$content":3,"$type":"UnityEngine.Object"},"typeHandle":{"Identification":"UnityEngine.GameObject,
+      Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"},{"name":"groundTrigger","value":{"$type":"Unity.VisualScripting.Unknown"},"typeHandle":{"Identification":"VolumeTrigger,
+      Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"},{"name":"moveObject","value":{"$content":0,"$type":"UnityEngine.Object"},"typeHandle":{"Identification":"UnityEngine.GameObject,
       UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"},{"name":"jumpLogic","value":{"$type":"Unity.VisualScripting.Unknown"},"typeHandle":{"Identification":"MovementJump,
-      Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"},{"name":"modVelocity","value":{"$content":4,"$type":"UnityEngine.Object"},"typeHandle":{"Identification":"CoreBody,
+      Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"},{"name":"modVelocity","value":{"$content":1,"$type":"UnityEngine.Object"},"typeHandle":{"Identification":"CoreBody,
       Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"},{"name":"moveLogic","value":{"$type":"Unity.VisualScripting.Unknown"},"typeHandle":{"Identification":"MovementHorizontal,
-      Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"},{"name":"rigidBody","value":{"$content":5,"$type":"UnityEngine.Object"},"typeHandle":{"Identification":"UnityEngine.Rigidbody2D,
+      Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"},{"name":"rigidBody","value":{"$content":2,"$type":"UnityEngine.Object"},"typeHandle":{"Identification":"UnityEngine.Rigidbody2D,
       UnityEngine.Physics2DModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"},{"name":"moveWallJump","value":{"$type":"Unity.VisualScripting.Unknown"},"typeHandle":{"Identification":"MovementWallJump,
-      Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"},{"name":"inputMovement","value":{"$content":6,"$type":"UnityEngine.Object"},"typeHandle":{"Identification":"EventHandlerHeldAxis,
-      Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"},{"name":"playerState","value":{"$content":7,"$type":"UnityEngine.Object"},"typeHandle":{"Identification":"PlayerCharacterState,
+      Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"},{"name":"inputMovement","value":{"$type":"Unity.VisualScripting.Unknown"},"typeHandle":{"Identification":"EventHandlerHeldAxis,
+      Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"},{"name":"playerState","value":{"$type":"Unity.VisualScripting.Unknown"},"typeHandle":{"Identification":"PlayerCharacterState,
       Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"}],"$version":"A"},"$version":"A"}}'
     _objectReferences:
-    - {fileID: 5749309989291738882}
-    - {fileID: 5749309989291738892}
-    - {fileID: 5749309989291738893}
     - {fileID: 5749309988582234132}
     - {fileID: 5749309988582234122}
     - {fileID: 5749309989022562396}
-    - {fileID: 5749309987960713794}
-    - {fileID: 5749309989291738880}
 --- !u!1 &5749309989291738889
 GameObject:
   m_ObjectHideFlags: 0

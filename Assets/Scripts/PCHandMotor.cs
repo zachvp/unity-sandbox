@@ -10,6 +10,7 @@ public class PCHandMotor : MonoBehaviour
     public TriggerVolume grabTrigger;
     public TriggerVolume heldTrigger;
     public CoreBody hand;
+    public PCPlatformMotor motor;
     public Transform holdAnchor;
     public MovementRadial movementHeldPickup;
     public float interactionBlockDelay;
@@ -37,7 +38,7 @@ public class PCHandMotor : MonoBehaviour
             if (state == HandState.GRIP && !heldTrigger.isTriggered)
             {
                 Debug.DrawRay(transform.position, inputGesture.args.axis * 32, Color.yellow, 12);
-                ball.Throw(hand.velocity, inputGesture.args.axis);
+                ball.Throw(hand.velocity, inputGesture.args.axis, motor);
 
                 state &= ~HandState.GRIP;
                 state |= HandState.BLOCKED;

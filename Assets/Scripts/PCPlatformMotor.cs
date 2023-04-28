@@ -2,8 +2,6 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using System;
 
-// TODO: SWITCH FROM SHORT TO INT/FLOAT -- =OOOO 
-
 public class PCPlatformMotor : MonoBehaviour
 {
     // -- read vars
@@ -28,8 +26,6 @@ public class PCPlatformMotor : MonoBehaviour
 
     public void Update()
     {
-        // todo: check input data each frame rather than splitting into events.
-
         // movement
         if (!state.platformState.HasFlag(PlatformState.DISABLE_MOVE))
         {

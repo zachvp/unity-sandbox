@@ -48,7 +48,7 @@ public class Ball : MonoBehaviour
     }
 
     // Deactivate the held object, activate the temp released object.
-    public void Throw(Vector2 baseVelocity, Vector2 inputDirection)
+    public void Throw(Vector2 baseVelocity, Vector2 inputDirection, PCPlatformMotor motor)
     {
         held.gameObject.SetActive(false);
         released.transform.position = held.transform.position;
@@ -57,18 +57,24 @@ public class Ball : MonoBehaviour
         body.ResetVertical();
         body.UnfreezeRotation();
 
-        var dotUp = Vector2.Dot(Vector2.up, inputDirection);
         var dotRight = Vector2.Dot(Vector2.right, inputDirection);
         var modDirection = inputDirection;
         var modAssistThrow = assistThrow;
 
-        Debug.Log($"up: {dotUp}");
-        Debug.Log($"right: {dotRight}");
+        //Debug.Log($"up: {dotUp}");
+        //Debug.Log($"right: {dotRight}");
 
         if (Mathf.Abs(dotRight) > 0.81f )
         {
-            // direct right throw
+            // direct, straight throw
             modDirection = Vector2.right;
+        }
+
+        if (Mathf.Abs(motor.body.velocity.y) < 60 && !motor.state.down.isTriggered)
+        {
+            // todo: rather than static number, compute optimal velocity for score
+            modAssistThrow.y += 80;
+            Debug.Log("precise jump shot!");
         }
 
         var modVelocity = modDirection * baseVelocity.magnitude;
