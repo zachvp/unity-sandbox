@@ -79,8 +79,15 @@ public class Ball : MonoBehaviour
             var a = body.originalGravity * Physics2D.gravity.y;
             //target.transform.position.
 
-            magicVel.x = 2 * (toTarget.x / 2.5f);
+            magicVel.x = 2 * (toTarget.x / 2.6f);
             magicVel.y = Mathf.Sqrt(Mathf.Pow(baseVelocity.y, 2) - (2 * a * toTarget.y));
+
+            if (float.IsNaN(magicVel.y))
+            {
+                magicVel.y = 0;
+                magicVel.x = toTarget.x;
+            }
+
             magicVel *= 1 + body.body.drag;
             Debug.Log($"precise jump shot! | {magicVel}");
         }
