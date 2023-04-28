@@ -11,7 +11,6 @@ public class Ball : MonoBehaviour
 
     public Vector2 assistThrow = new Vector2(50, 50);
 
-    // todo: consider gesture input direction in throw
     // todo: possibly related to above: improve jump shot feasibility
 
     // Activate the held object, deactivate the pickup object.
@@ -66,11 +65,10 @@ public class Ball : MonoBehaviour
         Debug.Log($"up: {dotUp}");
         Debug.Log($"right: {dotRight}");
 
-        if (Mathf.Abs(dotRight) > 0.85f )
+        if (Mathf.Abs(dotRight) > 0.81f )
         {
             // direct right throw
             modDirection = Vector2.right;
-            Debug.Log("direct right throw");
         }
 
         var modVelocity = modDirection * baseVelocity.magnitude;
