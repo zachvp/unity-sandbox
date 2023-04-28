@@ -49,6 +49,7 @@ public class CoreBody : MonoBehaviour
         }));
     }
 
+    // -- STATE CONTROL
     public void StopVertical()
     {
         StartCoroutine(CoreUtilities.PostFixedUpdateTask(() =>
@@ -62,17 +63,7 @@ public class CoreBody : MonoBehaviour
         }));
     }
 
-    // -- TRANSFORM CONTROL
-    public void SetRotation(float r)
-    {
-        StartCoroutine(CoreUtilities.PostFixedUpdateTask(() =>
-        {
-            rotation = r;
-        }));
-    }
-
-    // -- STATE CONTROL
-    public void Reset()
+    public void ResetVertical()
     {
         StartCoroutine(CoreUtilities.PostFixedUpdateTask(() =>
         {
@@ -80,20 +71,14 @@ public class CoreBody : MonoBehaviour
         }));
     }
 
-    public void StopPhysics()
+    public void FreezeRotation()
     {
-        StartCoroutine(CoreUtilities.PostFixedUpdateTask(() =>
-        {
-            body.bodyType = RigidbodyType2D.Static;
-        }));
+        body.freezeRotation = true;
     }
 
-    public void ResetPhysics()
+    public void UnfreezeRotation()
     {
-        StartCoroutine(CoreUtilities.PostFixedUpdateTask(() =>
-        {
-            body.bodyType = originalType;
-        }));
+        body.freezeRotation = false;
     }
 
     // -- COLLISIONS

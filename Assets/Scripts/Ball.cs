@@ -9,7 +9,7 @@ public class Ball : MonoBehaviour
     public GameObject released;
     public MovementFollowTransform heldMovement;
 
-    public Vector2 assistThrow = new Vector2(1.1f, 1.1f);
+    public Vector2 assistThrow = new Vector2(50, 50);
 
     // todo: consider gesture input direction in throw
     // todo: possibly related to above: improve jump shot feasibility
@@ -18,7 +18,8 @@ public class Ball : MonoBehaviour
     public void Grab(Transform holdAnchor)
     {
         heldMovement.root = holdAnchor;
-        body.StopPhysics();
+        body.StopVertical();
+        body.FreezeRotation();
         
         held.SetActive(true);
         pickup.SetActive(false);
@@ -27,7 +28,9 @@ public class Ball : MonoBehaviour
     // Activate the temp release object, deactivate the held object.
     public void Release()
     {
-        body.ResetPhysics();
+        body.ResetVertical();
+        body.UnfreezeRotation();
+
         released.SetActive(true);
         held.SetActive(false);
         released.transform.position = held.transform.position;
@@ -38,8 +41,10 @@ public class Ball : MonoBehaviour
     {
         released.SetActive(false);
         pickup.SetActive(true);
-        body.ResetPhysics();
-        //coll.enabled = true;
+
+        body.ResetVertical();
+        body.UnfreezeRotation();
+
         pickup.transform.position = released.transform.position;
     }
 
@@ -49,19 +54,35 @@ public class Ball : MonoBehaviour
         held.gameObject.SetActive(false);
         released.transform.position = held.transform.position;
         released.SetActive(true);
-        //coll.enabled = true;
-        body.ResetPhysics();
 
-        var modVelocity = inputDirection * baseVelocity.magnitude;
+        body.ResetVertical();
+        body.UnfreezeRotation();
 
-        modVelocity += assistThrow;
+        var dotUp = Vector2.Dot(Vector2.up, inputDirection);
+        var dotRight = Vector2.Dot(Vector2.right, inputDirection);
+        var modDirection = inputDirection;
+        var modAssistThrow = assistThrow;
 
-        if (baseVelocity.x < 0)
+        Debug.Log($"up: {dotUp}");
+        Debug.Log($"right: {dotRight}");
+
+        if (Mathf.Abs(dotRight) > 0.85f )
+        {
+            // direct right throw
+            modDirection = Vector2.right;
+            Debug.Log("direct right throw");
+        }
+
+        var modVelocity = modDirection * baseVelocity.magnitude;
+
+        modVelocity += modAssistThrow;
+
+        if (inputDirection.x < 0)
         {
             modVelocity.x = baseVelocity.x - assistThrow.x;
         }
 
-        //modVelocity.Scale(assistThrow);
+        Debug.DrawRay(released.transform.position, modDirection*32, Color.red, 12);
 
         body.Trigger(modVelocity);
     }

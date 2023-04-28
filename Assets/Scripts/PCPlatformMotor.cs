@@ -105,7 +105,7 @@ public class PCPlatformMotor : MonoBehaviour
         }
         else if (state.platformState.HasFlag(PlatformState.WALL_RELEASE))
         {
-            body.Reset();
+            body.ResetVertical();
             state.platformState &= ~PlatformState.WALL_RELEASE;
             state.platformState &= ~PlatformState.WALL_CLING;
         }
