@@ -9,6 +9,7 @@ public class InputHandlerButton : MonoBehaviour
     public CustomInputAction action;
     public InputButtonArgs args;
     public UnityAction<InputButtonArgs> actionDelegate;
+    public UnityAction<InputHandlerButton> startDelegate;
 
     public void Trigger(InputAction.CallbackContext context)
     {
