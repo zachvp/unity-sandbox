@@ -1,7 +1,8 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-using System.Collections.Generic;
+
 using System;
+using UnityEngine.UI;
 
 public class TestKinematicBody : MonoBehaviour
 {
@@ -13,35 +14,32 @@ public class TestKinematicBody : MonoBehaviour
         MOVE_LEFT = 1 << 1,
         MOVE_RIGHT = 1 << 2,
         MOVE_NONE = 1 << 3,
-        ADJUST = 1 << 4,
-        JUMP_PHASE_1 = 1 << 5,
-        JUMP_PHASE_2 = 1 << 6,
+        JUMP_PHASE_1 = 1 << 4,
+        JUMP_PHASE_2 = 1 << 5,
     }
 
     public Rigidbody2D body;
     public Collider2D attachedCollider;
-    public LayerMask mask;
+    public Collider2D checkCollider;
     public TriggerVolume triggerDown;
-
-    public short speed = 50;
-    public short jumpStrength = 200;
-    public short maxSpeed = 100;
-    public short gravity = 8;
-    public float originalX;
-    public Direction2D collisionDirection;
-    public Command command;
+    public ContactPoint2D[] contacts;
 
     public Vector2 velocity;
-    public Vector2 adjustPosition;
+    public short speed = 50;
+    public short jumpStrength = 200;
+    public short gravity = 8;
+    public Command command;
 
-    public float maxHeight;
-    
+    public void Start()
+    {
+        Physics2D.IgnoreCollision(checkCollider, attachedCollider);
+        Physics2D.IgnoreCollision(checkCollider, triggerDown.collider);
+        contacts = new ContactPoint2D[4];
+    }
 
     public void Update()
     {
-        collisionDirection = EnumHelper.FromBool(false, false, triggerDown.isTriggered, false);
-
-        if (Keyboard.current.upArrowKey.wasPressedThisFrame && collisionDirection.HasFlag(Direction2D.DOWN))
+        if (Keyboard.current.upArrowKey.wasPressedThisFrame && triggerDown.isTriggered)
         {
             command |= Command.JUMP;
         }
@@ -59,11 +57,103 @@ public class TestKinematicBody : MonoBehaviour
         {
             command |= Command.MOVE_NONE;
         }
-
-        maxHeight = Mathf.Max(maxHeight, transform.position.y);
     }
 
     public void FixedUpdate()
+    {
+        Move0();
+
+        //var roundedPos = body.position;
+        //roundedPos.Set(Mathf.RoundToInt(body.position.x), Mathf.RoundToInt(body.position.y));
+
+        //body.MovePosition(roundedPos);
+    }
+
+    public void OnCollisionEnter2D(Collision2D collision)
+    {
+        Debug.Log($"contact count: {collision.GetContacts(contacts)}");
+
+        foreach (var c in contacts)
+        {
+            Debug.Log($"c.normal: {c.normal}");
+        }
+    }
+
+    public void OnCollisionExit2D(Collision2D collision)
+    {
+        Debug.Log($"contact count: {collision.GetContacts(contacts)}");
+
+        foreach (var c in contacts)
+        {
+            Debug.Log($"c.normal: {c.normal}");
+        }
+    }
+
+    private void Move0()
+    {
+        if (command.HasFlag(Command.JUMP))
+        {
+            velocity.y = jumpStrength;
+            command ^= Command.JUMP;
+        }
+        else if (triggerDown.isTriggered)
+        {
+            velocity.y = 0;
+        }
+
+        if (command.HasFlag(Command.MOVE_RIGHT))
+        {
+            velocity.x = speed;
+            command ^= Command.MOVE_RIGHT;
+        }
+        if (command.HasFlag(Command.MOVE_LEFT))
+        {
+            velocity.x = -speed;
+            command ^= Command.MOVE_LEFT;
+        }
+        if (command.HasFlag(Command.MOVE_NONE))
+        {
+            velocity.x = 0;
+            command ^= Command.MOVE_NONE;
+        }
+
+        if (!triggerDown.isTriggered)
+        {
+            velocity.y -= gravity;
+        }
+
+        // check new pos for overlaps
+        var newPos = body.position + velocity * Time.deltaTime;
+        //checkCollider.transform.position = newPos;
+
+        //var filter = new ContactFilter2D();
+        //var overlappingObjects = new Collider2D[1];
+
+        //filter.useLayerMask = true;
+        //filter.layerMask = 1 << 8 | 1 << 9 | 1 << 11;
+
+        //var isTriggered = checkCollider.OverlapCollider(filter, overlappingObjects) > 0;
+        
+        //if (isTriggered)
+        //{
+        //    Debug.Log($"check collider hit object, no movement: {overlappingObjects[0]}");
+        //    velocity = Vector2.zero;
+        //}
+        //else
+        //{
+        //    body.MovePosition(newPos);
+        //}
+
+        body.MovePosition(newPos);
+
+        if (Mathf.Abs(velocity.y) < 5 && !triggerDown.isTriggered)
+        {
+            Debug.Log($"y pos: {body.position.y}");
+            Debug.DrawRay(body.position, Vector2.right * 16, Color.red, 8);
+        }
+    }
+
+    private void Move1()
     {
         if (command.HasFlag(Command.MOVE_RIGHT))
         {
@@ -85,7 +175,7 @@ public class TestKinematicBody : MonoBehaviour
             command ^= Command.MOVE_LEFT;
         }
 
-        if (!collisionDirection.HasFlag(Direction2D.DOWN))
+        if (!triggerDown.isTriggered)
         {
             var newPos = body.position;
 
@@ -98,58 +188,12 @@ public class TestKinematicBody : MonoBehaviour
         {
             var newPos = body.position;
 
-            newPos.y += 0.75f * 8;
+            newPos.y += 0.75f * 8 * Time.deltaTime;
             // todo: set position with curve
             command ^= Command.JUMP;
             command |= Command.JUMP_PHASE_1;
 
             body.MovePosition(newPos);
         }
-
-
-    }
-
-    private void Move0()
-    {
-        if (command.HasFlag(Command.JUMP))
-        {
-            velocity.y = jumpStrength;
-            command ^= Command.JUMP;
-        }
-        else if (collisionDirection.HasFlag(Direction2D.DOWN))
-        {
-            velocity.y = 0;
-        }
-
-        if (command.HasFlag(Command.MOVE_RIGHT))
-        {
-            velocity.x = speed;
-            command ^= Command.MOVE_RIGHT;
-        }
-        if (command.HasFlag(Command.MOVE_LEFT))
-        {
-            velocity.x = -speed;
-            command ^= Command.MOVE_LEFT;
-        }
-        if (command.HasFlag(Command.MOVE_NONE))
-        {
-            velocity.x = 0;
-            command ^= Command.MOVE_NONE;
-        }
-
-        if (!collisionDirection.HasFlag(Direction2D.DOWN))
-        {
-            velocity.y -= gravity;
-        }
-
-        if (command.HasFlag(Command.ADJUST))
-        {
-            velocity += adjustPosition;
-            command ^= Command.ADJUST;
-        }
-
-        var newPos = body.position + velocity * Time.fixedDeltaTime;
-
-        body.MovePosition(newPos);
     }
 }
