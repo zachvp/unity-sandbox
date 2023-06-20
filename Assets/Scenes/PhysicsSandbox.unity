@@ -1432,6 +1432,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5637173112284442397, guid: 436f7d052c0623e4f8e1de809f63a55e, type: 3}
+      propertyPath: maxSpeedX
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 5637173112284442397, guid: 436f7d052c0623e4f8e1de809f63a55e, type: 3}
+      propertyPath: groundMoveSpeed
+      value: 80
+      objectReference: {fileID: 0}
     - target: {fileID: 5749309987770028314, guid: 436f7d052c0623e4f8e1de809f63a55e, type: 3}
       propertyPath: m_RootOrder
       value: 11
@@ -1521,7 +1529,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &452247667
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -7891,6 +7899,14 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 1130020185}
+    - target: {fileID: 1022144515006881038, guid: 5c2d9e042253566459b3c48c97bf94e1, type: 3}
+      propertyPath: assistThrow.x
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 1022144515006881038, guid: 5c2d9e042253566459b3c48c97bf94e1, type: 3}
+      propertyPath: assistThrow.y
+      value: 160
+      objectReference: {fileID: 0}
     - target: {fileID: 1022144515006881038, guid: 5c2d9e042253566459b3c48c97bf94e1, type: 3}
       propertyPath: measureFloorToTarget
       value: 

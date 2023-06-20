@@ -22,7 +22,6 @@ public class TestKinematicBody : MonoBehaviour
     public Collider2D attachedCollider;
     public Collider2D checkCollider;
     public TriggerVolume triggerDown;
-    public ContactPoint2D[] contacts;
 
     public Vector2 velocity;
     public short speed = 50;
@@ -32,9 +31,8 @@ public class TestKinematicBody : MonoBehaviour
 
     public void Start()
     {
-        Physics2D.IgnoreCollision(checkCollider, attachedCollider);
-        Physics2D.IgnoreCollision(checkCollider, triggerDown.collider);
-        contacts = new ContactPoint2D[4];
+        //Physics2D.IgnoreCollision(checkCollider, attachedCollider);
+        //Physics2D.IgnoreCollision(checkCollider, triggerDown.collider);
     }
 
     public void Update()
@@ -71,22 +69,21 @@ public class TestKinematicBody : MonoBehaviour
 
     public void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log($"contact count: {collision.GetContacts(contacts)}");
-
-        foreach (var c in contacts)
+        var contacts = new ContactPoint2D[4];
+        collision.GetContacts(contacts);
+        for (var i = 0; i < collision.contactCount; i++)
         {
-            Debug.Log($"c.normal: {c.normal}");
+            var c = contacts[i];
+            Debug.DrawRay(c.point, c.normal * 4, Color.green, 8);
         }
     }
 
     public void OnCollisionExit2D(Collision2D collision)
     {
-        Debug.Log($"contact count: {collision.GetContacts(contacts)}");
-
-        foreach (var c in contacts)
-        {
-            Debug.Log($"c.normal: {c.normal}");
-        }
+        //foreach (var c in contacts)
+        //{
+        //    Debug.DrawRay(c.point, c.normal * 8, Color.blue);
+        //}
     }
 
     private void Move0()

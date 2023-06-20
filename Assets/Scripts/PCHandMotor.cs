@@ -37,7 +37,6 @@ public class PCHandMotor : MonoBehaviour
         {
             if (state == HandState.GRIP && !heldTrigger.isTriggered)
             {
-                Debug.DrawRay(transform.position, inputGesture.args.axis * 32, Color.yellow, 12);
                 ball.Throw(hand.velocity, inputGesture.args.axis, motor);
 
                 state &= ~HandState.GRIP;
