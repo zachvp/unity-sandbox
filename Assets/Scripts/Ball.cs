@@ -1,4 +1,5 @@
 using UnityEngine;
+using System;
 using UnityEngine.EventSystems;
 
 public class Ball : MonoBehaviour
@@ -13,6 +14,14 @@ public class Ball : MonoBehaviour
     public GameObject measureFloorToTarget;
 
     public Vector2 assistThrow = new Vector2(50, 50);
+
+    // todo: remove
+
+    public void LateUpdate()
+    {
+        var modPos = new Vector2Int(Mathf.RoundToInt(body.position.x), Mathf.RoundToInt(body.position.y));
+        body.position = modPos;
+    }
 
     // todo: possibly related to above: improve jump shot feasibility
 
@@ -64,9 +73,18 @@ public class Ball : MonoBehaviour
         //Debug.Log($"right: {dotRight}");
 
         var modVelocity = inputDirection * baseVelocity.magnitude * 1.5f + assistThrow;
+        var shotMagic = 0f;
+
         if (inputDirection.x < 0)
         {
             modVelocity.x -= 2*assistThrow.x;
+        }
+
+        var dotGesture = Vector2.Dot(inputDirection, Vector2.right + Vector2.up);
+        if (Mathf.Abs(dotGesture) > 0.84f)
+        {
+            shotMagic += 50;
+            Debug.Log("shot motion: magic +50");
         }
 
         var dotRight = Vector2.Dot(Vector2.right, inputDirection);
@@ -76,7 +94,27 @@ public class Ball : MonoBehaviour
             modVelocity.x = 1;
         }
 
-        if (Mathf.Abs(motor.body.velocity.y) < 50 && !motor.state.down.isTriggered)
+        // todo: adjust closeness to "magic shot" depending on context
+        //      + boost if close to jump peak (+15)
+        //      + boost if at jump peak (+30)
+        //      + boost if right stick gesture matches shot (+30)
+        //      + boost if right stick gesture matches follow thru (+20)
+        //      + boost if have dribble stack of TBD (+20)
+        if (!motor.state.down.isTriggered)
+        {
+            if (Mathf.Abs(motor.body.velocity.y) < 50)
+            {
+                shotMagic += 30;
+                Debug.Log("precise! magic +30");
+            }
+            else if (Mathf.Abs(motor.body.velocity.y) < 100)
+            {
+                shotMagic += 15;
+                Debug.Log("close; magic +15");
+            }
+        }
+
+        if (shotMagic > 0)
         {
             var magicVel = Vector2.zero;
             var toTarget = target.transform.position - released.transform.position;
@@ -98,8 +136,11 @@ public class Ball : MonoBehaviour
 
             magicVel.x *= baseFudge;
             magicVel.y *= Mathf.Max(baseFudge, yFudge);
-            modVelocity = Vector2.Lerp(modVelocity, magicVel, 0.9f);
-            Debug.Log($"precise jump shot! | {magicVel}; fudge denom: {toTarget.y / measureFloorToTarget.transform.localScale.y}");
+            shotMagic = Mathf.Min(100, shotMagic);
+            modVelocity = Vector2.Lerp(modVelocity, magicVel, shotMagic / 100);
+            //modVelocity = magicVel;
+            //Debug.Log($"precise jump shot! | {magicVel}; fudge denom: {toTarget.y / measureFloorToTarget.transform.localScale.y}");
+            Debug.Log($"shot magic: {shotMagic / 100}");
         }
 
         Debug.DrawRay(released.transform.position, modVelocity.normalized*32, Color.yellow, 12);
