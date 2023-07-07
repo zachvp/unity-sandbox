@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using System;
 
-public class PCPlatformMotor : MonoBehaviour, ICommandProcessor
+public class PCPlatformMotor : MonoBehaviour
 {
     // -- read vars
     public CoreBody body;
@@ -114,12 +114,12 @@ public class PCPlatformMotor : MonoBehaviour, ICommandProcessor
         }
     }
 
-    // ICommandProcessor
+    // Command Processor
     public void Process(CoreCommand command)
     {
-        switch (command.type)
+        switch (command)
         {
-            case CustomInputAction.JUMP:
+            case CoreCommand.JUMP:
                 // ground jump
                 if (state.down.isTriggered)
                 {

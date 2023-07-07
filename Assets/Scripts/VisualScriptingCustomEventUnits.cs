@@ -20,7 +20,7 @@ public sealed class InputButtonEvent : EventUnit<InputButtonArgs>
     {
         base.Definition();
         phase = ValueOutput<InputActionPhase>(nameof(phase));
-        action = ValueOutput<CustomInputAction>(nameof(action));
+        action = ValueOutput<CoreCommand>(nameof(action));
     }
 
     protected override void AssignArguments(Flow flow, InputButtonArgs args)
@@ -49,8 +49,29 @@ public sealed class InputAxis2DEvent : EventUnit<InputAxis2DArgs>
 
     // todo: expose arg properties
 }
-
 /* End input event units */
+
+/** COMMAND EVENTS */
+public sealed class CommandEvent : EventUnit<CoreCommand>
+{
+    public static string Hook = EnumHelper.GetStringID(CustomHook.COMMAND);
+
+    protected override bool register => true;
+    public override EventHook GetHook(GraphReference r) => Hook;
+
+    public ValueOutput command { get; private set; }
+
+    protected override void Definition()
+    {
+        base.Definition();
+        command = ValueOutput<InputActionPhase>(nameof(command));
+    }
+
+    protected override void AssignArguments(Flow flow, CoreCommand args)
+    {
+        flow.SetValue(command, args);
+    }
+}
 
 /**  REFERENCE: Machine events, independent of gameobject */
 [UnitCategory("Events/Core")]

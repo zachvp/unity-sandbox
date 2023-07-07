@@ -4,11 +4,13 @@ public enum CustomHook : Int32
 {
     INPUT_BUTTON,
     INPUT_AXIS1D,
-    INPUT_AXIS2D
+    INPUT_AXIS2D,
+
+    COMMAND
 }
 
 // todo: rename to CoreCommand
-public enum CustomInputAction : Int32
+public enum CoreCommand : Int32
 {
     JUMP,
     MOVE,
