@@ -7,6 +7,7 @@ public enum CustomHook : Int32
     INPUT_AXIS2D
 }
 
+// todo: rename to CoreCommand
 public enum CustomInputAction : Int32
 {
     JUMP,

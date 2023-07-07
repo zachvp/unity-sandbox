@@ -6,13 +6,13 @@ using UnityEngine;
 public class Buffer<T>
 {
     public T[] values;
-    public short index;
+    public int index;
     public float interval; // in seconds
 
     public void Store(T s)
     {
         values[index] = s;
-        index = (short) (((short) (index + 1)) % values.Length);
+        index = (index + 1) % values.Length;
     }
 }
 
@@ -41,4 +41,38 @@ public static class CoreUtilities
         task();
         yield return null;
     }
+}
+
+public abstract class CoreCommand
+{
+    public CustomInputAction type;
+}
+
+public abstract class CoreCommand<T>
+{
+    public CustomInputAction command;
+    public T data0;
+
+    public CoreCommand(T in0)
+    {
+        data0 = in0;
+    }
+}
+
+public class JumpCommand : CoreCommand
+{
+    public JumpCommand()
+    {
+        type = CustomInputAction.JUMP;
+    }
+}
+
+public interface ICommandProcessor
+{
+    public void Process(CoreCommand command);
+}
+
+public interface ICommandProcessor<T>
+{
+    public void Process(CoreCommand<T> command);
 }

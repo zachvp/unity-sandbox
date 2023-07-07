@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using System;
 
-public class PCPlatformMotor : MonoBehaviour
+public class PCPlatformMotor : MonoBehaviour, ICommandProcessor
 {
     // -- read vars
     public CoreBody body;
@@ -114,6 +114,36 @@ public class PCPlatformMotor : MonoBehaviour
         }
     }
 
+    // ICommandProcessor
+    public void Process(CoreCommand command)
+    {
+        switch (command.type)
+        {
+            case CustomInputAction.JUMP:
+                // ground jump
+                if (state.down.isTriggered)
+                {
+                    state.platformState |= PlatformState.JUMP;
+                    //Debug.Log($"enter jump state");
+                }
+
+                // wall jump 
+                else if (state.BufferContainsState(Direction2D.RIGHT | Direction2D.LEFT))
+                {
+                    state.platformState |= PlatformState.WALL_JUMP;
+                    state.platformState |= PlatformState.DISABLE_MOVE;
+                    state.platformState &= ~PlatformState.MOVE;
+
+                    StartCoroutine(CoreUtilities.DelayedTask(wallJumpDelay, () =>
+                    {
+                        state.platformState &= ~PlatformState.DISABLE_MOVE;
+                    }));
+                }
+                break;
+        }
+    }
+
+    // todo: remove this in favor of command; the InputButtonArgs check should go in a separate inputLogic class
     public void OnInputJump(InputButtonArgs args)
     {
         if (args.phase == InputActionPhase.Started)
