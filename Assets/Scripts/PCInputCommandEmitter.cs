@@ -13,6 +13,7 @@ public class PCInputCommandEmitter : MonoBehaviour
     public void OnEnable()
     {
         playerInput.onActionTriggered += HandleActionTriggered;
+        data.playerIndex = playerInput.playerIndex;
     }
 
     public void OnDisable()

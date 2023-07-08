@@ -29,5 +29,6 @@ public struct InputAxis2DArgs
 public struct PCInputArgs
 {
     public CoreActionMapPlayer type;
+    public int playerIndex;
     public MultiValue value;
 }
