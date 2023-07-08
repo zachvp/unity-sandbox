@@ -115,11 +115,11 @@ public class PCPlatformMotor : MonoBehaviour
     }
 
     // Command Processor
-    public void Process(CoreCommand command)
+    public void Process(CoreActionMapPlayer command)
     {
         switch (command)
         {
-            case CoreCommand.JUMP:
+            case CoreActionMapPlayer.JUMP:
                 // ground jump
                 if (state.down.isTriggered)
                 {

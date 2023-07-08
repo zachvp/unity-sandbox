@@ -20,7 +20,7 @@ public sealed class InputButtonEvent : EventUnit<InputButtonArgs>
     {
         base.Definition();
         phase = ValueOutput<InputActionPhase>(nameof(phase));
-        action = ValueOutput<CoreCommand>(nameof(action));
+        action = ValueOutput<CoreActionMapPlayer>(nameof(action));
     }
 
     protected override void AssignArguments(Flow flow, InputButtonArgs args)
@@ -52,7 +52,7 @@ public sealed class InputAxis2DEvent : EventUnit<InputAxis2DArgs>
 /* End input event units */
 
 /** COMMAND EVENTS */
-public sealed class CommandEvent : EventUnit<CoreCommand>
+public sealed class CommandEvent : EventUnit<CoreActionMapPlayer>
 {
     public static string Hook = EnumHelper.GetStringID(CustomHook.COMMAND);
 
@@ -67,7 +67,7 @@ public sealed class CommandEvent : EventUnit<CoreCommand>
         command = ValueOutput<InputActionPhase>(nameof(command));
     }
 
-    protected override void AssignArguments(Flow flow, CoreCommand args)
+    protected override void AssignArguments(Flow flow, CoreActionMapPlayer args)
     {
         flow.SetValue(command, args);
     }

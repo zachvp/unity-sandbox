@@ -5,12 +5,13 @@ using UnityEngine;
 public class PCInputCommandEmitter : MonoBehaviour
 {
     public PlayerInput playerInput;
+    public CoreActionMap actionMapType;
 
     public void OnEnable()
     {
         playerInput.onActionTriggered += HandleActionTriggered;
-        Debug.Log($"playerInput.currentControlScheme: {playerInput.currentControlScheme}");
-        Debug.Log($"playerInput.currentActionMap: {playerInput.currentActionMap}");
+        //Debug.Log($"playerInput.currentControlScheme: {playerInput.currentControlScheme}");
+        //Debug.Log($"playerInput.currentActionMap: {playerInput.currentActionMap}");
     }
 
     public void OnDisable()
@@ -20,11 +21,14 @@ public class PCInputCommandEmitter : MonoBehaviour
 
     public void HandleActionTriggered(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (EnumHelper.GetActionMap(context.action.actionMap.name) == actionMapType)
         {
-            //switch (context.action.)
             Debug.Log($"action triggered: {context.action.name}");
-            EventBus.Trigger(CommandEvent.Hook, CoreCommand.JUMP);
+
+            EventBus.Trigger(CommandEvent.Hook, EnumHelper.GetPlayerAction(context.action.name));
         }
     }
+
+
+    
 }

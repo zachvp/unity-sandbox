@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 public enum CustomHook : Int32
 {
@@ -9,15 +10,6 @@ public enum CustomHook : Int32
     COMMAND
 }
 
-// todo: rename to CoreCommand
-public enum CoreCommand : Int32
-{
-    JUMP,
-    MOVE,
-    GESTURE,
-    GRIP,
-    THROW
-}
 
 [Flags]
 public enum Direction2D
@@ -57,6 +49,24 @@ public enum Trait
     PICKUP = 1 << 0
 }
 
+public enum CoreActionMap
+{
+    NONE,
+    PLAYER
+}
+
+public enum CoreActionMapPlayer : Int32
+{
+    NONE,
+
+    START,
+    JUMP,
+    MOVE,
+    MOVE_HAND,
+    GRIP,
+    THROW
+}
+
 public static class EnumHelper
 {
     public static string GetStringID(Enum hook)
@@ -78,5 +88,40 @@ public static class EnumHelper
         return result;
     }
 
-    //public static Unset()
+    public static CoreActionMapPlayer GetPlayerAction(string name)
+    {
+        var result = CoreActionMapPlayer.NONE;
+        var map = new Dictionary<string, CoreActionMapPlayer>
+        {
+            { "start", CoreActionMapPlayer.START },
+            { "jump", CoreActionMapPlayer.JUMP },
+            { "move", CoreActionMapPlayer.MOVE },
+            { "move hand", CoreActionMapPlayer.MOVE_HAND },
+            { "grip", CoreActionMapPlayer.GRIP },
+            { "throw", CoreActionMapPlayer.THROW },
+        };
+
+        if (map.ContainsKey(name.ToLower()))
+        {
+            result = map[name.ToLower()];
+        }
+
+        return result;
+    }
+
+    public static CoreActionMap GetActionMap(string name)
+    {
+        var result = CoreActionMap.NONE;
+        var map = new Dictionary<string, CoreActionMap>
+        {
+            { "player", CoreActionMap.PLAYER },
+        };
+
+        if (map.ContainsKey(name.ToLower()))
+        {
+            result = map[name.ToLower()];
+        }
+
+        return result;
+    }
 }

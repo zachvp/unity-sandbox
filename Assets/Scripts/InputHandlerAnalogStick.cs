@@ -5,7 +5,7 @@ using UnityEngine.Events;
 public class InputHandlerAnalogStick : MonoBehaviour
 {
     public PlayerInput input;
-    public CoreCommand action;
+    public CoreActionMapPlayer action;
     public InputAxis2DArgs args;
     public UnityAction<InputAxis2DArgs> actionDelegate;
 

@@ -5,7 +5,7 @@ using Unity.VisualScripting;
 public class InputHandlerDigitalAxis1D : MonoBehaviour
 {
     public PlayerInput playerInput;
-    public CoreCommand action;
+    public CoreActionMapPlayer action;
     public InputAxis1DArgs args;
 
     public void Trigger(InputAction.CallbackContext context)

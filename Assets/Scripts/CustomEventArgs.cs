@@ -6,14 +6,14 @@ public struct InputButtonArgs
 {
     public int playerID;
     public InputActionPhase phase;
-    public CoreCommand action;
+    public CoreActionMapPlayer action;
 }
 
 [Serializable]
 public struct InputAxis1DArgs
 {
     public int playerID;
-    public CoreCommand action;
+    public CoreActionMapPlayer action;
     public int axis;
 }
 
@@ -21,6 +21,6 @@ public struct InputAxis1DArgs
 public struct InputAxis2DArgs
 {
     public int playerID;
-    public CoreCommand action;
+    public CoreActionMapPlayer action;
     public Vector2 axis;
 }
