@@ -24,3 +24,10 @@ public struct InputAxis2DArgs
     public CoreActionMapPlayer action;
     public Vector2 axis;
 }
+
+[Serializable]
+public struct PCInputArgs
+{
+    public CoreActionMapPlayer type;
+    public MultiValue value;
+}

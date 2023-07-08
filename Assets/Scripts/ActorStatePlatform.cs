@@ -10,8 +10,6 @@ public class ActorStatePlatform : MonoBehaviour
     public PlatformState platformState;
     public Buffer<Direction2D> triggerStateBuffer;
 
-    public Vector2 lastGroundVelocity;
-
     public void Start()
     {
         StartCoroutine(CoreUtilities.RepeatTask(triggerStateBuffer.interval, () =>

@@ -5,11 +5,11 @@ public class TestCommandHandler : MonoBehaviour
 {
     public void Awake()
     {
-        EventBus.Register<CoreActionMapPlayer>(CommandEvent.Hook, HandleCommand);
+        EventBus.Register<PCInputArgs>(CommandEvent.Hook, HandleCommand);
     }
 
-    public void HandleCommand(CoreActionMapPlayer command)
+    public void HandleCommand(PCInputArgs command)
     {
-        Debug.Log($"handle command: {command}");
+        Debug.Log($"handle command: {command.type} | {command.value}");
     }
 }

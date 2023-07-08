@@ -9,6 +9,7 @@ public class PCPlatformMotor : MonoBehaviour
     public ActorStatePlatform state;
     public InputHandlerDigitalAxis1D inputMove;
     public InputHandlerButton inputJump;
+
     public float jumpStrength = 100;
     public float groundMoveSpeed = 100;
     public float airMoveSpeed = 25;
@@ -41,14 +42,9 @@ public class PCPlatformMotor : MonoBehaviour
             }
         }
 
-        // grounded
-        if (state.down.isTriggered)
+        // wall cling & release
+        if (!state.down.isTriggered)
         {
-            state.lastGroundVelocity = body.velocity;
-        }
-        else
-        {
-            // wall cling & release
             if (TriggerWallCling(state.triggerState, inputMove.args.axis, body))
             {
                 state.platformState |= PlatformState.WALL_CLING;

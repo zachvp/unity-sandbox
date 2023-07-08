@@ -52,7 +52,7 @@ public sealed class InputAxis2DEvent : EventUnit<InputAxis2DArgs>
 /* End input event units */
 
 /** COMMAND EVENTS */
-public sealed class CommandEvent : EventUnit<CoreActionMapPlayer>
+public sealed class CommandEvent : EventUnit<PCInputArgs>
 {
     public static string Hook = EnumHelper.GetStringID(CustomHook.COMMAND);
 
@@ -67,7 +67,7 @@ public sealed class CommandEvent : EventUnit<CoreActionMapPlayer>
         command = ValueOutput<InputActionPhase>(nameof(command));
     }
 
-    protected override void AssignArguments(Flow flow, CoreActionMapPlayer args)
+    protected override void AssignArguments(Flow flow, PCInputArgs args)
     {
         flow.SetValue(command, args);
     }
