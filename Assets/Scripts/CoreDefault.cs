@@ -44,6 +44,12 @@ public static class CoreUtilities
     }
 }
 
+public static class CoreConstants
+{
+    public const float FLOAT_DEADZONE = 0.01f;
+    public const float VELOCITY_DEADZONE = 2;
+}
+
 public struct MultiValue
 {
     public Vector2 vVec2;

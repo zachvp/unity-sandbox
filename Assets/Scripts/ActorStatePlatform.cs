@@ -10,6 +10,9 @@ public class ActorStatePlatform : MonoBehaviour
     public PlatformState platformState;
     public Buffer<Direction2D> triggerStateBuffer;
 
+    // input state
+    public float inputMove;
+
     public void Start()
     {
         StartCoroutine(CoreUtilities.RepeatTask(triggerStateBuffer.interval, () =>
