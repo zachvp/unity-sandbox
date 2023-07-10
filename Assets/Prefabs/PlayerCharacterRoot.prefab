@@ -1701,10 +1701,10 @@ MonoBehaviour:
   right: {fileID: 5749309989291738892}
   left: {fileID: 5749309989291738882}
   down: {fileID: 5749309989291738893}
-  triggerState: 0
   platformState: 0
-  triggerStateBufferLifetime: 0.05
+  triggerState: 0
   inputMove: 0
+  bufferLifetime: 0.06
 --- !u!58 &5749309989291738894
 CircleCollider2D:
   m_ObjectHideFlags: 0

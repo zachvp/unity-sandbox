@@ -1,8 +1,6 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 using System;
 using Unity.VisualScripting;
-using static TestKinematicBody;
 
 public class PCPlatformMotor : MonoBehaviour
 {
@@ -46,8 +44,7 @@ public class PCPlatformMotor : MonoBehaviour
 
                 // wall jump 
                 else if (!state.platformState.HasFlag(PlatformState.WALL_JUMPING) &&
-                        (state.triggerStateBuffer.Contains(Direction2D.LEFT) ||
-                        state.triggerStateBuffer.Contains(Direction2D.RIGHT)))
+                        IsWallJumpState())
                 {
                     state.platformState |= PlatformState.WALL_JUMP;
                     state.platformState &= ~PlatformState.MOVE;
@@ -77,21 +74,28 @@ public class PCPlatformMotor : MonoBehaviour
         // wall cling & release
         if (!state.down.isTriggered)
         {
-            if (IsWallClingInput(state.triggerState, state.inputMove))
+            if (IsWallClingState())
             {
                 state.platformState |= PlatformState.WALL_CLING;
                 state.platformState &= ~PlatformState.WALL_RELEASE;
+                state.platformState &= ~PlatformState.WALL_JUMPING;
             }
             else
             {
                 state.platformState |= PlatformState.WALL_RELEASE;
                 state.platformState &= ~PlatformState.WALL_CLING;
             }
+
+            if (IsCurrentWallJumpState())
+            {
+                state.platformState &= ~PlatformState.WALL_JUMPING;
+            }
         }
         else
         {
             state.platformState &= ~PlatformState.WALL_CLING;
             state.platformState &= ~PlatformState.WALL_RELEASE;
+            state.platformState &= ~PlatformState.WALL_JUMPING;
         }
 
         // todo: implement air movement
@@ -117,7 +121,7 @@ public class PCPlatformMotor : MonoBehaviour
 
             state.platformState &= ~PlatformState.JUMP;
         }
-        else if (state.platformState.HasFlag(PlatformState.WALL_JUMP))
+        if (state.platformState.HasFlag(PlatformState.WALL_JUMP))
         {
             var velocity = wallJumpSpeed;
             velocity.x *= state.inputMove;
@@ -128,18 +132,19 @@ public class PCPlatformMotor : MonoBehaviour
             state.platformState |= PlatformState.WALL_JUMPING;
         }
 
-        // wall cling/release
+        // wall cling
         if (state.platformState.HasFlag(PlatformState.WALL_CLING))
         {
             body.StopVertical();
-            state.platformState &= ~PlatformState.WALL_JUMPING;
         }
+
+        // wall release
         if (state.platformState.HasFlag(PlatformState.WALL_RELEASE))
         {
             body.ResetVertical();
+
             state.platformState &= ~PlatformState.WALL_RELEASE;
             state.platformState &= ~PlatformState.WALL_CLING;
-            state.platformState &= ~PlatformState.WALL_JUMPING;
         }
 
         adjustedVelocityX = Mathf.Clamp(adjustedVelocityX, -maxSpeedX, maxSpeedX);
@@ -150,12 +155,45 @@ public class PCPlatformMotor : MonoBehaviour
         }
     }
 
-    public bool IsWallClingInput(Direction2D triggerState, float inputAxis)
+    public bool IsWallClingState()
     {
-        // check if next to a wall
-        var rightCondition = inputAxis > CoreConstants.FLOAT_DEADZONE && triggerState.HasFlag(Direction2D.RIGHT);
-        var leftCondition = inputAxis < -CoreConstants.FLOAT_DEADZONE && triggerState.HasFlag(Direction2D.LEFT);
+        // check if next to a wall and input is pressing into wall.
+        var right = state.inputMove > CoreConstants.FLOAT_DEADZONE && state.triggerState.HasFlag(Direction2D.RIGHT);
+        var left = state.inputMove < -CoreConstants.FLOAT_DEADZONE && state.triggerState.HasFlag(Direction2D.LEFT);
 
-        return leftCondition || rightCondition;
+        return left || right;
+    }
+
+    public bool IsWallJumpState()
+    {
+        // check if next to a wall and input is pressing away from wall.
+        var right = state.triggerStateBuffer.Contains(Direction2D.LEFT);
+        var left = state.triggerStateBuffer.Contains(Direction2D.RIGHT);
+
+        if (right || left)
+        {
+            foreach (var item in state.inputMoveBuffer)
+            {
+                if (item > CoreConstants.FLOAT_DEADZONE)
+                {
+                    right = true;
+                }
+                if (item < -CoreConstants.FLOAT_DEADZONE)
+                {
+                    left = true;
+                }
+            }
+        }
+
+        return left || right;
+    }
+
+    public bool IsCurrentWallJumpState()
+    {
+        // check if next to a wall and input is pressing away from wall.
+        var right = state.inputMove > CoreConstants.FLOAT_DEADZONE && state.triggerStateBuffer.Contains(Direction2D.LEFT);
+        var left = state.inputMove < -CoreConstants.FLOAT_DEADZONE && state.triggerStateBuffer.Contains(Direction2D.RIGHT);
+
+        return left || right;
     }
 }

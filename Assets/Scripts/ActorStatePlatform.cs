@@ -3,35 +3,40 @@ using System.Collections.Generic;
 
 public class ActorStatePlatform : MonoBehaviour
 {
+    // proximity triggers
     public TriggerVolume right;
     public TriggerVolume left;
     public TriggerVolume down;
 
-    public Direction2D triggerState;
+    // current state data
     public PlatformState platformState;
-
-    public LinkedList<Direction2D> triggerStateBuffer;
-    public float triggerStateBufferLifetime = 0.5f;
-
-    // input state
+    public Direction2D triggerState;
     public float inputMove;
+
+    // buffered state data
+    public float bufferLifetime = 0.5f;
+    public LinkedList<Direction2D> triggerStateBuffer;
+    public LinkedList<float> inputMoveBuffer;
 
     public void Awake()
     {
         triggerStateBuffer = new LinkedList<Direction2D>();
+        inputMoveBuffer = new LinkedList<float>();
     }
 
     public void Update()
     {
         triggerState = EnumHelper.FromBool(left.isTriggered, right.isTriggered, down.isTriggered, false);
 
-        // new buffer
-        var entry = triggerStateBuffer.AddLast(triggerState);
+        // state buffers
+        var triggerEntry = triggerStateBuffer.AddLast(triggerState);
+        var inputMoveEntry = inputMoveBuffer.AddLast(inputMove);
 
         // todo: make config value
-        StartCoroutine(CoreUtilities.DelayedTask(triggerStateBufferLifetime, () =>
+        StartCoroutine(CoreUtilities.DelayedTask(bufferLifetime, () =>
         {
-            triggerStateBuffer.Remove(entry);
+            triggerStateBuffer.Remove(triggerEntry);
+            inputMoveBuffer.Remove(inputMoveEntry);
         }));
     }
 }
