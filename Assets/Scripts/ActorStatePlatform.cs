@@ -26,7 +26,6 @@ public class ActorStatePlatform : MonoBehaviour
         triggerState = EnumHelper.FromBool(left.isTriggered, right.isTriggered, down.isTriggered, false);
 
         // new buffer
-        //Debug.Log($"snapshot time: {Time.time}\tdelta time: {Time.deltaTime}");
         var entry = triggerStateBuffer.AddLast(triggerState);
 
         // todo: make config value

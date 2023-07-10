@@ -77,7 +77,7 @@ public class PCPlatformMotor : MonoBehaviour
         // wall cling & release
         if (!state.down.isTriggered)
         {
-            if (TriggerWallCling(state.triggerState, state.inputMove))
+            if (IsWallClingInput(state.triggerState, state.inputMove))
             {
                 state.platformState |= PlatformState.WALL_CLING;
                 state.platformState &= ~PlatformState.WALL_RELEASE;
@@ -150,18 +150,12 @@ public class PCPlatformMotor : MonoBehaviour
         }
     }
 
-    public bool TriggerWallCling(Direction2D triggerState, float inputAxis)
+    public bool IsWallClingInput(Direction2D triggerState, float inputAxis)
     {
         // check if next to a wall
         var rightCondition = inputAxis > CoreConstants.FLOAT_DEADZONE && triggerState.HasFlag(Direction2D.RIGHT);
         var leftCondition = inputAxis < -CoreConstants.FLOAT_DEADZONE && triggerState.HasFlag(Direction2D.LEFT);
 
-        // check if input pushes off
-        var result = Mathf.Abs(inputAxis) > CoreConstants.FLOAT_DEADZONE &&
-                     !triggerState.HasFlag(Direction2D.DOWN);
-
-        result &= leftCondition || rightCondition;
-
-        return result;
+        return leftCondition || rightCondition;
     }
 }

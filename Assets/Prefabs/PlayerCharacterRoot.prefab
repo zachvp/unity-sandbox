@@ -1703,7 +1703,7 @@ MonoBehaviour:
   down: {fileID: 5749309989291738893}
   triggerState: 0
   platformState: 0
-  triggerStateBufferLifetime: 0.5
+  triggerStateBufferLifetime: 0.05
   inputMove: 0
 --- !u!58 &5749309989291738894
 CircleCollider2D:
