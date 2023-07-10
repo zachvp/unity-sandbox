@@ -29,9 +29,9 @@ public enum PlatformState
     MOVE = 1 << 1,
     MOVE_NEUTRAL = 1 << 2,
     WALL_JUMP = 1 << 3,
-    WALL_CLING = 1 << 4,
-    WALL_RELEASE = 1 << 5,
-    DISABLE_MOVE = 1 << 6
+    WALL_JUMPING = 1 << 4,
+    WALL_CLING = 1 << 5,
+    WALL_RELEASE = 1 << 6,
 }
 
 [Flags]

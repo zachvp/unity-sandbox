@@ -99,7 +99,7 @@ Transform:
   - {fileID: 5749309987876600311}
   - {fileID: 5749309988450397615}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5749309987876600307
 GameObject:
@@ -370,7 +370,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5749309987960713804
 Transform:
   m_ObjectHideFlags: 0
@@ -1160,8 +1160,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   body: {fileID: 5749309988582234122}
   state: {fileID: 5749309989291738880}
-  inputMove: {fileID: 5749309987960713794}
-  inputJump: {fileID: 5749309987960713799}
   jumpStrength: 200
   groundMoveSpeed: 100
   airMoveSpeed: 100
@@ -1705,11 +1703,8 @@ MonoBehaviour:
   down: {fileID: 5749309989291738893}
   triggerState: 0
   platformState: 0
-  triggerStateBuffer:
-    values: 000000000000000000000000000000000000000000000000
-    index: 0
-    interval: 0.01
-  lastGroundVelocity: {x: 0, y: 0}
+  triggerStateBufferLifetime: 0.5
+  inputMove: 0
 --- !u!58 &5749309989291738894
 CircleCollider2D:
   m_ObjectHideFlags: 0

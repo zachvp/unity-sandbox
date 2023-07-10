@@ -40,38 +40,32 @@ public class PCPlatformMotor : MonoBehaviour
                 if (state.down.isTriggered)
                 {
                     state.platformState |= PlatformState.JUMP;
+                    state.platformState &= ~PlatformState.WALL_JUMPING;
                     //Debug.Log($"enter jump state");
                 }
 
                 // wall jump 
-                else if (state.triggerStateBuffer.Contains(Direction2D.LEFT))
+                else if (!state.platformState.HasFlag(PlatformState.WALL_JUMPING) &&
+                        (state.triggerStateBuffer.Contains(Direction2D.LEFT) ||
+                        state.triggerStateBuffer.Contains(Direction2D.RIGHT)))
                 {
                     state.platformState |= PlatformState.WALL_JUMP;
-                    state.platformState |= PlatformState.DISABLE_MOVE;
                     state.platformState &= ~PlatformState.MOVE;
-
-                    StartCoroutine(CoreUtilities.DelayedTask(wallJumpDelay, () =>
-                    {
-                        state.platformState &= ~PlatformState.DISABLE_MOVE;
-                    }));
                 }
                 break;
 
             case CoreActionMapPlayer.MOVE:
                 state.inputMove = args.value.vFloat;
 
-                if (!state.platformState.HasFlag(PlatformState.DISABLE_MOVE))
+                if (Mathf.Abs(state.inputMove) > CoreConstants.FLOAT_DEADZONE)
                 {
-                    if (Mathf.Abs(state.inputMove) > CoreConstants.FLOAT_DEADZONE)
-                    {
-                        state.platformState |= PlatformState.MOVE;
-                        state.platformState &= ~PlatformState.MOVE_NEUTRAL;
-                    }
-                    else
-                    {
-                        state.platformState |= PlatformState.MOVE_NEUTRAL;
-                        state.platformState &= ~PlatformState.MOVE;
-                    }
+                    state.platformState |= PlatformState.MOVE;
+                    state.platformState &= ~PlatformState.MOVE_NEUTRAL;
+                }
+                else
+                {
+                    state.platformState |= PlatformState.MOVE_NEUTRAL;
+                    state.platformState &= ~PlatformState.MOVE;
                 }
                 break;
 
@@ -83,7 +77,7 @@ public class PCPlatformMotor : MonoBehaviour
         // wall cling & release
         if (!state.down.isTriggered)
         {
-            if (TriggerWallCling(state.triggerState, state.inputMove, body))
+            if (TriggerWallCling(state.triggerState, state.inputMove))
             {
                 state.platformState |= PlatformState.WALL_CLING;
                 state.platformState &= ~PlatformState.WALL_RELEASE;
@@ -93,6 +87,11 @@ public class PCPlatformMotor : MonoBehaviour
                 state.platformState |= PlatformState.WALL_RELEASE;
                 state.platformState &= ~PlatformState.WALL_CLING;
             }
+        }
+        else
+        {
+            state.platformState &= ~PlatformState.WALL_CLING;
+            state.platformState &= ~PlatformState.WALL_RELEASE;
         }
 
         // todo: implement air movement
@@ -126,18 +125,21 @@ public class PCPlatformMotor : MonoBehaviour
             adjustedVelocityX = velocity.x;
 
             state.platformState &= ~PlatformState.WALL_JUMP;
+            state.platformState |= PlatformState.WALL_JUMPING;
         }
 
         // wall cling/release
         if (state.platformState.HasFlag(PlatformState.WALL_CLING))
         {
             body.StopVertical();
+            state.platformState &= ~PlatformState.WALL_JUMPING;
         }
-        else if (state.platformState.HasFlag(PlatformState.WALL_RELEASE))
+        if (state.platformState.HasFlag(PlatformState.WALL_RELEASE))
         {
             body.ResetVertical();
             state.platformState &= ~PlatformState.WALL_RELEASE;
             state.platformState &= ~PlatformState.WALL_CLING;
+            state.platformState &= ~PlatformState.WALL_JUMPING;
         }
 
         adjustedVelocityX = Mathf.Clamp(adjustedVelocityX, -maxSpeedX, maxSpeedX);
@@ -148,7 +150,7 @@ public class PCPlatformMotor : MonoBehaviour
         }
     }
 
-    public bool TriggerWallCling(Direction2D triggerState, float inputAxis, CoreBody body)
+    public bool TriggerWallCling(Direction2D triggerState, float inputAxis)
     {
         // check if next to a wall
         var rightCondition = inputAxis > CoreConstants.FLOAT_DEADZONE && triggerState.HasFlag(Direction2D.RIGHT);
