@@ -3,22 +3,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[Serializable]
-public class Buffer<T>
-{
-    public T[] values;
-    public int index;
-    public float interval; // in seconds
-
-    public void Store(T s)
-    {
-        values[index] = s;
-        index = (index + 1) % values.Length;
-    }
-}
-
 public static class CoreUtilities
 {
+    public static IEnumerator RunTask(Action task)
+    {
+        while (true)
+        {
+            task();
+            yield return null;
+        }
+    }
+
     public static IEnumerator RepeatTask(float interval, Action task)
     {
         while (true)

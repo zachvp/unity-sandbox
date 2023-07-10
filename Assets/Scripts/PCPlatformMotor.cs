@@ -44,7 +44,7 @@ public class PCPlatformMotor : MonoBehaviour
                 }
 
                 // wall jump 
-                else if (state.BufferContainsState(Direction2D.RIGHT | Direction2D.LEFT))
+                else if (state.triggerStateBuffer.Contains(Direction2D.LEFT))
                 {
                     state.platformState |= PlatformState.WALL_JUMP;
                     state.platformState |= PlatformState.DISABLE_MOVE;
@@ -62,7 +62,6 @@ public class PCPlatformMotor : MonoBehaviour
 
                 if (!state.platformState.HasFlag(PlatformState.DISABLE_MOVE))
                 {
-                    //if (Mathf.Abs(inputMove.args.axis) > 0)
                     if (Mathf.Abs(state.inputMove) > CoreConstants.FLOAT_DEADZONE)
                     {
                         state.platformState |= PlatformState.MOVE;
@@ -101,12 +100,10 @@ public class PCPlatformMotor : MonoBehaviour
         {
             if (state.down.isTriggered)
             {
-                //adjustedVelocityX = (groundMoveSpeed * inputMove.args.axis);
                 adjustedVelocityX = groundMoveSpeed * state.inputMove;
             }
             else
             {
-                //adjustedVelocityX = airMoveSpeed * inputMove.args.axis;
                 adjustedVelocityX = groundMoveSpeed * state.inputMove;
             }
         }
@@ -159,8 +156,7 @@ public class PCPlatformMotor : MonoBehaviour
 
         // check if input pushes off
         var result = Mathf.Abs(inputAxis) > CoreConstants.FLOAT_DEADZONE &&
-                     !triggerState.HasFlag(Direction2D.DOWN) &&
-                     Mathf.Abs(body.velocity.y) < CoreConstants.VELOCITY_DEADZONE;
+                     !triggerState.HasFlag(Direction2D.DOWN);
 
         result &= leftCondition || rightCondition;
 

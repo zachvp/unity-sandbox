@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public class ActorStatePlatform : MonoBehaviour
 {
@@ -8,35 +9,30 @@ public class ActorStatePlatform : MonoBehaviour
 
     public Direction2D triggerState;
     public PlatformState platformState;
-    public Buffer<Direction2D> triggerStateBuffer;
+
+    public LinkedList<Direction2D> triggerStateBuffer;
+    public float triggerStateBufferLifetime = 0.5f;
 
     // input state
     public float inputMove;
 
-    public void Start()
+    public void Awake()
     {
-        StartCoroutine(CoreUtilities.RepeatTask(triggerStateBuffer.interval, () =>
+        triggerStateBuffer = new LinkedList<Direction2D>();
+    }
+
+    public void Update()
+    {
+        triggerState = EnumHelper.FromBool(left.isTriggered, right.isTriggered, down.isTriggered, false);
+
+        // new buffer
+        //Debug.Log($"snapshot time: {Time.time}\tdelta time: {Time.deltaTime}");
+        var entry = triggerStateBuffer.AddLast(triggerState);
+
+        // todo: make config value
+        StartCoroutine(CoreUtilities.DelayedTask(triggerStateBufferLifetime, () =>
         {
-            triggerState = EnumHelper.FromBool(left.isTriggered, right.isTriggered, down.isTriggered, false);
-            triggerStateBuffer.Store(triggerState);
+            triggerStateBuffer.Remove(entry);
         }));
-    }
-
-    public bool BufferContainsState(Direction2D included)
-    {
-        return BufferContainsState(included, Direction2D.NONE);
-    }
-
-    public bool BufferContainsState(Direction2D included, Direction2D excluded)
-    {
-        for (var i = 0; i < triggerStateBuffer.values.Length; i++)
-        {
-            if ((triggerStateBuffer.values[i] & included) > 0 && (triggerStateBuffer.values[i] & excluded) == 0)
-            {
-                return true;
-            }
-        }
-
-        return false;
     }
 }

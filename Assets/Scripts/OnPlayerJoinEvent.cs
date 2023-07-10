@@ -23,6 +23,8 @@ public class OnPlayerJoinEvent : MonoBehaviour
 
     public void HandlePlayerLeave(PlayerInput playerInput)
     {
+        // this is called at least when
+        // application closes (observed when unity player stopped in editor)
         Debug.LogWarning($"player left: {playerInput.playerIndex}; unknown what led to this");
     }
 }
