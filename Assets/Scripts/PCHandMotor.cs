@@ -1,14 +1,11 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PCHandMotor : MonoBehaviour
 {
     // TODO: separate pickup stuff into separate class
-    public InputHandlerButton inputGrip;
-    public InputHandlerButton inputThrow;
-    public InputHandlerAnalogStick inputGesture;
     public TriggerVolume grabTrigger;
-    public TriggerVolume heldTrigger;
     public CoreBody hand;
     public PCPlatformMotor motor;
     public Transform holdAnchor;
@@ -21,74 +18,67 @@ public class PCHandMotor : MonoBehaviour
 
     public void Awake()
     {
-        inputGrip.actionDelegate += OnInputGrip;
-        inputThrow.actionDelegate += OnInputThrow;
-        inputGesture.actionDelegate += OnInputGesture;
+        EventBus.Register<PCInputArgs>(CommandEvent.Hook, HandleCommand);
     }
 
-    public void OnInputGesture(InputAxis2DArgs args)
+    public void HandleCommand(PCInputArgs args)
     {
-        movementHeldPickup.Trigger(args.axis);
-    }
-
-    public void OnInputThrow(InputButtonArgs args)
-    {
-        if (args.phase == InputActionPhase.Started)
+        switch (args.type)
         {
-            if (state == HandState.GRIP && !heldTrigger.isTriggered)
-            {
-                ball.Throw(hand.velocity, inputGesture.args.axis, motor);
-
-                state &= ~HandState.GRIP;
-                state |= HandState.BLOCKED;
-                
-                StartCoroutine(CoreUtilities.DelayedTask(interactionBlockDelay, () =>
+            case CoreActionMap.Player.MOVE_HAND:
+                movementHeldPickup.Trigger(args.vVec2);
+                break;
+            case CoreActionMap.Player.THROW:
+                if (state == HandState.GRIP)
                 {
-                    state &= ~HandState.BLOCKED;
-                    ball.ThrowReset();
+                    ball.Throw(hand.velocity, args.vVec2, motor);
 
-                }));
-            }
-        }
-    }
-
-    public void OnInputGrip(InputButtonArgs args)
-    {
-        if (args.phase == InputActionPhase.Started)
-        {
-            if (grabTrigger.isTriggered)
-            {
-                //grabTrigger.overlappingObjects[0].GetComponent<Ball>();
-                ball = grabTrigger.overlappingObjects[0].GetComponentInParent<Ball>();
-
-                if (ball != null && state == HandState.NONE)
-                {
-                    ball.Grab(holdAnchor);
-                    
+                    state &= ~HandState.GRIP;
                     state |= HandState.BLOCKED;
-                    state |= HandState.GRIP;
 
                     StartCoroutine(CoreUtilities.DelayedTask(interactionBlockDelay, () =>
                     {
                         state &= ~HandState.BLOCKED;
+                        ball.ThrowReset();
+
                     }));
                 }
-            }
-
-            if (ball && state == HandState.GRIP && !heldTrigger.isTriggered)
-            {
-                ball.Release();
-
-                state |= HandState.BLOCKED;
-                state &= ~HandState.GRIP;
-
-                StartCoroutine(CoreUtilities.DelayedTask(interactionBlockDelay, () =>
+                break;
+            case CoreActionMap.Player.GRIP:
+                if (grabTrigger.isTriggered)
                 {
-                    state &= ~HandState.BLOCKED;
-                    ball.ReleaseReset();
+                    // todo: this seems hacky - maybe have singleton SceneRefs to directly access ball.
+                    ball = grabTrigger.overlappingObjects[0].GetComponentInParent<Ball>();
 
-                }));
-            }
+                    if (ball != null && state == HandState.NONE)
+                    {
+                        ball.Grab(holdAnchor);
+
+                        state |= HandState.BLOCKED;
+                        state |= HandState.GRIP;
+
+                        StartCoroutine(CoreUtilities.DelayedTask(interactionBlockDelay, () =>
+                        {
+                            state &= ~HandState.BLOCKED;
+                        }));
+                    }
+                }
+
+                if (ball && state == HandState.GRIP)
+                {
+                    ball.Release();
+
+                    state |= HandState.BLOCKED;
+                    state &= ~HandState.GRIP;
+
+                    StartCoroutine(CoreUtilities.DelayedTask(interactionBlockDelay, () =>
+                    {
+                        state &= ~HandState.BLOCKED;
+                        ball.ReleaseReset();
+
+                    }));
+                }
+                break;
         }
     }
 }

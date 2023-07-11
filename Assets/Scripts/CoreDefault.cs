@@ -44,15 +44,3 @@ public static class CoreConstants
     public const float FLOAT_DEADZONE = 0.01f;
     public const float VELOCITY_DEADZONE = 2;
 }
-
-public struct MultiValue
-{
-    public Vector2 vVec2;
-    public float vFloat;
-    public bool vBool;
-
-    public override string ToString()
-    {
-        return $"{nameof(vVec2)}: {vVec2} | {nameof(vFloat)}: {vFloat} | {nameof(vBool)}: {vBool}";
-    }
-}

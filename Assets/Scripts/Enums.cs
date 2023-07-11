@@ -49,22 +49,25 @@ public enum Trait
     PICKUP = 1 << 0
 }
 
-public enum CoreActionMap
+public static class CoreActionMap
 {
-    NONE,
-    PLAYER
-}
+    public enum Type
+    {
+        NONE,
+        PLAYER
+    }
 
-public enum CoreActionMapPlayer : Int32
-{
-    NONE,
+    public enum Player : Int32
+    {
+        NONE,
 
-    START,
-    JUMP,
-    MOVE,
-    MOVE_HAND,
-    GRIP,
-    THROW
+        START,
+        JUMP,
+        MOVE,
+        MOVE_HAND,
+        GRIP,
+        THROW
+    }
 }
 
 public static class EnumHelper
@@ -88,17 +91,17 @@ public static class EnumHelper
         return result;
     }
 
-    public static CoreActionMapPlayer GetPlayerAction(string name)
+    public static CoreActionMap.Player GetPlayerAction(string name)
     {
-        var result = CoreActionMapPlayer.NONE;
-        var map = new Dictionary<string, CoreActionMapPlayer>
+        var result = CoreActionMap.Player.NONE;
+        var map = new Dictionary<string, CoreActionMap.Player>
         {
-            { "start", CoreActionMapPlayer.START },
-            { "jump", CoreActionMapPlayer.JUMP },
-            { "move", CoreActionMapPlayer.MOVE },
-            { "move hand", CoreActionMapPlayer.MOVE_HAND },
-            { "grip", CoreActionMapPlayer.GRIP },
-            { "throw", CoreActionMapPlayer.THROW },
+            { "start", CoreActionMap.Player.START },
+            { "jump", CoreActionMap.Player.JUMP },
+            { "move", CoreActionMap.Player.MOVE },
+            { "move hand", CoreActionMap.Player.MOVE_HAND },
+            { "grip", CoreActionMap.Player.GRIP },
+            { "throw", CoreActionMap.Player.THROW },
         };
 
         if (map.ContainsKey(name.ToLower()))
@@ -109,12 +112,12 @@ public static class EnumHelper
         return result;
     }
 
-    public static CoreActionMap GetActionMap(string name)
+    public static CoreActionMap.Type GetActionMap(string name)
     {
-        var result = CoreActionMap.NONE;
-        var map = new Dictionary<string, CoreActionMap>
+        var result = CoreActionMap.Type.NONE;
+        var map = new Dictionary<string, CoreActionMap.Type>
         {
-            { "player", CoreActionMap.PLAYER },
+            { "player", CoreActionMap.Type.PLAYER },
         };
 
         if (map.ContainsKey(name.ToLower()))

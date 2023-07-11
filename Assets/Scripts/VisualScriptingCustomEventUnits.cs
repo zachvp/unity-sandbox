@@ -20,7 +20,7 @@ public sealed class InputButtonEvent : EventUnit<InputButtonArgs>
     {
         base.Definition();
         phase = ValueOutput<InputActionPhase>(nameof(phase));
-        action = ValueOutput<CoreActionMapPlayer>(nameof(action));
+        action = ValueOutput<CoreActionMap.Player>(nameof(action));
     }
 
     protected override void AssignArguments(Flow flow, InputButtonArgs args)

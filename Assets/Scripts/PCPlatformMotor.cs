@@ -31,9 +31,10 @@ public class PCPlatformMotor : MonoBehaviour
 
         // todo: separate state computation to separate class, then feed state result each frame to motor?
 
+        // update state according to input.
         switch (args.type)
         {
-            case CoreActionMapPlayer.JUMP:
+            case CoreActionMap.Player.JUMP:
                 // ground jump
                 if (state.down.isTriggered)
                 {
@@ -51,8 +52,8 @@ public class PCPlatformMotor : MonoBehaviour
                 }
                 break;
 
-            case CoreActionMapPlayer.MOVE:
-                state.inputMove = args.value.vFloat;
+            case CoreActionMap.Player.MOVE:
+                state.inputMove = args.vFloat;
 
                 if (Mathf.Abs(state.inputMove) > CoreConstants.FLOAT_DEADZONE)
                 {

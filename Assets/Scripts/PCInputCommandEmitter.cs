@@ -5,7 +5,7 @@ using UnityEngine;
 public class PCInputCommandEmitter : MonoBehaviour
 {
     public PlayerInput playerInput;
-    public CoreActionMap actionMapType;
+    public CoreActionMap.Type actionMapType;
 
     // Contains the combination of the most recent input data.
     public PCInputArgs data;
@@ -34,23 +34,23 @@ public class PCInputCommandEmitter : MonoBehaviour
         }
     }
 
-    public void UpdateData(CoreActionMapPlayer actionType, InputAction.CallbackContext context)
+    public void UpdateData(CoreActionMap.Player actionType, InputAction.CallbackContext context)
     {
         data.type = actionType;
 
         switch (actionType)
         {
-            case CoreActionMapPlayer.JUMP:
-            case CoreActionMapPlayer.GRIP:
-            case CoreActionMapPlayer.START:
-            case CoreActionMapPlayer.THROW:
-                data.value.vBool = context.phase == InputActionPhase.Started;
+            case CoreActionMap.Player.JUMP:
+            case CoreActionMap.Player.GRIP:
+            case CoreActionMap.Player.START:
+            case CoreActionMap.Player.THROW:
+                data.vBool = context.phase == InputActionPhase.Started;
                 break;
-            case CoreActionMapPlayer.MOVE:
-                data.value.vFloat = context.ReadValue<float>();
+            case CoreActionMap.Player.MOVE:
+                data.vFloat = context.ReadValue<float>();
                 break;
-            case CoreActionMapPlayer.MOVE_HAND:
-                data.value.vVec2 = context.ReadValue<Vector2>();
+            case CoreActionMap.Player.MOVE_HAND:
+                data.vVec2 = context.ReadValue<Vector2>();
                 break;
             default:
                 Debug.LogError($"Unhandled case: {actionType}");

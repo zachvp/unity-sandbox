@@ -20,7 +20,7 @@ public class TestCommandHandler : MonoBehaviour
     {
         if (command.playerIndex == playerIndex)
         {
-            Debug.Log($"handle command: {command.type} | {command.value}");
+            Debug.Log($"handle command: {command}");
         }
     }
 }
