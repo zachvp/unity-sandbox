@@ -1,6 +1,4 @@
 using UnityEngine;
-using System;
-using UnityEngine.EventSystems;
 
 public class Ball : MonoBehaviour
 {
@@ -10,12 +8,13 @@ public class Ball : MonoBehaviour
     public GameObject held;
     public GameObject released;
     public MovementFollowTransform heldMovement;
-    public GameObject target;
-    public GameObject measureFloorToTarget;
 
     public Vector2 assistThrow = new Vector2(50, 50);
 
-    // todo: remove
+    public void Awake()
+    {
+        SceneRefs.Instance.Register(SceneRefs.ID.BALL, this);
+    }
 
     public void LateUpdate()
     {
@@ -102,7 +101,7 @@ public class Ball : MonoBehaviour
         //      + boost if have dribble stack of TBD (+20)
         if (!motor.state.down.isTriggered)
         {
-            if (Mathf.Abs(motor.body.velocity.y) < 50)
+            if (Mathf.Abs(motor.body.velocity.y) < 500)
             {
                 shotMagic += 30;
                 Debug.Log("precise! magic +30");
@@ -117,9 +116,10 @@ public class Ball : MonoBehaviour
         if (shotMagic > 0)
         {
             var magicVel = Vector2.zero;
-            var toTarget = target.transform.position - released.transform.position;
+            var toTarget = SceneRefs.Instance.targetGoal.transform.position - released.transform.position;
             var a = new Vector2(-body.body.drag, body.originalGravity * Physics2D.gravity.y - body.body.drag);
 
+            // todo: t = sqrt(2*dy / g)
             magicVel.x = 2 * (toTarget.x / 2.55f);
             magicVel.y = Mathf.Sqrt(Mathf.Pow(baseVelocity.y, 2) - (2 * a.y * toTarget.y));
 
@@ -132,20 +132,20 @@ public class Ball : MonoBehaviour
 
             //var yFudge = 1 / (toTarget.y / target to floor dist) // todo: 
             var baseFudge = 1 + body.body.drag;
-            var yFudge = 0.8f / (Mathf.Max(0.25f, toTarget.y / measureFloorToTarget.transform.localScale.y));
+            var yFudge = 0.8f / Mathf.Max(0.25f, toTarget.y / SceneRefs.Instance.distanceGoalToFloor);
 
             magicVel.x *= baseFudge;
             magicVel.y *= Mathf.Max(baseFudge, yFudge);
             shotMagic = Mathf.Min(100, shotMagic);
-            modVelocity = Vector2.Lerp(modVelocity, magicVel, shotMagic / 100);
+            //modVelocity = Vector2.Lerp(modVelocity, magicVel, shotMagic / 100);
+            modVelocity = magicVel;
             //modVelocity = magicVel;
             //Debug.Log($"precise jump shot! | {magicVel}; fudge denom: {toTarget.y / measureFloorToTarget.transform.localScale.y}");
             Debug.Log($"shot magic: {shotMagic / 100}");
         }
 
-        Debug.DrawRay(released.transform.position, modVelocity.normalized*32, Color.yellow, 12);
+        Debug.DrawRay(released.transform.position, modVelocity.normalized*32, Color.blue, 12);
 
-        //body.Trigger(magicVel);
         body.Trigger(modVelocity);
     }
 

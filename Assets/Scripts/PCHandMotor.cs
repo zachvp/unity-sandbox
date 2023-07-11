@@ -14,8 +14,6 @@ public class PCHandMotor : MonoBehaviour
     public HandState state;
     public Trait grabbables;
 
-    private Ball ball;
-
     public void Awake()
     {
         EventBus.Register<PCInputArgs>(CommandEvent.Hook, HandleCommand);
@@ -23,6 +21,8 @@ public class PCHandMotor : MonoBehaviour
 
     public void HandleCommand(PCInputArgs args)
     {
+        var ball = SceneRefs.Instance.ball;
+
         switch (args.type)
         {
             case CoreActionMap.Player.MOVE_HAND:

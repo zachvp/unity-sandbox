@@ -66,7 +66,9 @@ public class PCPlatformMotor : MonoBehaviour
                     state.platformState &= ~PlatformState.MOVE;
                 }
                 break;
-
+            default:
+                Debug.LogWarning($"Unhandled case: {args.type}");
+                break;
         }
     }
 
