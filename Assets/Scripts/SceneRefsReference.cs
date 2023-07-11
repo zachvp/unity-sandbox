@@ -10,4 +10,9 @@ public class SceneRefsReference : MonoBehaviour
     {
         SceneRefs.Instance.Register(id, transform);
     }
+
+    public void Update()
+    {
+        Debug.DrawRay(transform.position, Vector2.down * 128, Color.blue, 10);
+    }
 }
