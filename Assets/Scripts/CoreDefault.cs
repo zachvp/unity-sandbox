@@ -44,3 +44,52 @@ public static class CoreConstants
     public const float FLOAT_DEADZONE = 0.01f;
     public const float VELOCITY_DEADZONE = 2;
 }
+
+// todo: migrate to be singleton (maybe monosingleton)
+public static class Notifier
+{
+    public static void Send(Action handler)
+    {
+        // Temp variable for thread safety.
+        var threadsafeHandler = handler;
+        if (threadsafeHandler != null)
+        {
+            threadsafeHandler();
+        }
+    }
+
+    public static void Send<T>(Action<T> eventHandler, T args)
+    {
+        // Temp variable for thread safety.
+        var threadsafeHandler = eventHandler;
+        if (threadsafeHandler != null)
+        {
+            threadsafeHandler(args);
+        }
+    }
+}
+
+public class Notifications
+{
+    public Action<PCInputArgs> CommandPC;
+
+    public static Notifications instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                _instance = new Notifications();
+
+            }
+            return _instance;
+        }
+    }
+    private static Notifications _instance;
+
+    public static void Reset()
+    {
+        _instance.CommandPC = null;
+        _instance = null;
+    }
+}

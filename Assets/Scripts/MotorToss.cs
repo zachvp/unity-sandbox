@@ -15,7 +15,7 @@ public class MotorToss : MonoBehaviour
 
     public void Awake()
     {
-        EventBus.Register<PCInputArgs>(CommandEvent.Hook, HandleInput);
+        Notifications.instance.CommandPC += HandleInput;
         body = GetComponent<Rigidbody2D>();
     }
 
@@ -71,14 +71,6 @@ public class MotorToss : MonoBehaviour
         {
             //isMove = false;
         }
-    }
-
-    public void OnDestroy()
-    {
-        // todo: migrate to Notifications-type usgae instead of EventBus; make sure it's a singleton, NOT static
-        //      Unable to use this unregister method, and also has more overhead
-        //EventBus.Unregister(CommandEvent.Hook, new EventBus.);
-        
     }
 
     public void MovePos()
