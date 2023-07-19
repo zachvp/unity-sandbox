@@ -8,7 +8,7 @@ public class TestCommandHandler : MonoBehaviour
 
     public void Awake()
     {
-        EventBus.Register<PCInputArgs>(CommandEvent.Hook, HandleCommand);
+        Notifications.CommandPC += HandleCommand;
     }
 
     public void Initialize(int playerIdx)

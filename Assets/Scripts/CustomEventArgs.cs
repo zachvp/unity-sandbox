@@ -36,6 +36,7 @@ public struct PCInputArgs
 
     public override string ToString()
     {
-        return $"{nameof(type)}: {type} | {nameof(vVec2)}: {vVec2} | {nameof(vFloat)}: {vFloat} | {nameof(vBool)}: {vBool}";
+        return JsonUtility.ToJson(this);
+        //return $"{nameof(type)}: {type} | {nameof(vVec2)}: {vVec2} | {nameof(vFloat)}: {vFloat} | {nameof(vBool)}: {vBool}";
     }
 }

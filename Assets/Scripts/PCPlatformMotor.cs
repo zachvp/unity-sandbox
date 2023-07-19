@@ -20,7 +20,7 @@ public class PCPlatformMotor : MonoBehaviour
 
     public void Awake()
     {
-        EventBus.Register<PCInputArgs>(CommandEvent.Hook, HandleCommand);
+        Notifications.CommandPC += HandleCommand;
     }
 
     public void HandleCommand(PCInputArgs args)
