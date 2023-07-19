@@ -1,5 +1,7 @@
 using UnityEngine.InputSystem;
 using UnityEngine;
+using System.Collections.Generic;
+using System.Collections;
 
 using System;
 using UnityEngine.UI;
@@ -17,16 +19,28 @@ public class TestKinematicBody : MonoBehaviour
         JUMP_PHASE_1 = 1 << 4,
         JUMP_PHASE_2 = 1 << 5,
     }
+    public class CommandEntry
+    {
+        public Command command;
+        public int count;
+
+        public CommandEntry(Command cd, int ct)
+        {
+            command = cd;
+            count = ct;
+        }
+    }
 
     public Rigidbody2D body;
     public Collider2D attachedCollider;
     public TriggerVolume triggerDown;
-    public bool isGrounded;
-    //public Direction2D triggerDirection;
     public Command command;
+    public Command commandPrev;
+    public static List<CommandEntry> commands;
+    public bool isPlayback;
 
     public Vector2 velocity;
-    public Vector2 pastPos;
+    public Vector2 initialPos;
 
     public float speed = 5;
     public float jumpStrength = 10;
@@ -34,7 +48,8 @@ public class TestKinematicBody : MonoBehaviour
 
     public void Start()
     {
-        pastPos = body.position;
+        initialPos = body.position;
+        commands = new List<CommandEntry>();
     }
 
     public void Update()
@@ -57,20 +72,44 @@ public class TestKinematicBody : MonoBehaviour
         {
             command |= Command.MOVE_NONE;
         }
+
+        if (Keyboard.current.spaceKey.wasPressedThisFrame)
+        {
+            isPlayback = true;
+            body.position = initialPos;
+            StartCoroutine(Playback());
+        }
+
+        // store command sequence
+        if (!isPlayback)
+        {
+            if (command == commandPrev)
+            {
+                commands[commands.Count - 1].count += 1;
+            }
+            else
+            {
+                var entry = new CommandEntry(command, 1);
+                commands.Add(entry);
+            }
+
+            commandPrev = command;
+        }
     }
 
-    public void OnCollisionEnter2D(Collision2D collision)
+    public IEnumerator Playback()
     {
-        //Debug.Log($"collision with: {collision.collider}");
-        var contacts = new ContactPoint2D[collision.contactCount];
-
-        foreach (var c in contacts)
+        foreach (var c in commands)
         {
-            if (Vector2.Dot(c.normal, Vector2.up) > 0.9f)
+            for (var i = 0; i < c.count; i++)
             {
-                isGrounded = true;
+                command = c.command;
+                yield return null;
             }
+            yield return null;
         }
+
+        yield return null;
     }
 
     public void FixedUpdate()
@@ -120,21 +159,8 @@ public class TestKinematicBody : MonoBehaviour
         }
 
         newPos += velocity * Time.fixedDeltaTime;
-        pastPos = body.position;
 
         body.MovePosition(newPos);
-        //body.position = newPos;
-
-        //if (Mathf.Abs(newPos.sqrMagnitude - body.position.sqrMagnitude) > 0)
-        //{
-        //    var b = 0;
-        //}
-
-        //if (Mathf.Abs(velocity.y) < 5 && !triggerDirection.HasFlag(Direction2D.DOWN))
-        //{
-        //    Debug.Log($"y pos: {body.position.y}");
-        //    Debug.DrawRay(body.position, Vector2.right * 16, Color.red, 8);
-        //}
     }
 
     private void Move1()
