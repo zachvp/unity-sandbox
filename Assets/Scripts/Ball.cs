@@ -113,46 +113,46 @@ public class Ball : MonoBehaviour
             }
         }
 
-        //if (shotMagic > 0)
-        //{
-        //    var magicVel = Vector2.zero;
-        //    var toTarget = SceneRefs.Instance.targetGoal.transform.position - released.transform.position;
-        //    var a = new Vector2(-body.body.drag, body.originalGravity * Physics2D.gravity.y - body.body.drag);
+        if (shotMagic > 0)
+        {
+            var magicVel = Vector2.zero;
+            var toTarget = SceneRefs.Instance.targetGoal.transform.position - released.transform.position;
+            var a = new Vector2(-body.body.drag, body.originalGravity * Physics2D.gravity.y - body.body.drag);
 
-        //    // todo: t = sqrt(2*dy / g)
-        //    magicVel.x = 2 * (toTarget.x / 2.55f);
-        //    magicVel.y = Mathf.Sqrt(Mathf.Pow(baseVelocity.y, 2) - (2 * a.y * toTarget.y));
+            // todo: t = sqrt(2*dy / g)
+            magicVel.x = 2 * (toTarget.x / 2.55f);
+            magicVel.y = Mathf.Sqrt(Mathf.Pow(baseVelocity.y, 2) - (2 * a.y * toTarget.y));
 
-        //    if (float.IsNaN(magicVel.y))
-        //    {
-        //        magicVel.y = 0;
-        //        magicVel.x = toTarget.x;
-        //        Debug.LogWarning("magicVelocity.y is NaN");
-        //    }
+            if (float.IsNaN(magicVel.y))
+            {
+                magicVel.y = 0;
+                magicVel.x = toTarget.x;
+                Debug.LogWarning("magicVelocity.y is NaN");
+            }
 
-        //    //var yFudge = 1 / (toTarget.y / target to floor dist) // todo: 
-        //    var baseFudge = 1 + body.body.drag;
-        //    var yFudge = 0.8f / Mathf.Max(0.25f, toTarget.y / SceneRefs.Instance.distanceGoalToFloor);
+            //var yFudge = 1 / (toTarget.y / target to floor dist) // todo: 
+            var baseFudge = 1 + body.body.drag;
+            var yFudge = 0.8f / Mathf.Max(0.25f, toTarget.y / SceneRefs.Instance.distanceGoalToFloor);
 
-        //    magicVel.x *= baseFudge;
-        //    magicVel.y *= Mathf.Max(baseFudge, yFudge);
-        //    shotMagic = Mathf.Min(100, shotMagic);
-        //    //modVelocity = Vector2.Lerp(modVelocity, magicVel, shotMagic / 100);
-        //    modVelocity = magicVel;
-        //    //modVelocity = magicVel;
-        //    //Debug.Log($"precise jump shot! | {magicVel}; fudge denom: {toTarget.y / measureFloorToTarget.transform.localScale.y}");
-        //    Debug.Log($"shot magic: {shotMagic / 100}");
-        //}
+            magicVel.x *= baseFudge;
+            magicVel.y *= Mathf.Max(baseFudge, yFudge);
+            shotMagic = Mathf.Min(100, shotMagic);
+            //modVelocity = Vector2.Lerp(modVelocity, magicVel, shotMagic / 100);
+            modVelocity = magicVel;
+            //modVelocity = magicVel;
+            //Debug.Log($"precise jump shot! | {magicVel}; fudge denom: {toTarget.y / measureFloorToTarget.transform.localScale.y}");
+            Debug.Log($"shot magic: {shotMagic / 100}");
+        }
 
-        var magicVel = Vector2.zero;
-        var height = 64;
-        var toTarget = SceneRefs.Instance.targetGoal.transform.position - released.transform.position;
-        var g = -body.originalGravity * Physics2D.gravity.y;
-        var t = Mathf.Sqrt(2 * (height + toTarget.y) / g);
-        modVelocity.x = toTarget.x / t;
-        modVelocity.y = Mathf.Sqrt(2 * g * toTarget.y);
+        //var magicVel = Vector2.zero;
+        //var height = 64;
+        //var toTarget = SceneRefs.Instance.targetGoal.transform.position - released.transform.position;
+        //var g = -body.originalGravity * Physics2D.gravity.y;
+        //var t = Mathf.Sqrt(2 * (height + toTarget.y) / g);
+        //modVelocity.x = toTarget.x / t;
+        //modVelocity.y = Mathf.Sqrt(2 * g * toTarget.y);
 
-        Debug.DrawRay(released.transform.position, modVelocity.normalized*32, Color.blue, 12);
+        //Debug.DrawRay(released.transform.position, modVelocity.normalized*32, Color.blue, 12);
 
         body.Trigger(modVelocity);
     }
