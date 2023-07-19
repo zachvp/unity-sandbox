@@ -30,7 +30,7 @@ public class PCInputCommandEmitter : MonoBehaviour
 
             UpdateData(actionType, context);
 
-            Notifier.Send(Notifications.instance.CommandPC, data);
+            Notifier.Send(Notifications.CommandPC, data);
         }
     }
 

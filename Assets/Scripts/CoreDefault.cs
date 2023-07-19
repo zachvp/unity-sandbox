@@ -69,27 +69,12 @@ public static class Notifier
     }
 }
 
-public class Notifications
+public static class Notifications
 {
-    public Action<PCInputArgs> CommandPC;
-
-    public static Notifications instance
-    {
-        get
-        {
-            if (_instance == null)
-            {
-                _instance = new Notifications();
-
-            }
-            return _instance;
-        }
-    }
-    private static Notifications _instance;
+    public static Action<PCInputArgs> CommandPC;
 
     public static void Reset()
     {
-        _instance.CommandPC = null;
-        _instance = null;
+        CommandPC = null;
     }
 }

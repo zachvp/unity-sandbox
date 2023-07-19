@@ -15,7 +15,7 @@ public class MotorToss : MonoBehaviour
 
     public void Awake()
     {
-        Notifications.instance.CommandPC += HandleInput;
+        Notifications.CommandPC += HandleInput;
         body = GetComponent<Rigidbody2D>();
     }
 
