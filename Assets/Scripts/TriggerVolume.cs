@@ -11,6 +11,7 @@ public class TriggerVolume : MonoBehaviour
     public void Awake()
     {
         Debug.AssertFormat(overlappingObjects.Length > 0, "non-zero length required for trigger");
+        Debug.AssertFormat(collider.isTrigger, "attached collider required to be trigger");
     }
 #endif
 

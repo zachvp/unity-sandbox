@@ -28,7 +28,6 @@ public class MotorToss : MonoBehaviour
                 if (args.vBool)
                 {
                     Debug.Log($"TOSS");
-
                     
                     //float dh = 0;
                     float g = body.gravityScale * -Physics2D.gravity.y;
@@ -58,7 +57,7 @@ public class MotorToss : MonoBehaviour
                 }
                 break;
             case CoreActionMap.Player.JUMP:
-                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+                //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
                 break;
         }
         
@@ -76,7 +75,7 @@ public class MotorToss : MonoBehaviour
     public void MovePos()
     {
         delta = (displacement * Time.fixedDeltaTime);
-        body.MovePosition(body.position + (displacement * delta));
+        body.MovePosition(body.position + delta);
         Debug.Log($"delta: {delta}");
     }
 }
