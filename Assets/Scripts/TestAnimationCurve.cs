@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class TestAnimationCurve : MonoBehaviour
 {
-    public AnimationCurve curve;
+    public AnimationCurve xCurve;
     public AnimationCurve yCurve;
     public float t;
     public int multiplier = 1;
@@ -19,7 +19,7 @@ public class TestAnimationCurve : MonoBehaviour
         {
             Debug.Log("move right");
             var newPos = transform.position;
-            newPos.x = curve.Evaluate(t / totalTime) * totalDistance;
+            newPos.x = xCurve.Evaluate(t / totalTime) * totalDistance;
             newPos.y = yCurve.Evaluate(t / totalTime) * totalDistance;
 
             transform.position = newPos;
@@ -32,12 +32,11 @@ public class TestAnimationCurve : MonoBehaviour
             }
 
         }
-        // todo: movement goes back and forth with single key held
         if (Keyboard.current.leftArrowKey.isPressed)
         {
             Debug.Log("move left");
             var newPos = transform.position;
-            newPos.x = curve.Evaluate(t / totalTime) * totalDistance;
+            newPos.x = xCurve.Evaluate(t / totalTime) * totalDistance;
             newPos.y = yCurve.Evaluate(t / totalTime) * totalDistance;
 
             transform.position = newPos;

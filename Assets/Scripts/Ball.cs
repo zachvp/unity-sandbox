@@ -1,4 +1,5 @@
 using UnityEngine;
+using System;
 
 public class Ball : MonoBehaviour
 {
@@ -10,6 +11,15 @@ public class Ball : MonoBehaviour
     public MovementFollowTransform heldMovement;
 
     public Vector2 assistThrow = new Vector2(50, 50);
+    public State state;
+
+    public enum State
+    {
+        NONE = 0,
+        SHOOT = 1 << 0,
+        STRAIGHT = 1 << 1,
+        DRIBBLE = 1 << 2
+    }
 
     public void Awake()
     {
@@ -79,11 +89,13 @@ public class Ball : MonoBehaviour
             modVelocity.x -= 2*assistThrow.x;
         }
 
-        var dotGesture = Vector2.Dot(inputDirection, Vector2.right + Vector2.up);
-        if (Mathf.Abs(dotGesture) > 0.84f)
+        var dotGesture0 = Vector2.Dot(inputDirection, Vector2.right + Vector2.up);
+        var dotGesture1 = Vector2.Dot(inputDirection, Vector2.left + Vector2.up);
+        if (dotGesture0 > 0.84f || dotGesture1 > 0.84f)
         {
             shotMagic += 50;
             Debug.Log("shot motion: magic +50");
+            state = State.SHOOT;
         }
 
         var dotRight = Vector2.Dot(Vector2.right, inputDirection);
@@ -91,6 +103,15 @@ public class Ball : MonoBehaviour
         {
             // direct, straight throw
             modVelocity.x = 1;
+            state = State.STRAIGHT;
+        }
+        if (Vector2.Dot(Vector2.down, inputDirection) > 0.84f)
+        {
+            modVelocity.y = -60;
+            modVelocity.x = motor.body.velocity.x;
+
+            state = State.DRIBBLE;
+            Debug.Log("dribble");
         }
 
         // todo: adjust closeness to "magic shot" depending on context
@@ -113,7 +134,7 @@ public class Ball : MonoBehaviour
             }
         }
 
-        if (shotMagic > 0)
+        if (shotMagic > 0 && state == State.SHOOT)
         {
             var magicVel = Vector2.zero;
             var toTarget = SceneRefs.Instance.targetGoal.transform.position - released.transform.position;

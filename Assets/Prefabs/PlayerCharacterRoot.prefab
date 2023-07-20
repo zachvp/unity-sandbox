@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   root: {fileID: 5749309988162198082}
-  range: 12
+  range: 16
 --- !u!114 &5749309987702789851
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -98,7 +98,7 @@ Transform:
   - {fileID: 5749309987876600311}
   - {fileID: 5749309988450397615}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5749309987876600307
 GameObject:
@@ -804,9 +804,9 @@ MonoBehaviour:
   body: {fileID: 5749309988582234122}
   state: {fileID: 5749309989291738880}
   jumpStrength: 200
-  groundMoveSpeed: 100
+  groundMoveSpeed: 80
   airMoveSpeed: 100
-  maxSpeedX: 110
+  maxSpeedX: 90
   wallJumpDelay: 0.5
   wallJumpSpeed: {x: 100, y: 180}
   adjustedVelocityX: 0
