@@ -12,7 +12,6 @@ public class TestAnimationCurve : MonoBehaviour
     public int multiplier = 1;
     public float totalTime;
     public float totalDistance;
-    public bool inbound;
 
     public void Update()
     {
@@ -23,26 +22,13 @@ public class TestAnimationCurve : MonoBehaviour
             newPos.x = curve.Evaluate(t / totalTime) * totalDistance;
             newPos.y = yCurve.Evaluate(t / totalTime) * totalDistance;
 
-            //distanceTraveled = Mathf.Abs((newPos - transform.position).magnitude);
             transform.position = newPos;
 
-            if (inbound)
-            {
-                t -= Time.deltaTime;
+            t += Time.deltaTime * multiplier;
 
-                if (t < 0)
-                {
-                    inbound = false;
-                }
-            }
-            else
+            if (t < 0 || t > totalTime)
             {
-                t += Time.deltaTime;
-
-                if (t > totalTime)
-                {
-                    inbound = true;
-                }
+                multiplier *= -1;
             }
 
         }
