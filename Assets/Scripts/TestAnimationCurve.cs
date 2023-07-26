@@ -6,12 +6,20 @@ using UnityEngine.SceneManagement;
 
 public class TestAnimationCurve : MonoBehaviour
 {
+    public Transform target;
     public AnimationCurve xCurve;
     public AnimationCurve yCurve;
+
     public float t;
     public int multiplier = 1;
     public float totalTime;
     public float totalDistance;
+    public Vector3 toTarget;
+
+    public void Start()
+    {
+        toTarget = target.position - transform.position;
+    }
 
     public void Update()
     {
@@ -30,21 +38,27 @@ public class TestAnimationCurve : MonoBehaviour
             {
                 multiplier *= -1;
             }
-
         }
-        if (Keyboard.current.leftArrowKey.isPressed)
+        if (Keyboard.current.spaceKey.isPressed)
         {
-            Debug.Log("move left");
+            Debug.Log("move to target");
             var newPos = transform.position;
-            newPos.x = xCurve.Evaluate(t / totalTime) * totalDistance;
-            newPos.y = yCurve.Evaluate(t / totalTime) * totalDistance;
+
+            newPos.x = xCurve.Evaluate(t / totalTime) * toTarget.x;
+            newPos.y = yCurve.Evaluate(t / totalTime) * toTarget.y;
 
             transform.position = newPos;
 
-            if (t > 0)
+            t += Time.deltaTime * multiplier;
+
+            if (t < 0 || t > totalTime)
             {
-                t -= Time.deltaTime;
+                multiplier *= -1;
             }
+        }
+        if (Keyboard.current.upArrowKey.isPressed)
+        {
+            //var newRot 
         }
 
         if (Keyboard.current.enterKey.wasPressedThisFrame)
