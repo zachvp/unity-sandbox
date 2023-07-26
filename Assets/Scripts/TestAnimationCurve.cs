@@ -58,7 +58,24 @@ public class TestAnimationCurve : MonoBehaviour
         }
         if (Keyboard.current.upArrowKey.isPressed)
         {
-            //var newRot 
+            transform.rotation = Quaternion.AngleAxis(t, Vector3.forward);
+
+            t += Time.deltaTime * multiplier;
+
+            if (t < 0 || t > totalTime)
+            {
+                multiplier *= -1;
+            }
+        }
+        if (Keyboard.current.pKey.isPressed)
+        {
+            //float newPositionX = Mathf.PingPong(Time.time * speed, maxXPosition * 2) - maxXPosition;
+            var newX = Mathf.PingPong(t * multiplier, 10);
+            var newPos = transform.position;
+            newPos.x = newX;
+
+            transform.position = newPos;
+            t += Time.deltaTime;
         }
 
         if (Keyboard.current.enterKey.wasPressedThisFrame)
