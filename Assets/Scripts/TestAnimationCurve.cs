@@ -14,6 +14,7 @@ public class TestAnimationCurve : MonoBehaviour
     public int multiplier = 1;
     public float totalTime;
     public float totalDistance;
+    public float counter;
     public Vector3 toTarget;
 
     public void Start()
@@ -49,12 +50,15 @@ public class TestAnimationCurve : MonoBehaviour
 
             transform.position = newPos;
 
-            t += Time.deltaTime * multiplier;
+            t = Mathf.PingPong(counter, totalTime);
+            counter += Time.deltaTime * multiplier;
 
-            if (t < 0 || t > totalTime)
-            {
-                multiplier *= -1;
-            }
+            //t += Time.deltaTime * multiplier;
+
+            //if (t < 0 || t > totalTime)
+            //{
+            //    multiplier *= -1;
+            //}
         }
         if (Keyboard.current.upArrowKey.isPressed)
         {
