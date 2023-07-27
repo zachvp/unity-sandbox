@@ -37,12 +37,18 @@ public static class CoreUtilities
         task();
         yield return null;
     }
+
+    public static float RoundTo(float num, float unit)
+    {
+        return Mathf.Round(num / unit) * unit;
+    }
 }
 
 public static class CoreConstants
 {
     public const float FLOAT_DEADZONE = 0.01f;
     public const float VELOCITY_DEADZONE = 2;
+    public const float UNIT_ROUND_POSITION = 1f / 16f;
 }
 
 // todo: migrate to be singleton (maybe monosingleton)

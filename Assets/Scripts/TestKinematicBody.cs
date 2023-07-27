@@ -97,6 +97,22 @@ public class TestKinematicBody : MonoBehaviour
         }
     }
 
+    //public void LateUpdate()
+    //{
+    //    var fixedPos = body.position;
+
+    //    fixedPos.x = CoreUtilities.RoundTo(fixedPos.x, 1f / 16f);
+    //    fixedPos.y = CoreUtilities.RoundTo(fixedPos.y, 1f / 16f);
+
+    //    CoreUtilities.PostFixedUpdateTask(() =>
+    //    {
+    //        //body.MovePosition(fixedPos);
+    //        body.position = fixedPos;
+    //    });
+
+    //    //transform.position = fixedPos;
+    //}
+
     public IEnumerator Playback()
     {
         foreach (var c in commands)
@@ -143,13 +159,13 @@ public class TestKinematicBody : MonoBehaviour
         if (command.HasFlag(Command.MOVE_RIGHT))
         {
             velocity.x = speed;
-            velocity.y += 0.001f; // fudge y to avoid getting stuck on ground
+            //velocity.y += 0.001f; // fudge y to avoid getting stuck on ground
             command &= ~Command.MOVE_RIGHT;
         }
         if (command.HasFlag(Command.MOVE_LEFT))
         {
             velocity.x = -speed;
-            velocity.y += 0.001f; // fudge y to avoid getting stuck on ground
+            //velocity.y += 0.001f; // fudge y to avoid getting stuck on ground
             command &= ~Command.MOVE_LEFT;
         }
         if (command.HasFlag(Command.MOVE_NONE))
@@ -159,6 +175,9 @@ public class TestKinematicBody : MonoBehaviour
         }
 
         newPos += velocity * Time.fixedDeltaTime;
+
+        newPos.x = CoreUtilities.RoundTo(newPos.x, CoreConstants.UNIT_ROUND_POSITION);
+        newPos.y = CoreUtilities.RoundTo(newPos.y, CoreConstants.UNIT_ROUND_POSITION);
 
         body.MovePosition(newPos);
     }
