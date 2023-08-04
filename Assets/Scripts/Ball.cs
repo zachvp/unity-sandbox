@@ -32,8 +32,6 @@ public class Ball : MonoBehaviour
         body.position = modPos;
     }
 
-    // todo: possibly related to above: improve jump shot feasibility
-
     // Activate the held object, deactivate the pickup object.
     public void Grab(Transform holdAnchor)
     {
@@ -107,7 +105,7 @@ public class Ball : MonoBehaviour
         }
         if (Vector2.Dot(Vector2.down, inputDirection) > 0.84f)
         {
-            modVelocity.y = -60;
+            modVelocity.y = -180;
             modVelocity.x = motor.body.velocity.x;
 
             state = State.DRIBBLE;

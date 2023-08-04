@@ -16,10 +16,12 @@ public class TestAnimationCurve : MonoBehaviour
     public float totalDistance;
     public float counter;
     public Vector3 toTarget;
+    public Vector3 posInit;
 
     public void Start()
     {
         toTarget = target.position - transform.position;
+        posInit = transform.position;
     }
 
     public void Update()
@@ -28,8 +30,8 @@ public class TestAnimationCurve : MonoBehaviour
         {
             Debug.Log("move right");
             var newPos = transform.position;
-            newPos.x = xCurve.Evaluate(t / totalTime) * totalDistance;
-            newPos.y = yCurve.Evaluate(t / totalTime) * totalDistance;
+            newPos.x = posInit.x + xCurve.Evaluate(t / totalTime) * totalDistance;
+            newPos.y = posInit.y + yCurve.Evaluate(t / totalTime) * totalDistance;
 
             transform.position = newPos;
 
@@ -40,13 +42,14 @@ public class TestAnimationCurve : MonoBehaviour
                 multiplier *= -1;
             }
         }
+
         if (Keyboard.current.spaceKey.isPressed)
         {
             Debug.Log("move to target");
             var newPos = transform.position;
 
-            newPos.x = xCurve.Evaluate(t / totalTime) * toTarget.x;
-            newPos.y = yCurve.Evaluate(t / totalTime) * toTarget.y;
+            newPos.x = posInit.x + xCurve.Evaluate(t / totalTime) * toTarget.x;
+            newPos.y = posInit.y + yCurve.Evaluate(t / totalTime) * toTarget.y;
 
             transform.position = newPos;
 
@@ -60,6 +63,7 @@ public class TestAnimationCurve : MonoBehaviour
             //    multiplier *= -1;
             //}
         }
+
         if (Keyboard.current.upArrowKey.isPressed)
         {
             transform.rotation = Quaternion.AngleAxis(t, Vector3.forward);
@@ -71,6 +75,7 @@ public class TestAnimationCurve : MonoBehaviour
                 multiplier *= -1;
             }
         }
+
         if (Keyboard.current.pKey.isPressed)
         {
             //float newPositionX = Mathf.PingPong(Time.time * speed, maxXPosition * 2) - maxXPosition;
@@ -80,6 +85,18 @@ public class TestAnimationCurve : MonoBehaviour
 
             transform.position = newPos;
             t += Time.deltaTime;
+        }
+
+        if (Keyboard.current.oKey.isPressed)
+        {
+            var newPos = transform.position;
+
+            newPos.x = Mathf.Lerp(posInit.x, target.position.x, t / totalTime);
+            newPos.y = Mathf.Cos(t) * 4;
+
+            transform.position = Vector3.Slerp(posInit, target.position, t / totalTime);
+
+            t += Time.deltaTime * multiplier;
         }
 
         if (Keyboard.current.enterKey.wasPressedThisFrame)

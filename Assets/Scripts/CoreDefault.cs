@@ -38,6 +38,7 @@ public static class CoreUtilities
         yield return null;
     }
 
+    // rounds given number to closest multiple of unit
     public static float RoundTo(float num, float unit)
     {
         return Mathf.Round(num / unit) * unit;
@@ -51,7 +52,6 @@ public static class CoreConstants
     public const float UNIT_ROUND_POSITION = 1f / 16f;
 }
 
-// todo: migrate to be singleton (maybe monosingleton)
 public static class Notifier
 {
     public static void Send(Action handler)

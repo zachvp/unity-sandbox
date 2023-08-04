@@ -66,9 +66,6 @@ public class PCPlatformMotor : MonoBehaviour
                     state.platformState &= ~PlatformState.MOVE;
                 }
                 break;
-            default:
-                Debug.LogWarning($"Unhandled case: {args.type}");
-                break;
         }
     }
 
@@ -179,11 +176,11 @@ public class PCPlatformMotor : MonoBehaviour
             {
                 if (item > CoreConstants.FLOAT_DEADZONE)
                 {
-                    right = true;
+                    right &= true;
                 }
                 if (item < -CoreConstants.FLOAT_DEADZONE)
                 {
-                    left = true;
+                    left &= true;
                 }
             }
         }

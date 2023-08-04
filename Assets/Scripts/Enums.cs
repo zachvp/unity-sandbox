@@ -35,14 +35,6 @@ public enum PlatformState
 }
 
 [Flags]
-public enum HandState
-{
-    NONE = 0,
-    GRIP = 1 << 0,
-    BLOCKED = 1 << 1
-}
-
-[Flags]
 public enum Trait
 {
     NONE = 0,
@@ -72,11 +64,9 @@ public static class CoreActionMap
 
 public static class EnumHelper
 {
-    public static string GetStringID(Enum hook)
+    public static string GetStringID(Enum value)
     {
-        var hookCast = Convert.ToInt32(hook);
-
-        return hookCast.ToString();
+        return Convert.ToInt32(value).ToString();
     }
 
     public static Direction2D FromBool(bool left, bool right, bool down, bool up)
