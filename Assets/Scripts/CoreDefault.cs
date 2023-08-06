@@ -47,9 +47,10 @@ public static class CoreUtilities
 
 public static class CoreConstants
 {
-    public const float FLOAT_DEADZONE = 0.01f;
-    public const float VELOCITY_DEADZONE = 2;
+    public const float DEADZONE_FLOAT = 0.01f;
+    public const float DEADZONE_VELOCITY = 2;
     public const float UNIT_ROUND_POSITION = 1f / 16f;
+    public const float THRESHOLD_DOT = 0.84f;
 }
 
 public static class Notifier

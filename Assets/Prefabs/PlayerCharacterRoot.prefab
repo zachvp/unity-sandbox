@@ -98,7 +98,7 @@ Transform:
   - {fileID: 5749309987876600311}
   - {fileID: 5749309988450397615}
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5749309987876600307
 GameObject:
@@ -206,13 +206,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grabTrigger: {fileID: 5749309987876600296}
-  hand: {fileID: 5749309987876600302}
+  body: {fileID: 5749309987876600302}
   motor: {fileID: 5637173112284442397}
   holdAnchor: {fileID: 5749309988552863997}
   movementHeldPickup: {fileID: 5749309987702789797}
   interactionBlockDelay: 0.2
   state: 0
-  grabbables: 0
 --- !u!50 &5749309987876600305
 Rigidbody2D:
   serializedVersion: 4

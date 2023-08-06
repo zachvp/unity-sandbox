@@ -5,9 +5,8 @@ using UnityEngine.InputSystem;
 
 public class PCHandMotor : MonoBehaviour
 {
-    // TODO: separate pickup stuff into separate class
     public TriggerVolume grabTrigger;
-    public CoreBody hand;
+    public CoreBody body;
     public PCPlatformMotor motor;
     public Transform holdAnchor;
     public MovementRadial movementHeldPickup;
@@ -31,7 +30,8 @@ public class PCHandMotor : MonoBehaviour
             case CoreActionMap.Player.THROW:
                 if (state == State.GRIP)
                 {
-                    ball.Throw(hand.velocity, args.vVec2, motor);
+                    //ball.Throw(hand.velocity, args.vVec2, motor);
+                    ApplyThrow(args.vVec2);
 
                     state &= ~State.GRIP;
                     state |= State.BLOCKED;
@@ -40,16 +40,12 @@ public class PCHandMotor : MonoBehaviour
                     {
                         state &= ~State.BLOCKED;
                         ball.ThrowReset();
-
                     }));
                 }
                 break;
             case CoreActionMap.Player.GRIP:
                 if (grabTrigger.isTriggered)
                 {
-                    // todo: this seems hacky - maybe have singleton SceneRefs to directly access ball.
-                    ball = grabTrigger.overlappingObjects[0].GetComponentInParent<Ball>();
-
                     if (ball != null && state == State.NONE)
                     {
                         ball.Grab(holdAnchor);
@@ -66,7 +62,7 @@ public class PCHandMotor : MonoBehaviour
 
                 if (ball && state == State.GRIP)
                 {
-                    ball.Release();
+                    ball.ActivateRelease();
 
                     state |= State.BLOCKED;
                     state &= ~State.GRIP;
@@ -74,19 +70,50 @@ public class PCHandMotor : MonoBehaviour
                     StartCoroutine(CoreUtilities.DelayedTask(interactionBlockDelay, () =>
                     {
                         state &= ~State.BLOCKED;
-                        ball.ReleaseReset();
-
+                        ball.ActivatePickup();
                     }));
                 }
                 break;
         }
     }
 
+    public void ApplyThrow(Vector2 inputDirection)
+    {
+        var ball = SceneRefs.Instance.ball;
+        var dotUpRight = Vector2.Dot(inputDirection, Vector2.right + Vector2.up);
+        var dotUpLeft = Vector2.Dot(inputDirection, Vector2.left + Vector2.up);
+        var dotRight = Vector2.Dot(inputDirection, Vector2.right);
+
+        if (dotUpRight > CoreConstants.THRESHOLD_DOT || dotUpLeft > CoreConstants.THRESHOLD_DOT)
+        {
+            ball.Shoot(body.velocity,
+                       inputDirection,
+                       dotUpRight > CoreConstants.THRESHOLD_DOT || dotUpLeft > CoreConstants.THRESHOLD_DOT,
+                       Mathf.Abs(motor.body.velocity.y) < CoreConstants.DEADZONE_VELOCITY);
+        }
+
+        if (Mathf.Abs(dotRight) > CoreConstants.THRESHOLD_DOT)
+        {
+            // direct, straight throw
+            //modVelocity.x = 1;
+            ball.ThrowAttack(body.velocity, inputDirection);
+            //state = State.STRAIGHT;
+        }
+
+        if (Vector2.Dot(Vector2.down, inputDirection) > 0.84f)
+        {
+            ball.Dribble(motor.body.velocity);
+        }
+    }
+
+    // -- Class definitions
     [Flags]
     public enum State
     {
         NONE = 0,
         GRIP = 1 << 0,
-        BLOCKED = 1 << 1
+        BLOCKED = 1 << 1,
+        STRAIGHT = 1 << 3,
+        DRIBBLE = 1 << 4
     }
 }

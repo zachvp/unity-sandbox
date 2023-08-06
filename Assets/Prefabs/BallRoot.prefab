@@ -100,6 +100,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   root: {fileID: 0}
+  followX: 1
+  followY: 1
+  followZ: 1
   usePhysics: 1
   body: {fileID: 1022144515006881039}
 --- !u!58 &44624939598502558
@@ -311,7 +314,7 @@ Transform:
   - {fileID: 1022144513684276993}
   - {fileID: 1022144515247545798}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1022144515006881038
 MonoBehaviour:
@@ -330,7 +333,7 @@ MonoBehaviour:
   held: {fileID: 1022144513684277020}
   released: {fileID: 1022144515247545795}
   heldMovement: {fileID: 1022144513684277023}
-  assistThrow: {x: 70, y: 80}
+  assistThrow: {x: 80, y: 160}
 --- !u!114 &1022144515006881039
 MonoBehaviour:
   m_ObjectHideFlags: 0

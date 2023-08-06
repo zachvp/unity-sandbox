@@ -58,7 +58,7 @@ public static class CoreActionMap
         MOVE,
         MOVE_HAND,
         GRIP,
-        THROW
+        THROW // todo: rename to be more generic (e.g. HAND_ACTION); also rename the action map asset
     }
 }
 

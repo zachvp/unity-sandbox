@@ -4,32 +4,16 @@ using System;
 public class Ball : MonoBehaviour
 {
     public CoreBody body;
-
     public GameObject pickup;
     public GameObject held;
     public GameObject released;
     public MovementFollowTransform heldMovement;
 
     public Vector2 assistThrow = new Vector2(50, 50);
-    public State state;
-
-    public enum State
-    {
-        NONE = 0,
-        SHOOT = 1 << 0,
-        STRAIGHT = 1 << 1,
-        DRIBBLE = 1 << 2
-    }
 
     public void Awake()
     {
         SceneRefs.Instance.Register(SceneRefs.ID.BALL, this);
-    }
-
-    public void LateUpdate()
-    {
-        var modPos = new Vector2Int(Mathf.RoundToInt(body.position.x), Mathf.RoundToInt(body.position.y));
-        body.position = modPos;
     }
 
     // Activate the held object, deactivate the pickup object.
@@ -44,18 +28,18 @@ public class Ball : MonoBehaviour
     }
 
     // Activate the temp release object, deactivate the held object.
-    public void Release()
+    public void ActivateRelease()
     {
-        body.ResetVertical();
-        body.UnfreezeRotation();
-
-        released.SetActive(true);
         held.SetActive(false);
         released.transform.position = held.transform.position;
+        released.SetActive(true);
+
+        body.ResetVertical();
+        body.UnfreezeRotation();
     }
 
     // Deactivate the released object, activate the pickup object.
-    public void ReleaseReset()
+    public void ActivatePickup()
     {
         released.SetActive(false);
         pickup.SetActive(true);
@@ -66,51 +50,19 @@ public class Ball : MonoBehaviour
         pickup.transform.position = released.transform.position;
     }
 
-    // Deactivate the held object, activate the temp released object.
-    public void Throw(Vector2 baseVelocity, Vector2 inputDirection, PCPlatformMotor motor)
+    // Activate the pickup object, deactivate the temp released object.
+    public void ThrowReset()
     {
-        held.gameObject.SetActive(false);
-        released.transform.position = held.transform.position;
-        released.SetActive(true);
+        pickup.transform.position = released.transform.position;
+        pickup.SetActive(true);
+        released.gameObject.SetActive(false);
+    }
 
-        body.ResetVertical();
-        body.UnfreezeRotation();
-
-        //Debug.Log($"up: {dotUp}");
-        //Debug.Log($"right: {dotRight}");
+    public void Shoot(Vector2 baseVelocity, Vector2 inputDirection, bool inputBonus, bool jumpBonus)
+    {
+        ActivateRelease();
 
         var modVelocity = inputDirection * baseVelocity.magnitude * 1.5f + assistThrow;
-        var shotMagic = 0f;
-
-        if (inputDirection.x < 0)
-        {
-            modVelocity.x -= 2*assistThrow.x;
-        }
-
-        var dotGesture0 = Vector2.Dot(inputDirection, Vector2.right + Vector2.up);
-        var dotGesture1 = Vector2.Dot(inputDirection, Vector2.left + Vector2.up);
-        if (dotGesture0 > 0.84f || dotGesture1 > 0.84f)
-        {
-            shotMagic += 50;
-            Debug.Log("shot motion: magic +50");
-            state = State.SHOOT;
-        }
-
-        var dotRight = Vector2.Dot(Vector2.right, inputDirection);
-        if (Mathf.Abs(dotRight) > 0.84f)
-        {
-            // direct, straight throw
-            modVelocity.x = 1;
-            state = State.STRAIGHT;
-        }
-        if (Vector2.Dot(Vector2.down, inputDirection) > 0.84f)
-        {
-            modVelocity.y = -180;
-            modVelocity.x = motor.body.velocity.x;
-
-            state = State.DRIBBLE;
-            Debug.Log("dribble");
-        }
 
         // todo: adjust closeness to "magic shot" depending on context
         //      + boost if close to jump peak (+15)
@@ -118,21 +70,10 @@ public class Ball : MonoBehaviour
         //      + boost if right stick gesture matches shot (+30)
         //      + boost if right stick gesture matches follow thru (+20)
         //      + boost if have dribble stack of TBD (+20)
-        if (!motor.state.down.isTriggered)
-        {
-            if (Mathf.Abs(motor.body.velocity.y) < 500)
-            {
-                shotMagic += 30;
-                Debug.Log("precise! magic +30");
-            }
-            else if (Mathf.Abs(motor.body.velocity.y) < 100)
-            {
-                shotMagic += 15;
-                Debug.Log("close; magic +15");
-            }
-        }
+        var shotMagic = inputBonus ? 50f : 0f;
+        shotMagic += jumpBonus ? 50f : 0f;
 
-        if (shotMagic > 0 && state == State.SHOOT)
+        if (shotMagic > 0)
         {
             var magicVel = Vector2.zero;
             var toTarget = SceneRefs.Instance.targetGoal.transform.position - released.transform.position;
@@ -163,24 +104,35 @@ public class Ball : MonoBehaviour
             Debug.Log($"shot magic: {shotMagic / 100}");
         }
 
-        //var magicVel = Vector2.zero;
-        //var height = 64;
-        //var toTarget = SceneRefs.Instance.targetGoal.transform.position - released.transform.position;
-        //var g = -body.originalGravity * Physics2D.gravity.y;
-        //var t = Mathf.Sqrt(2 * (height + toTarget.y) / g);
-        //modVelocity.x = toTarget.x / t;
-        //modVelocity.y = Mathf.Sqrt(2 * g * toTarget.y);
+        body.Trigger(modVelocity);
+    }
 
-        //Debug.DrawRay(released.transform.position, modVelocity.normalized*32, Color.blue, 12);
+    // Deactivate the held object, activate the temp released object.
+    public void ThrowAttack(Vector2 baseVelocity, Vector2 inputDirection)
+    {
+        ActivateRelease();
+
+        //Debug.Log($"up: {dotUp}");
+        //Debug.Log($"right: {dotRight}");
+
+        var modVelocity = inputDirection * baseVelocity.magnitude * 1.5f + assistThrow;
+
+        if (inputDirection.x < 0)
+        {
+            modVelocity.x -= 2 * assistThrow.x;
+        }
 
         body.Trigger(modVelocity);
     }
 
-    // Activate the pickup object, deactivate the temp released object.
-    public void ThrowReset()
+    public void Dribble(Vector2 baseVelocity)
     {
-        pickup.transform.position = released.transform.position;
-        pickup.SetActive(true);
-        released.gameObject.SetActive(false);
+        ActivateRelease();
+
+        var modVelocity = new Vector2(baseVelocity.x, -180);
+
+        Debug.Log("dribble");
+
+        body.Trigger(modVelocity);
     }
 }
