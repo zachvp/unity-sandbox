@@ -12,6 +12,16 @@ public class SceneRefs : CoreSingletonBehavior<SceneRefs>
     [NonSerialized]
     public Ball ball;
 
+    [NonSerialized]
+    public List<PCInputCommandEmitter> pcCommandEmitters;
+
+    public override void Awake()
+    {
+        base.Awake();
+
+        pcCommandEmitters = new List<PCInputCommandEmitter>();
+    }
+
     public void Start()
     {
         var filter = new ContactFilter2D();
@@ -36,6 +46,10 @@ public class SceneRefs : CoreSingletonBehavior<SceneRefs>
                 Debug.Assert(reference is Ball, $"non-{nameof(Ball)} type for reference: {reference}");
                 ball = reference as Ball;
                 break;
+            case ID.COMMAND_EMITTER_PC:
+                Debug.Assert(reference is PCInputCommandEmitter, $"non-{nameof(PCInputCommandEmitter)} type for reference: {reference}");
+                pcCommandEmitters.Add(reference as PCInputCommandEmitter);
+                break;
             default:
                 Debug.LogWarning($"Unhandled case: {id}");
                 break;
@@ -45,6 +59,7 @@ public class SceneRefs : CoreSingletonBehavior<SceneRefs>
     public enum ID
     {
         TARGET_GOAL,
-        BALL
+        BALL,
+        COMMAND_EMITTER_PC
     }
 }

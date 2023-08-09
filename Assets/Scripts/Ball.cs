@@ -11,11 +11,6 @@ public class Ball : MonoBehaviour
 
     public Vector2 assistThrow = new Vector2(50, 50);
 
-    public void Awake()
-    {
-        SceneRefs.Instance.Register(SceneRefs.ID.BALL, this);
-    }
-
     // Activate the held object, deactivate the pickup object.
     public void Grab(Transform holdAnchor)
     {

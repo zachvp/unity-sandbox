@@ -15,6 +15,10 @@ public class PCPlatformMotor : MonoBehaviour
     public float wallJumpDelay = 0.1f;
     public Vector2 wallJumpSpeed = new Vector2Int(40, 80);
 
+    // -- 1-time write vars
+    // todo: shared reference
+    public int playerIndex;
+
     // -- write vars
     public float adjustedVelocityX;
 
@@ -23,13 +27,21 @@ public class PCPlatformMotor : MonoBehaviour
         Notifications.CommandPC += HandleCommand;
     }
 
+    public void Start()
+    {
+        PCIDRegistry.Instance.Register(this, (id) =>
+        {
+            playerIndex = id;
+            Debug.Log($"pc motor assigned id: {id}");
+        });
+    }
+
     public void HandleCommand(PCInputArgs args)
     {
-        // todo: distinguish between player IDs
-        // maybe register to receive commands for a specific player
-        // call singleton command handler, pass in reference to self in the form of a command processing interface
-
-        // todo: separate state computation to separate class, then feed state result each frame to motor?
+        if (args.playerIndex != playerIndex)
+        {
+            return;
+        }
 
         // update state according to input.
         switch (args.type)
@@ -40,7 +52,6 @@ public class PCPlatformMotor : MonoBehaviour
                 {
                     state.platformState |= PlatformState.JUMP;
                     state.platformState &= ~PlatformState.WALL_JUMPING;
-                    //Debug.Log($"enter jump state");
                 }
 
                 // wall jump 

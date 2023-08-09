@@ -103,6 +103,7 @@ MonoBehaviour:
   followX: 1
   followY: 1
   followZ: 1
+  offset: {x: 0, y: 0, z: 0}
   usePhysics: 1
   body: {fileID: 1022144515006881039}
 --- !u!58 &44624939598502558
@@ -291,6 +292,7 @@ GameObject:
   - component: {fileID: 1022144515006881038}
   - component: {fileID: 1022144515006881039}
   - component: {fileID: 1022144515006881036}
+  - component: {fileID: 5882958956437546148}
   m_Layer: 0
   m_Name: BallRoot
   m_TagString: Untagged
@@ -314,7 +316,7 @@ Transform:
   - {fileID: 1022144513684276993}
   - {fileID: 1022144515247545798}
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1022144515006881038
 MonoBehaviour:
@@ -376,6 +378,20 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &5882958956437546148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1022144515006881035}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9e7da06e56d24affa89087bfd8458e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 1
+  component: {fileID: 1022144515006881038}
 --- !u!1 &1022144515247545795
 GameObject:
   m_ObjectHideFlags: 0

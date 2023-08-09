@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+// todo: delete this class
 public class OnPlayerJoinEvent : MonoBehaviour
 {
     public GameObject PlayerInputObjectTemplate;
