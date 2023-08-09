@@ -10,6 +10,8 @@ public class PCHandMotor : MonoBehaviour
     public PCPlatformMotor motor;
     public Transform holdAnchor;
     public MovementRadial movementHeldPickup;
+    public PCMetadata metadata;
+
     public float interactionBlockDelay;
     public State state;
 
@@ -20,6 +22,11 @@ public class PCHandMotor : MonoBehaviour
 
     public void HandleCommand(PCInputArgs args)
     {
+        if (args.playerIndex != metadata.playerID)
+        {
+            return;
+        }
+
         var ball = SceneRefs.Instance.ball;
 
         switch (args.type)

@@ -94,6 +94,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 4862699498754172362}
   - {fileID: 5749309989022562397}
   - {fileID: 5749309987876600311}
   - {fileID: 5749309988450397615}
@@ -210,6 +211,7 @@ MonoBehaviour:
   motor: {fileID: 5637173112284442397}
   holdAnchor: {fileID: 5749309988552863997}
   movementHeldPickup: {fileID: 5749309987702789797}
+  metadata: {fileID: 21154116321411518}
   interactionBlockDelay: 0.2
   state: 0
 --- !u!50 &5749309987876600305
@@ -802,13 +804,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   body: {fileID: 5749309988582234122}
   state: {fileID: 5749309989291738880}
+  metadata: {fileID: 21154116321411518}
   jumpStrength: 200
   groundMoveSpeed: 80
   airMoveSpeed: 100
   maxSpeedX: 90
   wallJumpDelay: 0.5
   wallJumpSpeed: {x: 100, y: 180}
-  playerIndex: 0
   adjustedVelocityX: 0
 --- !u!1 &5749309988690601923
 GameObject:
@@ -1510,3 +1512,48 @@ MonoBehaviour:
   nameOverride: grabTrigger
   tooltipOverride: 
   target: {fileID: 5749309987876600296}
+--- !u!1 &8964419880563620556
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4862699498754172362}
+  - component: {fileID: 21154116321411518}
+  m_Layer: 0
+  m_Name: Meta
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4862699498754172362
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8964419880563620556}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5749309987770028314}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &21154116321411518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8964419880563620556}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6dc4275b51b0e41f9986caefbc871991, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerID: 0

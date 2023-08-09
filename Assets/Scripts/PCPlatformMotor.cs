@@ -7,6 +7,7 @@ public class PCPlatformMotor : MonoBehaviour
     // -- read vars
     public CoreBody body;
     public ActorStatePlatform state;
+    public PCMetadata metadata;
 
     public float jumpStrength = 100;
     public float groundMoveSpeed = 100;
@@ -14,10 +15,6 @@ public class PCPlatformMotor : MonoBehaviour
     public float maxSpeedX = 200;
     public float wallJumpDelay = 0.1f;
     public Vector2 wallJumpSpeed = new Vector2Int(40, 80);
-
-    // -- 1-time write vars
-    // todo: shared reference
-    public int playerIndex;
 
     // -- write vars
     public float adjustedVelocityX;
@@ -27,18 +24,9 @@ public class PCPlatformMotor : MonoBehaviour
         Notifications.CommandPC += HandleCommand;
     }
 
-    public void Start()
-    {
-        PCIDRegistry.Instance.Register(this, (id) =>
-        {
-            playerIndex = id;
-            Debug.Log($"pc motor assigned id: {id}");
-        });
-    }
-
     public void HandleCommand(PCInputArgs args)
     {
-        if (args.playerIndex != playerIndex)
+        if (args.playerIndex != metadata.playerID)
         {
             return;
         }
