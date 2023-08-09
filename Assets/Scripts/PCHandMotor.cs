@@ -112,8 +112,6 @@ public class PCHandMotor : MonoBehaviour
     {
         NONE = 0,
         GRIP = 1 << 0,
-        BLOCKED = 1 << 1,
-        STRAIGHT = 1 << 3,
-        DRIBBLE = 1 << 4
+        BLOCKED = 1 << 1
     }
 }

@@ -43,6 +43,11 @@ public static class CoreUtilities
     {
         return Mathf.Round(num / unit) * unit;
     }
+
+    public static bool Compare(float lhs, float rhs)
+    {
+        return Mathf.Abs(lhs - rhs) < CoreConstants.DEADZONE_FLOAT;
+    }
 }
 
 public static class CoreConstants
