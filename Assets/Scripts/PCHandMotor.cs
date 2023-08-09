@@ -15,18 +15,13 @@ public class PCHandMotor : MonoBehaviour
     public float interactionBlockDelay;
     public State state;
 
-    public void Awake()
+    public void Start()
     {
-        Notifications.CommandPC += HandleCommand;
+        metadata.commandEmitter.CommandPC += HandleCommand;
     }
 
     public void HandleCommand(PCInputArgs args)
     {
-        if (args.playerIndex != metadata.playerID)
-        {
-            return;
-        }
-
         var ball = SceneRefs.Instance.ball;
 
         switch (args.type)

@@ -19,18 +19,13 @@ public class PCPlatformMotor : MonoBehaviour
     // -- write vars
     public float adjustedVelocityX;
 
-    public void Awake()
+    public void Start()
     {
-        Notifications.CommandPC += HandleCommand;
+        metadata.commandEmitter.CommandPC += HandleCommand;
     }
 
     public void HandleCommand(PCInputArgs args)
     {
-        if (args.playerIndex != metadata.playerID)
-        {
-            return;
-        }
-
         // update state according to input.
         switch (args.type)
         {

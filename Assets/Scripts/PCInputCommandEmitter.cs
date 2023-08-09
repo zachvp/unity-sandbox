@@ -1,11 +1,13 @@
 using UnityEngine.InputSystem;
 using Unity.VisualScripting;
 using UnityEngine;
+using System;
 
 public class PCInputCommandEmitter : MonoBehaviour
 {
     public PlayerInput playerInput;
-    public CoreActionMap.Type actionMapType;
+    public CoreActionMap.Type actionMapType; // todo: this may not make sense since UpdateData assumes player action map
+    public Action<PCInputArgs> CommandPC;
 
     // Contains the combination of the most recent input data.
     public PCInputArgs data;
@@ -25,12 +27,12 @@ public class PCInputCommandEmitter : MonoBehaviour
     {
         if (EnumHelper.GetActionMap(context.action.actionMap.name) == actionMapType)
         {
-            Debug.Log($"action triggered: {context.action.name}");
             var actionType = EnumHelper.GetPlayerAction(context.action.name);
 
             UpdateData(actionType, context);
 
             Notifier.Send(Notifications.CommandPC, data);
+            Notifier.Send(CommandPC, data);
         }
     }
 
