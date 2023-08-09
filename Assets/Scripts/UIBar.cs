@@ -18,7 +18,6 @@ public class UIBar : MonoBehaviour
         sizeStart = rect.localScale;
     }
 
-    // todo: determine how to set position to given world space coords
     public void Update()
     {
         worldPosition = rect.position;
