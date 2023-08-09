@@ -8,24 +8,27 @@ public class UIBar : MonoBehaviour
     public float speed = 256;
     public bool shrink;
     public Vector2 sizeStart;
+    public Vector2 worldPosition;
 
     public float t;
     public float totalTime;
 
     public void Awake()
     {
-        sizeStart = rect.sizeDelta;
+        sizeStart = rect.localScale;
     }
 
     // todo: determine how to set position to given world space coords
     public void Update()
     {
+        worldPosition = rect.position;
+
         if ((t < totalTime && !shrink) || (t > 0 && shrink))
         {
-            var newSize = rect.sizeDelta;
+            var newSize = rect.localScale;
 
             newSize.x = Mathf.Lerp(0, sizeStart.x, t / totalTime);
-            rect.sizeDelta = newSize;
+            rect.localScale = newSize;
 
             if (shrink)
             {
