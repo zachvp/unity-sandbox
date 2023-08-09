@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class UIBar : MonoBehaviour
 {
@@ -33,6 +34,11 @@ public class UIBar : MonoBehaviour
 
             newSize.x = Mathf.Lerp(0, sizeStart.x, t / totalTime);
             rect.localScale = newSize;
+        }
+
+        if (Keyboard.current.spaceKey.wasPressedThisFrame)
+        {
+            shrink = !shrink;
         }
     }
 }

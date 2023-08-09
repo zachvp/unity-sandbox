@@ -7,12 +7,13 @@ public class MovementFollowTransform : MonoBehaviour
     public bool followX = true;
     public bool followY = true;
     public bool followZ = true;
+    public Vector3 offset;
     public bool usePhysics;
 
-    [ConditionalField("usePhysics")]
+    [ConditionalField(nameof(usePhysics))]
     public CoreBody body;
 
-    public void Update()
+    public void LateUpdate()
     {
         var modPosition = transform.position;
 
@@ -28,6 +29,8 @@ public class MovementFollowTransform : MonoBehaviour
         {
             modPosition.z = root.position.z;
         }
+
+        modPosition += offset;
 
         if (usePhysics)
         {

@@ -39,9 +39,14 @@ public static class CoreUtilities
     }
 
     // rounds given number to closest multiple of unit
-    public static float RoundTo(float num, float unit)
+    public static float RoundTo(float value, float unit)
     {
-        return Mathf.Round(num / unit) * unit;
+        return Mathf.Round(value / unit) * unit;
+    }
+
+    public static Vector2 RoundTo(Vector2 value, float unit)
+    {
+        return new Vector2(RoundTo(value.x, unit), RoundTo(value.y, unit));
     }
 
     public static bool Compare(float lhs, float rhs)

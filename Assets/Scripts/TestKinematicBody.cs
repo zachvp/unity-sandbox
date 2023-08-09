@@ -17,7 +17,6 @@ public class TestKinematicBody : MonoBehaviour
         MOVE_RIGHT = 1 << 2,
         MOVE_NONE = 1 << 3,
         JUMP_PHASE_1 = 1 << 4,
-        JUMP_PHASE_2 = 1 << 5,
     }
     public class CommandEntry
     {
