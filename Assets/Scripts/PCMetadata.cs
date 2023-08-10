@@ -28,6 +28,6 @@ public class PCMetadata : MonoBehaviour
             commandEmitter = emitter;
         }
 
-        Notifier.Send(onInitialized);
+        Emitter.Send(onInitialized);
     }
 }

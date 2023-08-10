@@ -63,7 +63,7 @@ public static class CoreConstants
     public const float THRESHOLD_DOT = 0.84f;
 }
 
-public static class Notifier
+public static class Emitter
 {
     public static void Send(Action handler)
     {
@@ -110,31 +110,9 @@ public class Singleton<T> where T : new()
     protected static T _instance;
 }
 
-public class Signals
+public class Signals : Singleton<Signals>
 {
     // Global notification definitions
     public Action<PCInputArgs> onPCCommand;
     public Action<PCInputCommandEmitter> onPCCommandEmitterSpawn;
-
-    // -- Singleton management
-    public static Signals instance
-    {
-        get
-        {
-            if (_instance == null)
-            {
-                _instance = new Signals();
-
-                // register for cleanup
-                SceneManager.sceneUnloaded += (scene) =>
-                {
-                    _instance = null;
-                };
-            }
-
-            return _instance;
-        }
-    }
-
-    private static Signals _instance;
 }

@@ -19,7 +19,7 @@ public class PCInputCommandEmitter : MonoBehaviour
 
     public void Start()
     {
-        Notifier.Send(Signals.instance.onPCCommandEmitterSpawn, this);
+        Emitter.Send(Signals.instance.onPCCommandEmitterSpawn, this);
     }
 
     public void OnEnable()
@@ -40,8 +40,8 @@ public class PCInputCommandEmitter : MonoBehaviour
 
             UpdateData(actionType, context);
 
-            Notifier.Send(Signals.instance.onPCCommand, data);
-            Notifier.Send(onPCCommand, data);
+            Emitter.Send(Signals.instance.onPCCommand, data);
+            Emitter.Send(onPCCommand, data);
         }
     }
 
