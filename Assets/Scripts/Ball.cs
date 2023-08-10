@@ -4,6 +4,7 @@ using System;
 public class Ball : MonoBehaviour
 {
     public CoreBody body;
+    public Collider2D mainCollider;
     public GameObject pickup;
     public GameObject held;
     public GameObject released;

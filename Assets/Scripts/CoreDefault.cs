@@ -88,10 +88,11 @@ public static class Notifier
 
 public static class Notifications
 {
-    public static Action<PCInputArgs> CommandPC;
+    public static Action<PCInputArgs> onPCCommand;
+    public static Action<PCInputCommandEmitter> onPCCommandEmitterSpawn;
 
     public static void Reset()
     {
-        CommandPC = null;
+        onPCCommand = null;
     }
 }

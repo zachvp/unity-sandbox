@@ -316,7 +316,7 @@ Transform:
   - {fileID: 1022144513684276993}
   - {fileID: 1022144515247545798}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1022144515006881038
 MonoBehaviour:
@@ -331,6 +331,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   body: {fileID: 1022144515006881039}
+  mainCollider: {fileID: 1022144513868170262}
   pickup: {fileID: 1022144513868170261}
   held: {fileID: 1022144513684277020}
   released: {fileID: 1022144515247545795}

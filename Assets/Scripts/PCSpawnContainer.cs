@@ -1,6 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PCSpawnContainer : MonoBehaviour
 {
@@ -8,6 +7,11 @@ public class PCSpawnContainer : MonoBehaviour
     public GameObject[] spawnObjects;
 
     public void Start()
+    {
+        PlayerInputManager.instance.onPlayerJoined += HandlePlayerJoined;
+    }
+
+    public void HandlePlayerJoined(PlayerInput playerInput)
     {
         foreach (var spawnObject in spawnObjects)
         {

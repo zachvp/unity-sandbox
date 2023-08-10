@@ -19,9 +19,20 @@ public class PCPlatformMotor : MonoBehaviour
     // -- write vars
     public float adjustedVelocityX;
 
+    public void Awake()
+    {
+        Debug.Log("Awake");
+    }
+
     public void Start()
     {
-        metadata.commandEmitter.CommandPC += HandleCommand;
+        metadata.commandEmitter.onPCCommand += HandleCommand;
+        Debug.Log("Start");
+    }
+
+    public void OnEnable()
+    {
+        Debug.Log("OnEnable");
     }
 
     public void HandleCommand(PCInputArgs args)

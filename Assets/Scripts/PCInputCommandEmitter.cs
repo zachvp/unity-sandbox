@@ -7,10 +7,16 @@ public class PCInputCommandEmitter : MonoBehaviour
 {
     public PlayerInput playerInput;
     public CoreActionMap.Type actionMapType; // todo: this may not make sense since UpdateData assumes player action map
-    public Action<PCInputArgs> CommandPC;
+    public Action<PCInputArgs> onPCCommand;
 
     // Contains the combination of the most recent input data.
     public PCInputArgs data;
+
+    public void Awake()
+    {
+        SceneRefs.Instance.Register(SceneRefs.ID.COMMAND_EMITTER_PC, this);
+        Notifier.Send(Notifications.onPCCommandEmitterSpawn, this);
+    }
 
     public void OnEnable()
     {
@@ -31,8 +37,8 @@ public class PCInputCommandEmitter : MonoBehaviour
 
             UpdateData(actionType, context);
 
-            Notifier.Send(Notifications.CommandPC, data);
-            Notifier.Send(CommandPC, data);
+            Notifier.Send(Notifications.onPCCommand, data);
+            Notifier.Send(onPCCommand, data);
         }
     }
 

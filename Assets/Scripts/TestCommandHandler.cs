@@ -8,7 +8,7 @@ public class TestCommandHandler : MonoBehaviour
 
     public void Awake()
     {
-        Notifications.CommandPC += HandleCommand;
+        Notifications.onPCCommand += HandleCommand;
     }
 
     public void Initialize(int playerIdx)

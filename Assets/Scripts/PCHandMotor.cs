@@ -17,7 +17,7 @@ public class PCHandMotor : MonoBehaviour
 
     public void Start()
     {
-        metadata.commandEmitter.CommandPC += HandleCommand;
+        metadata.commandEmitter.onPCCommand += HandleCommand;
     }
 
     public void HandleCommand(PCInputArgs args)

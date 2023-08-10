@@ -7,14 +7,20 @@ public class LogicScore : MonoBehaviour
     public Collider2D top;
     public Collider2D bottom;
     public Collider2D scoreZone;
-    public CoreBody ballBody;
-    public Collider2D ballCollider;
     public State state;
     public TextMeshProUGUI scoreUI;
     public int score;
 
-    public void Awake()
+    [NonSerialized]
+    public CoreBody ballBody;
+    [NonSerialized]
+    public Collider2D ballCollider;
+
+    public void Start()
     {
+        ballBody = SceneRefs.Instance.ball.body;
+        ballCollider = SceneRefs.Instance.ball.mainCollider;
+
         ballBody.OnAnyColliderEnter += HandleBallColliderEntry;
     }
 

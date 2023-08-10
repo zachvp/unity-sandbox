@@ -8,14 +8,23 @@ public class PCMetadata : MonoBehaviour
     public int playerID;
     public PCInputCommandEmitter commandEmitter;
 
+    public void OnEnable()
+    {
+        Notifications.onPCCommandEmitterSpawn += HandlePCCommandEmitterSpawn;
+    }
+
     public void Start()
     {
         PCIDRegistry.Instance.Register(this, (id) =>
         {
             playerID = id;
 
-            commandEmitter = SceneRefs.Instance.pcCommandEmitters[playerID];
             Debug.Log($"pc assigned id: {id}");
         });
+    }
+
+    public void HandlePCCommandEmitterSpawn(PCInputCommandEmitter emitter)
+    {
+        commandEmitter = SceneRefs.Instance.pcCommandEmitters[playerID];
     }
 }
