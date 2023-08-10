@@ -32,7 +32,6 @@ public class ActorStatePlatform : MonoBehaviour
         var triggerEntry = triggerStateBuffer.AddLast(triggerState);
         var inputMoveEntry = inputMoveBuffer.AddLast(inputMove);
 
-        // todo: make config value
         StartCoroutine(CoreUtilities.DelayedTask(bufferLifetime, () =>
         {
             triggerStateBuffer.Remove(triggerEntry);

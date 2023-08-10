@@ -1,21 +1,19 @@
 using System;
 using System.Collections.Generic;
 
-// todo: convert to pure C# class and remove prefab.
-public class PCIDRegistry : CoreSingletonBehavior<PCIDRegistry>
+public class PCIDRegistry : Singleton<PCIDRegistry>
 {
     public Dictionary<Type, int> assignments;
 
-    public override void Awake()
+    public PCIDRegistry()
     {
-        base.Awake();
-
         assignments = new Dictionary<Type, int>();
     }
 
     public void Register(object associate, Action<int> callback)
     {
         var key = associate.GetType();
+
         if (assignments.ContainsKey(key))
         {
             assignments[key] += 1;

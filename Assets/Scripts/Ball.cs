@@ -75,7 +75,6 @@ public class Ball : MonoBehaviour
             var toTarget = SceneRefs.instance.targetGoal.transform.position - released.transform.position;
             var a = new Vector2(-body.body.drag, body.originalGravity * Physics2D.gravity.y - body.body.drag);
 
-            // todo: t = sqrt(2*dy / g)
             magicVel.x = 2 * (toTarget.x / 2.55f);
             magicVel.y = Mathf.Sqrt(Mathf.Pow(baseVelocity.y, 2) - (2 * a.y * toTarget.y));
 
@@ -86,7 +85,7 @@ public class Ball : MonoBehaviour
                 Debug.LogWarning("magicVelocity.y is NaN");
             }
 
-            //var yFudge = 1 / (toTarget.y / target to floor dist) // todo: 
+            //var yFudge = 1 / (toTarget.y / target to floor dist)
             var baseFudge = 1 + body.body.drag;
             var yFudge = 0.8f / Mathf.Max(0.25f, toTarget.y / SceneRefs.instance.distanceGoalToFloor);
 

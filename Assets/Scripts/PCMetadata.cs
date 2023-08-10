@@ -15,7 +15,7 @@ public class PCMetadata : MonoBehaviour
 
     public void Start()
     {
-        PCIDRegistry.Instance.Register(this, (id) =>
+        PCIDRegistry.instance.Register(this, (id) =>
         {
             playerID = id;
         });
