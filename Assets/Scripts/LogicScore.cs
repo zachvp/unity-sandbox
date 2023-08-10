@@ -8,7 +8,6 @@ public class LogicScore : MonoBehaviour
     public Collider2D bottom;
     public Collider2D scoreZone;
     public State state;
-    public TextMeshProUGUI scoreUI;
     public int score;
 
     [NonSerialized]
@@ -42,7 +41,7 @@ public class LogicScore : MonoBehaviour
             if (state.HasFlag(State.TOP))
             {
                 score++;
-                scoreUI.text = score.ToString();
+                SceneRefs.Instance.scoreUI.text = score.ToString();
             }
 
             state = State.BOTTOM;

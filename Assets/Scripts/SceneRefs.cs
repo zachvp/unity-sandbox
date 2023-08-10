@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using TMPro;
 
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -13,6 +14,9 @@ public class SceneRefs : CoreSingletonBehavior<SceneRefs>
 
     [NonSerialized]
     public Ball ball;
+
+    [NonSerialized]
+    public TextMeshProUGUI scoreUI;
 
     public void Start()
     {
@@ -38,6 +42,10 @@ public class SceneRefs : CoreSingletonBehavior<SceneRefs>
                 Debug.Assert(reference is Ball, $"non-{nameof(Ball)} type for reference: {reference}");
                 ball = reference as Ball;
                 break;
+            case ID.UI_SCORE:
+                Debug.Assert(reference is TextMeshProUGUI, $"non-{nameof(TextMeshProUGUI)} type for reference: {reference}");
+                scoreUI = reference as TextMeshProUGUI;
+                break;
             default:
                 Debug.LogWarning($"Unhandled case: {id}");
                 break;
@@ -56,5 +64,6 @@ public class SceneRefs : CoreSingletonBehavior<SceneRefs>
     {
         TARGET_GOAL,
         BALL,
+        UI_SCORE
     }
 }
