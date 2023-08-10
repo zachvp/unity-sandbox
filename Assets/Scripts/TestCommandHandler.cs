@@ -1,5 +1,4 @@
 using UnityEngine;
-using Unity.VisualScripting;
 
 // todo: associate command handler with a particular player controller
 public class TestCommandHandler : MonoBehaviour
@@ -8,7 +7,7 @@ public class TestCommandHandler : MonoBehaviour
 
     public void Awake()
     {
-        Notifications.onPCCommand += HandleCommand;
+        Events.instance.onPCCommand += HandleCommand;
     }
 
     public void Initialize(int playerIdx)

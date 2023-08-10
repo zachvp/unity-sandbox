@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public static class CoreUtilities
 {
@@ -86,14 +86,31 @@ public static class Notifier
     }
 }
 
-public static class Notifications
+public class Events
 {
-    public static Action<PCInputArgs> onPCCommand;
-    public static Action<PCInputCommandEmitter> onPCCommandEmitterSpawn;
+    // Global notification definitions
+    public Action<PCInputArgs> onPCCommand;
+    public Action<PCInputCommandEmitter> onPCCommandEmitterSpawn;
 
-    public static void Reset()
+    // -- Singleton management
+    public static Events instance
     {
-        onPCCommand = null;
-        onPCCommandEmitterSpawn = null;
+        get
+        {
+            if (_instance == null)
+            {
+                _instance = new Events();
+
+                // register for cleanup
+                SceneManager.sceneUnloaded += (scene) =>
+                {
+                    _instance = null;
+                };
+            }
+
+            return _instance;
+        }
     }
+
+    private static Events _instance;
 }

@@ -33,7 +33,6 @@ public class PCHandMotor : MonoBehaviour
             case CoreActionMap.Player.THROW:
                 if (state == State.GRIP)
                 {
-                    //ball.Throw(hand.velocity, args.vVec2, motor);
                     ApplyThrow(args.vVec2);
 
                     state &= ~State.GRIP;

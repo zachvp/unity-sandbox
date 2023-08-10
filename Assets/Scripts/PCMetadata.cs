@@ -10,7 +10,7 @@ public class PCMetadata : MonoBehaviour
 
     public void OnEnable()
     {
-        Notifications.onPCCommandEmitterSpawn += HandlePCCommandEmitterSpawn;
+        Events.instance.onPCCommandEmitterSpawn += HandlePCCommandEmitterSpawn;
     }
 
     public void Start()

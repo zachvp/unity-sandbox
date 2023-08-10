@@ -1,8 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using Unity.VisualScripting;
-using UnityEngine.SceneManagement;
 
 public class MotorToss : MonoBehaviour
 {
@@ -15,7 +11,7 @@ public class MotorToss : MonoBehaviour
 
     public void Awake()
     {
-        Notifications.onPCCommand += HandleInput;
+        Events.instance.onPCCommand += HandleInput;
         body = GetComponent<Rigidbody2D>();
     }
 
