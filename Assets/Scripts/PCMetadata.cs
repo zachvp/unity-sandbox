@@ -18,8 +18,6 @@ public class PCMetadata : MonoBehaviour
         PCIDRegistry.Instance.Register(this, (id) =>
         {
             playerID = id;
-
-            Debug.Log($"pc assigned id: {id}");
         });
     }
 

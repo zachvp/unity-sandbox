@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
-using UnityEngine;
 
+// todo: convert to pure C# class and remove prefab.
 public class PCIDRegistry : CoreSingletonBehavior<PCIDRegistry>
 {
     public Dictionary<Type, int> assignments;
@@ -19,12 +19,10 @@ public class PCIDRegistry : CoreSingletonBehavior<PCIDRegistry>
         if (assignments.ContainsKey(key))
         {
             assignments[key] += 1;
-            Debug.Log($"assigning {assignments[key]} to associate: {associate}");
         }
         else
         {
             assignments.Add(key, 0);
-            Debug.Log($"assigning {0} to associate: {associate}");
         }
 
         callback(assignments[key]);
