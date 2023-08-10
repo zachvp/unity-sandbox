@@ -217,7 +217,6 @@ public class TestKinematicBody : MonoBehaviour
             var newPos = body.position;
 
             newPos.y += 0.75f * 8 * Time.deltaTime;
-            // todo: set position with curve
             command ^= Command.JUMP;
             command |= Command.JUMP_PHASE_1;
 

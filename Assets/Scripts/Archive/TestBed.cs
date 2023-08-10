@@ -49,9 +49,6 @@ public class TestBed : MonoBehaviour
 
     public void Update()
     {
-        // todo: look into this function
-        //Mathf.SmoothDamp()
-
         if (Keyboard.current.tabKey.wasPressedThisFrame)
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
