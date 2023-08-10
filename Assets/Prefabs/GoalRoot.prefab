@@ -497,7 +497,7 @@ Transform:
   - {fileID: 1975167263}
   - {fileID: 480138889}
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1126111751411655400
 MonoBehaviour:
@@ -514,10 +514,7 @@ MonoBehaviour:
   top: {fileID: 1126111751653854596}
   bottom: {fileID: 1126111751653854597}
   scoreZone: {fileID: 1326209839}
-  ballBody: {fileID: 0}
-  ballCollider: {fileID: 0}
   state: 0
-  scoreUI: {fileID: 0}
   score: 0
 --- !u!1 &1126111751541166270
 GameObject:
@@ -1008,6 +1005,7 @@ GameObject:
   - component: {fileID: 6405455038543609967}
   - component: {fileID: 3953535316186021924}
   - component: {fileID: 943383081018630310}
+  - component: {fileID: 1024320650448728610}
   m_Layer: 0
   m_Name: Target
   m_TagString: Untagged
@@ -1095,4 +1093,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 0
-  component: {fileID: 6405455038543609967}
+  component: {fileID: 1024320650448728610}
+--- !u!114 &1024320650448728610
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1910979239976679603}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e8e03ca5295c41198f4b94b2dcc1c59, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  root: {fileID: 6405455038543609967}
+  distToFloor: 0
