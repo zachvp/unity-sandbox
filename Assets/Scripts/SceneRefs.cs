@@ -1,45 +1,20 @@
-using System;
-using UnityEngine;
+using System.Collections.Generic;
 using TMPro;
-
-using UnityEngine.InputSystem;
-using UnityEngine.SceneManagement;
 
 public class SceneRefs : Singleton<SceneRefs>
 {
-    public TargetGoal targetGoal;
-    public float distanceGoalToFloor;
-    public Ball ball;
-    public TextMeshProUGUI scoreUI;
+    public TargetGoal targetGoal
+        { get { return registry[ID.TARGET_GOAL] as TargetGoal; } }
+    public Ball ball
+        { get { return registry[ID.BALL] as Ball; } }
+    public TextMeshProUGUI scoreUI
+        { get { return registry[ID.UI_SCORE] as TextMeshProUGUI; } }
 
-    public void Register<T>(ID id, T reference)
-    {
-        switch (id)
-        {
-            case ID.TARGET_GOAL:
-                Debug.Assert(reference is TargetGoal, $"non-{nameof(TargetGoal)} type for reference: {reference}");
-                targetGoal = reference as TargetGoal;
-                break;
-            case ID.BALL:
-                Debug.Assert(reference is Ball, $"non-{nameof(Ball)} type for reference: {reference}");
-                ball = reference as Ball;
-                break;
-            case ID.UI_SCORE:
-                Debug.Assert(reference is TextMeshProUGUI, $"non-{nameof(TextMeshProUGUI)} type for reference: {reference}");
-                scoreUI = reference as TextMeshProUGUI;
-                break;
-            default:
-                Debug.LogWarning($"Unhandled case: {id}");
-                break;
-        }
-    }
+    public readonly Dictionary<ID, object> registry;
 
-    public void Update()
+    public SceneRefs()
     {
-        if (Keyboard.current.tabKey.wasPressedThisFrame)
-        {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        }
+        registry = new Dictionary<ID, object>();
     }
 
     public enum ID

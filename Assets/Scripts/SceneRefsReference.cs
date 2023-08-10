@@ -10,6 +10,6 @@ public class SceneRefsReference : MonoBehaviour
 
     public void Awake()
     {
-        SceneRefs.instance.Register(id, component);
+        SceneRefs.instance.registry.Add(id, component);
     }
 }

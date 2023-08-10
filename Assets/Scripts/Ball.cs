@@ -87,7 +87,7 @@ public class Ball : MonoBehaviour
 
             //var yFudge = 1 / (toTarget.y / target to floor dist)
             var baseFudge = 1 + body.body.drag;
-            var yFudge = 0.8f / Mathf.Max(0.25f, toTarget.y / SceneRefs.instance.distanceGoalToFloor);
+            var yFudge = 0.8f / Mathf.Max(0.25f, toTarget.y / SceneRefs.instance.targetGoal.distToFloor);
 
             magicVel.x *= baseFudge;
             magicVel.y *= Mathf.Max(baseFudge, yFudge);
