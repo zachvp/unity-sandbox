@@ -21,18 +21,10 @@ public class PCPlatformMotor : MonoBehaviour
 
     public void Awake()
     {
-        Debug.Log("Awake");
-    }
-
-    public void Start()
-    {
-        metadata.commandEmitter.onPCCommand += HandleCommand;
-        Debug.Log("Start");
-    }
-
-    public void OnEnable()
-    {
-        Debug.Log("OnEnable");
+        metadata.onInitialized += () =>
+        {
+            metadata.commandEmitter.onPCCommand += HandleCommand;
+        };
     }
 
     public void HandleCommand(PCInputArgs args)

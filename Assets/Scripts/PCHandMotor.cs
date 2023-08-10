@@ -1,7 +1,5 @@
 using System;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class PCHandMotor : MonoBehaviour
 {
@@ -15,9 +13,12 @@ public class PCHandMotor : MonoBehaviour
     public float interactionBlockDelay;
     public State state;
 
-    public void Start()
+    public void Awake()
     {
-        metadata.commandEmitter.onPCCommand += HandleCommand;
+        metadata.onInitialized += () =>
+        {
+            metadata.commandEmitter.onPCCommand += HandleCommand;
+        };
     }
 
     public void HandleCommand(PCInputArgs args)

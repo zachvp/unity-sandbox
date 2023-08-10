@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class PCMetadata : MonoBehaviour
@@ -7,6 +6,7 @@ public class PCMetadata : MonoBehaviour
     // 1-time write vars
     public int playerID;
     public PCInputCommandEmitter commandEmitter;
+    public Action onInitialized;
 
     public void OnEnable()
     {
@@ -25,6 +25,11 @@ public class PCMetadata : MonoBehaviour
 
     public void HandlePCCommandEmitterSpawn(PCInputCommandEmitter emitter)
     {
-        commandEmitter = SceneRefs.Instance.pcCommandEmitters[playerID];
+        if (commandEmitter == null)
+        {
+            commandEmitter = emitter;
+        }
+
+        Notifier.Send(onInitialized);
     }
 }

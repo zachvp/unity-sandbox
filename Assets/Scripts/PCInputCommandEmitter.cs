@@ -14,14 +14,17 @@ public class PCInputCommandEmitter : MonoBehaviour
 
     public void Awake()
     {
-        SceneRefs.Instance.Register(SceneRefs.ID.COMMAND_EMITTER_PC, this);
+        data.playerIndex = playerInput.playerIndex;
+    }
+
+    public void Start()
+    {
         Notifier.Send(Notifications.onPCCommandEmitterSpawn, this);
     }
 
     public void OnEnable()
     {
         playerInput.onActionTriggered += HandleActionTriggered;
-        data.playerIndex = playerInput.playerIndex;
     }
 
     public void OnDisable()

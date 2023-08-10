@@ -94,5 +94,6 @@ public static class Notifications
     public static void Reset()
     {
         onPCCommand = null;
+        onPCCommandEmitterSpawn = null;
     }
 }
