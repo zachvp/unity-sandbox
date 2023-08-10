@@ -86,20 +86,44 @@ public static class Notifier
     }
 }
 
-public class Events
+public class Singleton<T> where T : new()
+{
+    public static T instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                _instance = new T();
+
+                // register for cleanup
+                SceneManager.sceneUnloaded += (scene) =>
+                {
+                    _instance = default(T);
+                };
+            }
+
+            return _instance;
+        }
+    }
+
+    protected static T _instance;
+}
+
+public class Signals
 {
     // Global notification definitions
     public Action<PCInputArgs> onPCCommand;
     public Action<PCInputCommandEmitter> onPCCommandEmitterSpawn;
 
     // -- Singleton management
-    public static Events instance
+    public static Signals instance
     {
         get
         {
             if (_instance == null)
             {
-                _instance = new Events();
+                _instance = new Signals();
 
                 // register for cleanup
                 SceneManager.sceneUnloaded += (scene) =>
@@ -112,5 +136,5 @@ public class Events
         }
     }
 
-    private static Events _instance;
+    private static Signals _instance;
 }

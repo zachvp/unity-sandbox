@@ -17,8 +17,8 @@ public class LogicScore : MonoBehaviour
 
     public void Start()
     {
-        ballBody = SceneRefs.Instance.ball.body;
-        ballCollider = SceneRefs.Instance.ball.mainCollider;
+        ballBody = SceneRefs.instance.ball.body;
+        ballCollider = SceneRefs.instance.ball.mainCollider;
 
         ballBody.OnAnyColliderEnter += HandleBallColliderEntry;
     }
@@ -41,7 +41,7 @@ public class LogicScore : MonoBehaviour
             if (state.HasFlag(State.TOP))
             {
                 score++;
-                SceneRefs.Instance.scoreUI.text = score.ToString();
+                SceneRefs.instance.scoreUI.text = score.ToString();
             }
 
             state = State.BOTTOM;

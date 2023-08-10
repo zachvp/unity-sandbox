@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using Unity.VisualScripting;
+using UnityEngine.SceneManagement;
 
 // reference code:
 // context.action.PerformInteractiveRebinding()
@@ -51,9 +52,9 @@ public class TestBed : MonoBehaviour
         // todo: look into this function
         //Mathf.SmoothDamp()
 
-        if (Keyboard.current.enterKey.wasPressedThisFrame)
+        if (Keyboard.current.tabKey.wasPressedThisFrame)
         {
-            
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }
 }

@@ -72,7 +72,7 @@ public class Ball : MonoBehaviour
         if (shotMagic > 0)
         {
             var magicVel = Vector2.zero;
-            var toTarget = SceneRefs.Instance.targetGoal.transform.position - released.transform.position;
+            var toTarget = SceneRefs.instance.targetGoal.transform.position - released.transform.position;
             var a = new Vector2(-body.body.drag, body.originalGravity * Physics2D.gravity.y - body.body.drag);
 
             // todo: t = sqrt(2*dy / g)
@@ -88,7 +88,7 @@ public class Ball : MonoBehaviour
 
             //var yFudge = 1 / (toTarget.y / target to floor dist) // todo: 
             var baseFudge = 1 + body.body.drag;
-            var yFudge = 0.8f / Mathf.Max(0.25f, toTarget.y / SceneRefs.Instance.distanceGoalToFloor);
+            var yFudge = 0.8f / Mathf.Max(0.25f, toTarget.y / SceneRefs.instance.distanceGoalToFloor);
 
             magicVel.x *= baseFudge;
             magicVel.y *= Mathf.Max(baseFudge, yFudge);
@@ -97,7 +97,7 @@ public class Ball : MonoBehaviour
             modVelocity = magicVel;
             //modVelocity = magicVel;
             //Debug.Log($"precise jump shot! | {magicVel}; fudge denom: {toTarget.y / measureFloorToTarget.transform.localScale.y}");
-            Debug.Log($"shot magic: {shotMagic / 100}");
+            //Debug.Log($"shot magic: {shotMagic / 100}");
         }
 
         body.Trigger(modVelocity);

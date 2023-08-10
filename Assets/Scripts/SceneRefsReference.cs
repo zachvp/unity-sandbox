@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SceneRefsReference : MonoBehaviour
@@ -12,6 +10,6 @@ public class SceneRefsReference : MonoBehaviour
 
     public void Awake()
     {
-        SceneRefs.Instance.Register(id, component);
+        SceneRefs.instance.Register(id, component);
     }
 }

@@ -23,7 +23,7 @@ public class PCHandMotor : MonoBehaviour
 
     public void HandleCommand(PCInputArgs args)
     {
-        var ball = SceneRefs.Instance.ball;
+        var ball = SceneRefs.instance.ball;
 
         switch (args.type)
         {
@@ -81,7 +81,7 @@ public class PCHandMotor : MonoBehaviour
 
     public void ApplyThrow(Vector2 inputDirection)
     {
-        var ball = SceneRefs.Instance.ball;
+        var ball = SceneRefs.instance.ball;
         var dotUpRight = Vector2.Dot(inputDirection, Vector2.right + Vector2.up);
         var dotUpLeft = Vector2.Dot(inputDirection, Vector2.left + Vector2.up);
         var dotRight = Vector2.Dot(inputDirection, Vector2.right);
