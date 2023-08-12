@@ -143,12 +143,12 @@ public struct VarWatch<T>
     {
         value = newValue;
 
+        Emitter.Send(onUpdated, oldValue, newValue);
+
         if (!oldValue.Equals(newValue))
         {
             Emitter.Send(onChanged, oldValue, newValue);
             oldValue = value;
         }
-
-        Emitter.Send(onUpdated, oldValue, newValue);
     }
 }
