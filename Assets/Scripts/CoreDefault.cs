@@ -75,13 +75,23 @@ public static class Emitter
         }
     }
 
-    public static void Send<T>(Action<T> eventHandler, T args)
+    public static void Send<T>(Action<T> eventHandler, T arg0)
     {
         // Temp variable for thread safety.
         var threadsafeHandler = eventHandler;
         if (threadsafeHandler != null)
         {
-            threadsafeHandler(args);
+            threadsafeHandler(arg0);
+        }
+    }
+
+    public static void Send<T, U>(Action<T, U> eventHandler, T arg0, U arg1)
+    {
+        // Temp variable for thread safety.
+        var threadsafeHandler = eventHandler;
+        if (threadsafeHandler != null)
+        {
+            threadsafeHandler(arg0, arg1);
         }
     }
 }
@@ -115,4 +125,30 @@ public class Signals : Singleton<Signals>
     // Global notification definitions
     public Action<PCInputArgs> onPCCommand;
     public Action<PCInputCommandEmitter> onPCCommandEmitterSpawn;
+}
+
+[Serializable]
+public struct VarWatch<T>
+{
+    public T value;
+
+    [NonSerialized]
+    public T oldValue;
+
+    // Change event that sends (oldValue, newValue)
+    public Action<T, T> onChanged;
+    public Action<T, T> onUpdated;
+
+    public void Update(T newValue)
+    {
+        value = newValue;
+
+        if (!oldValue.Equals(newValue))
+        {
+            Emitter.Send(onChanged, oldValue, newValue);
+            oldValue = value;
+        }
+
+        Emitter.Send(onUpdated, oldValue, newValue);
+    }
 }
